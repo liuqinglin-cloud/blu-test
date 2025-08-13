@@ -14,7 +14,7 @@ sys.path.append(project_path)
 sys.path.append(common_android_path)
 from common_android.assert_methods import *
 from common_android.app_operation import *
-from common_android.basic_operations import click_ele
+from common_android.basic_operation import click_ele
 import unittest
 
 

@@ -8,7 +8,7 @@ project_path = os.path.dirname(os.path.dirname(__file__))
 sys.path.append(project_path)
 from common_android.assert_methods import *
 from common_android.app_operation import *
-from common_android.basic_operations import click_ele_for_translation
+from common_android.basic_operation import click_ele_for_translation
 import unittest
 
 

@@ -7,7 +7,7 @@ import sys
 project_path = os.path.dirname(os.path.dirname(__file__))
 sys.path.append(project_path)
 from utils.handle_ini import translation_ini
-from common_android.basic_operations import *
+from common_android.basic_operation import *
 
 
 def assert_translation_by_find_ele(section, key):

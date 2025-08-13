@@ -1,60 +1,93 @@
 # -*- encoding=utf8 -*-
 __author__ = "admin"
 
-from airtest.core.api import *
-from airtest.cli.parser import cli_setup
+import os.path
+import sys
 
+project_path = os.path.dirname(os.path.dirname(__file__))
+sys.path.append(project_path)
+from common_ios.basic_operation import *
+from utils.handle_ini import translation_ini,test_user_ini
 
-if not cli_setup():
-    auto_setup(__file__, logdir=True, devices=["android://127.0.0.1:5037/1C231FDF60050J?cap_method=ADBCAP&touch_method=MAXTOUCH&",])
-from poco.drivers.ios import iosPoco
-poco = iosPoco()
+def main_page():
+    pass
 
-ST.FIND_TIMEOUT = 20
-ST.FIND_TIMEOUT_TMP = 3
-
-def switch_lang_chinese_to_other(lang):
+def current_lang():
     """
-    从简体中文切换至其他语言，传入目标语言即可
-    英语："English"
-    繁体："繁體中文"
-    日语："日本語"
-    德语："Deutsch"
-    意大利语："Italiano"
-    西班牙语："Español"
-    法语："Français"
-    韩语："한국어"
-    乌克兰语："Українська"
-    葡萄牙语："Português"
+    判断当前语言
+    :return: 当前语言，格式为中文字符串
     """
-    poco("我的").click()
-    poco("通用设置").click()
-    poco("多语言").click()
-    poco(lang).click()
-    poco("确定").click()
-    touch(Template(r"tpl1752816903163.png", record_pos=(-0.459, -0.621), resolution=(2048, 2732)))
+    main_page()
+    try:
+        poco0 = poco(text="服务")
+        poco1 = poco(text="Me")
+        poco2 = poco(text="マイページ")
+        poco3 = poco(text="Mein")
+        poco4 = poco(text="Io")
+        poco5 = poco(text="Yo")
+        poco6 = poco(text="Moi")
+        poco7 = poco(text="내 계정")
+        poco8 = poco(text="Я")
+        poco9 = poco(text="Perfil")
+        if poco0.exists():
+            return "简体中文"
+        elif poco1.exists():
+            return "英语"
+        elif poco2.exists():
+            return "日语"
+        elif poco3.exists():
+            return "德语"
+        elif poco4.exists():
+            return "意大利语"
+        elif poco5.exists():
+            return "西班牙语"
+        elif poco6.exists():
+            return "法语"
+        elif poco7.exists():
+            return "韩语"
+        elif poco8.exists():
+            return "乌克兰语"
+        elif poco9.exists():
+            return "葡萄牙语"
+        else:
+            return "繁体中文"
+    except:
+        log("获取当前语言失败，请检查是否为登录状态")
 
-def switch_lang_other_to_chinese(my,comfirm):
+def switch_lang(expectation):
     """
-    从其他语言切换至简体中文，传入“我的”翻译文案，选择语言后“确认按钮”的翻译文案
-    英语："Me","OK"
-    繁体："我的","確定"
-    日语："マイページ","はい"
-    德语："Mein","Bestätigen"
-    意大利语："Io","OK"
-    西班牙语："Yo","Aceptar"
-    法语："Moi","OK"
-    韩语："내 계정","확인"
-    乌克兰语："Я","ОК"
-    葡萄牙语："Perfil","Confirmar"
+    切换至任意语言
+    :param expectation: 期望语言的中文文案，如英语
     """
-    poco(my).click()
-    touch(Template(r"tpl1752817345575.png", record_pos=(0.244, 0.068), resolution=(2048, 2732)))
-    touch(Template(r"tpl1752817400705.png", record_pos=(-0.458, -0.548), resolution=(2048, 2732)))
-    poco("简体中文").click()
-    poco(comfirm).click()
-    touch(Template(r"tpl1752816903163.png", record_pos=(-0.459, -0.621), resolution=(2048, 2732)))
+    lang = current_lang()
+    log(f"当前语言是{lang}")
+    if lang == expectation:
+        log(f"期望语言是{expectation}，那就不用切换语言了")
+    else:
+        data = translation_ini.get_value(section="当前语言", key=lang)
+        data_list = data.split("-")
+        me = data_list[0]
+        settings = data_list[1]
+        languages = data_list[2]
+        confirm_button = data_list[3]
+        expectation_lang = translation_ini.get_value(section="期望语言", key=expectation)
+        poco(text=me).click()
+        sleep()
+        try:
+            poco(text=settings).click()
+        except:
+            swipe_bottom_top()
+            poco(text=settings).click()
+        poco(text=languages).click()
+        try:
+            poco(text=expectation_lang).click()
+        except:
+            swipe_bottom_top()
+            poco(text=expectation_lang).click()
+        poco(text=confirm_button).click()
+        log(f"已切换语言为{expectation}")
+        sleep(3)
+        main_page()
 
 if __name__ == "__main__":
-    switch_lang_chinese_to_other("Deutsch")
-    switch_lang_other_to_chinese("Mein","Bestätigen")# -*- encoding=utf8 -*-
+    pass

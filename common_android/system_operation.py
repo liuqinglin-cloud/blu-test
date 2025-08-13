@@ -2,7 +2,7 @@
 __author__ = "admin"
 
 
-from basic_operations import *
+from basic_operation import *
 
 
 
