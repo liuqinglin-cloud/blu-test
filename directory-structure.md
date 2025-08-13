@@ -1,0 +1,93 @@
+# Project Directory Structure
+
+*Generated: 2025-08-11 14:00:56*
+
+
+
+```
+有部分还在开发中，整体设计如下
+
+blu-test/
+├── api_test---------------------------------接口测试
+│   ├── basic_request.py---------------------基本请求方法
+│   ├── case.xlsx----------------------------用例&测试结果，设计是以sheet区分不同场景或者不同服务
+│   ├── run.py-------------------------------执行用例
+│   └── test_case.py-------------------------单个场景或者单个服务的测试
+├── common_android---------------------------安卓的公共方法
+│   ├── log----------------------------------日志，airtest会使用此日志生成测试报告
+│   ├── app_operation.py---------------------App通用操作，比如登录、返回主页、切换语言
+│   ├── assert_methods.py--------------------断言方法
+│   ├── basic_operations.py------------------基本操作，比如定位、点击、滑动、输入文本
+│   ├── system_operation.py------------------系统操作，比如切换WiFi，杀后台，给App授权
+├── common_ios-------------------------------Apple设备公共方法
+│   ├── log----------------------------------日志，airtest会使用此日志生成测试报告
+│   ├── app_operation.py---------------------App通用操作，比如返回主页、切换语言
+│   ├── assert_methods.py--------------------断言方法
+│   ├── basic_operations.py------------------基本操作，比如定位、点击、滑动、输入文本
+│   ├── system_operation.py------------------系统操作，比如切换WiFi，杀后台，给App授权
+├── config-----------------------------------配置，全是测试用到的相对固定的数据
+│   ├── device.ini---------------------------设备，测试设备时使用
+│   ├── environment.ini----------------------环境信息，测试接口、操作mysql、操作redis使用
+│   ├── header.json--------------------------header，测试接口使用
+│   ├── local_element_android.ini------------Android元素信息，测试翻译、UI功能使用
+│   ├── local_element_ios.ini----------------iOS元素信息，测试翻译、UI功能使用
+│   ├── test_user.ini------------------------测试账号信息
+│   ├── translation.ini----------------------翻译文案，测试翻译使用
+├── report-----------------------------------报告
+│   ├── airtest_report-----------------------airtest报告，有截图，方便测试翻译时检查UI效果，每次会覆盖上一次的报告
+│   │   ├── translation_android--------------Android翻译测试报告
+│   │   ├── ui_android-----------------------Android UI测试报告
+│   │   ├── translation_ios------------------iOS翻译测试报告
+│   │   └── ui_ios---------------------------iOS UI测试报告
+│   └── unittest_report----------------------unittest报告，无截图，可以添加截图，按时间命名，不会覆盖
+│       ├── api_test-------------------------接口测试报告，接口测试结果也会写入测试用例表格
+│       ├── translation_android--------------Android翻译测试报告
+│       ├── ui_android-----------------------Android UI测试报告
+│       ├── translation_ios------------------iOS翻译测试报告
+│       └── ui_ios---------------------------iOS UI测试报告
+├── translation_android----------------------Android翻译测试
+│   ├── run.py-------------------------------执行用例
+│   ├── translation_english.py---------------英语翻译测试
+│   ├── translation_french.py----------------法语翻译测试
+│   ├── translation_german.py----------------德语翻译测试
+│   ├── translation_italian.py---------------意大利语翻译测试
+│   ├── translation_japanese.py--------------日语翻译测试
+│   ├── translation_korean.py----------------韩语翻译测试
+│   ├── translation_portuguese.py------------葡萄牙语翻译测试
+│   ├── translation_simplified_chinese.py----简体中文翻译测试
+│   ├── translation_spanish.py---------------西班牙语翻译测试
+│   ├── translation_traditional_chinese.py---繁体中文翻译测试
+│   └── translation_ukrainian.py-------------乌克兰语翻译测试
+├── translation_ios--------------------------iOS翻译测试
+│   ├── run.py-------------------------------执行用例
+│   ├── translation_english.py---------------英语翻译测试
+│   ├── translation_french.py----------------法语翻译测试
+│   ├── translation_german.py----------------德语翻译测试
+│   ├── translation_italian.py---------------意大利语翻译测试
+│   ├── translation_japanese.py--------------日语翻译测试
+│   ├── translation_korean.py----------------韩语翻译测试
+│   ├── translation_portuguese.py------------葡萄牙语翻译测试
+│   ├── translation_simplified_chinese.py----简体中文翻译测试
+│   ├── translation_spanish.py---------------西班牙语翻译测试
+│   ├── translation_traditional_chinese.py---繁体中文翻译测试
+│   └── translation_ukrainian.py-------------乌克兰语翻译测试
+├── ui_android-------------------------------Android UI功能测试
+│   ├── run.py-------------------------------执行用例
+│   ├── test_comunity.py---------------------“社区”页面所有功能测试用例，用例也可以按照功能、场景来区分，此处计划以4个一级页面区分
+│   ├── test_me.py---------------------------“我的”页面所有功能测试用例
+│   ├── test_home.py-------------------------“首页”页面所有功能测试用例
+│   └── test_service.py----------------------“服务”页面所有功能测试用例
+├── ui_ios-----------------------------------iOS UI功能测试
+│   ├── run.py-------------------------------执行用例
+│   ├── test_comunity.py---------------------“社区”页面所有功能测试用例，用例也可以按照功能、场景来区分，此处计划以4个一级页面区分
+│   ├── test_me.py---------------------------“我的”页面所有功能测试用例
+│   ├── test_home.py-------------------------“首页”页面所有功能测试用例
+│   └── test_service.py----------------------“服务”页面所有功能测试用例
+└── utils------------------------------------实用方法
+    ├── handle_dependent_data.py-------------处理接口测试时接口间的依赖
+    ├── handle_excel.py----------------------读写excel
+    ├── handle_ini.py------------------------ini文件处理
+    ├── handle_json.py-----------------------json文件处理
+    ├── handle_mysql.py----------------------mysql操作
+    └── handle_redis.py----------------------redis操作
+```
