@@ -32,7 +32,6 @@ class TestMe(unittest.TestCase):
     def test_my_account(self):
         """
         测试“我的账户”各处输入框为空时，点确定，是否会出现异常
-        :return:
         """
         click_ele("我的","我的")
         click_ele("我的","我的账户")
