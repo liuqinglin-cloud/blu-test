@@ -34,6 +34,10 @@ def sys_photo_permission_setting(permission="始终全部允许"):
     home()
 
 def current_navigation():
+    """
+    获取当前系统导航方式
+    :return: 导航方式
+    """
     home()
     ele_back_key = element("pixel6手机","返回按键")
     if ele_back_key.exists():
@@ -42,6 +46,11 @@ def current_navigation():
         return "手势导航"
 
 def switch_navigation_method(navigation = "三按钮导航"):
+    """
+    切换系统导航方式
+    :param navigation: 期望导航方式，默认三按钮导航，测试场景三按钮用得比较多
+    :return:
+    """
     home()
     current = current_navigation()
     if navigation == current:
