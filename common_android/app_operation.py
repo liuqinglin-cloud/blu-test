@@ -300,6 +300,14 @@ def subscribe(is_subscribe=False):
         except:
             log("没有订阅弹窗")
 
+def get_user_nickname():
+    """
+    获取用户昵称
+    :return: 用户昵称
+    """
+    if is_login() is True:
+        nickname = get_ele_text("我的","昵称")
+        return nickname
 
 if __name__ == "__main__":
     #start_app("net.poweroak.bluetticloud.debug")
