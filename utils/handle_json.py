@@ -5,7 +5,7 @@ import os.path
 project_path = os.path.dirname(os.path.dirname(__file__))
 header_path = os.path.join(project_path,"config\\header.json")
 
-class ReadJson:
+class HandleJson:
 
     def __init__(self,file_path):
         self.path = file_path
@@ -39,7 +39,7 @@ class ReadJson:
             f.write(data_value)
 
 
-header_json = ReadJson(header_path)
+header_json = HandleJson(header_path)
 
 if __name__ == "__main__":
     pass
