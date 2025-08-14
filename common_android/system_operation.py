@@ -12,6 +12,7 @@ def sys_photo_permission_setting(permission="始终全部允许"):
     :param permission: 三选一"不允许"、"始终全部允许"（默认）、"每次都询问"
     :return:
     """
+    home()
     stop_app("com.android.settings")
     clear_app("com.android.settings")
     start_app("com.android.settings")
@@ -32,6 +33,32 @@ def sys_photo_permission_setting(permission="始终全部允许"):
     click_ele("pixel6手机", permission)
     home()
 
+def current_navigation():
+    home()
+    ele_back_key = element("pixel6手机","返回按键")
+    if ele_back_key.exists():
+        return "三按钮导航"
+    else:
+        return "手势导航"
+
+def switch_navigation_method(navigation = "三按钮导航"):
+    home()
+    current = current_navigation()
+    if navigation == current:
+        log(f"当前导航方式是{navigation}，不用切换")
+    else:
+        stop_app("com.android.settings")
+        clear_app("com.android.settings")
+        start_app("com.android.settings")
+        swipe_bottom_top()
+        click_ele("pixel6手机","显示")
+        swipe_bottom_top()
+        click_ele("pixel6手机", "导航模式")
+        click_ele("pixel6手机", navigation)
+        home()
+
+
+
 def switch_wifi():
     """
     原计划使用poco，页面操作，直接传入wifi名字，切换WiFi，
@@ -40,6 +67,6 @@ def switch_wifi():
     """
     pass
 
-
-
-
+if __name__ == "__main__":
+    switch_navigation_method("手势导航")
+    pass
