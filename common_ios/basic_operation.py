@@ -1,11 +1,11 @@
 from utils.handle_ini import local_element_ios_ini
 from airtest.core.api import *
-from airtest.cli.parser import cli_setup
-if not cli_setup():
-    auto_setup(__file__, logdir=True, devices=["android://127.0.0.1:5037/1C231FDF60050J?cap_method=ADBCAP&touch_method=MAXTOUCH&",])
 
+devices = '00008110-00112DA90E07801E'
+auto_setup(__file__, devices=[f"ios:///http+usbmux://{devices}", ])
 from poco.drivers.ios import iosPoco
-poco = iosPoco()
+dev = connect_device(f"iOS:///http+usbmux://{devices}")
+poco = iosPoco(device=dev)
 
 def element(section,key):
     """
