@@ -45,6 +45,7 @@ class TestSimplifiedChinese(unittest.TestCase):
     def tearDown(self):
         ST.SAVE_IMAGE = False
         main_page()
+        swipe_top_bottom()
         ST.SAVE_IMAGE = True
 
     def test_me(self):
