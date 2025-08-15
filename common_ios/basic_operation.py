@@ -2,10 +2,15 @@ from utils.handle_ini import local_element_ios_ini
 from airtest.core.api import *
 
 devices = '00008103-0005491036D9001E'
-auto_setup(__file__, devices=[f"ios:///http+usbmux://{devices}", ])
+auto_setup(__file__, logdir=True, devices=[f"ios:///http+usbmux://{devices}", ])
 from poco.drivers.ios import iosPoco
 dev = connect_device(f"iOS:///http+usbmux://{devices}")
-poco = iosPoco(device=dev)
+poco = iosPoco(device=dev,use_airtest_input=True, screenshot_each_action=True)
+
+ST.FIND_TIMEOUT = 20
+ST.FIND_TIMEOUT_TMP = 3
+sleep(1)
+
 
 def element(section,key):
     """
@@ -207,21 +212,22 @@ def click_back_button(times=1):
             log(f"第{i}次点击,没有找到返回按钮，停止点击")
             break
 
-def swipe_bottom_top(coordinates=1900):
+def swipe_bottom_top(coordinates=1050):
     """
     从下往上滑动，展示下方内容，for ipad pro12.9，暂时固定滑动点，根据后期需要再修改
-    :coordinates:起点纵坐标，根据不同手机自定义,默认pixel6可用
+    :coordinates: 横坐标，默认在屏幕中间
     :return:
     """
-    swipe((1000, 2000), (1000, 1000))
+    swipe((coordinates, 2000), (coordinates, 1000))
     log("从下往上滑动，展示下方内容")
 
-def swipe_top_bottom():
+def swipe_top_bottom(coordinates=1050):
     """
     从上往下滑动,展示上方内容，for ipad pro12.9，暂时固定滑动点，根据后期需要再修改
+    :coordinates: 横坐标，默认在屏幕中间
     :return:
     """
-    swipe((1000, 1000), (1000, 2000))
+    swipe((coordinates, 1000), (coordinates, 2000))
     log("从上往下滑动,展示上方内容")
 
 def swipe_left_right(coordinates=1350):

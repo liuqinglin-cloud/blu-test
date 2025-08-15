@@ -40,7 +40,8 @@ def assert_ele_is_exist(section, key, is_exist=True):
     :return:
     """
     ele = element(section,key)
-    assert_equal(ele.exists(), is_exist, f"{section}页面{key}元素存在性为{is_exist}")
-
-
+    if type(ele) is not list:
+        assert_equal(ele.exists(), is_exist, f"{section}页面{key}元素存在性为{is_exist}")
+    else:
+        log(f"{section}页面{key}元素是坐标定位")
 
