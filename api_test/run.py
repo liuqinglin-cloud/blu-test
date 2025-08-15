@@ -19,6 +19,6 @@ runner = unittestreport.TestRunner(testsuite,
                                    report_dir=report_path,
                                    title="接口测试报告",
                                    desc="接口测试",
-                                   templates=3
+                                   templates=1
                                    )
 runner.run()
