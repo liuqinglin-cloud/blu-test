@@ -1,17 +1,3 @@
-# -*- encoding=utf8 -*-
-__author__ = "admin"
-
-
-import os.path
-import sys
-
-from PIL.ImageOps import equalize
-from numpy.ma.testutils import assert_equal
-
-project_path = os.path.dirname(os.path.dirname(__file__))
-common_android_path = os.path.join(project_path,"common_android")
-sys.path.append(project_path)
-sys.path.append(common_android_path)
 from common_android.assert_methods import *
 from common_android.app_operation import *
 from common_android.basic_operation import click_ele

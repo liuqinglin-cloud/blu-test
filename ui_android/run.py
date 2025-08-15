@@ -1,5 +1,4 @@
-# -*- encoding=utf8 -*-
-__author__ = "admin"
+__author__ = "刘青林"
 
 
 import unittest

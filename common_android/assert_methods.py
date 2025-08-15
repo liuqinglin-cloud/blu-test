@@ -1,11 +1,3 @@
-# -*- encoding=utf8 -*-
-__author__ = "admin"
-
-import os.path
-import sys
-
-project_path = os.path.dirname(os.path.dirname(__file__))
-sys.path.append(project_path)
 from utils.handle_ini import translation_ini
 from common_android.basic_operation import *
 

@@ -1,7 +1,3 @@
-# -*- encoding=utf8 -*-
-__author__ = "lql"
-
-
 import unittest
 import unittestreport
 import time

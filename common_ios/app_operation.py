@@ -1,11 +1,3 @@
-# -*- encoding=utf8 -*-
-__author__ = "admin"
-
-import os.path
-import sys
-
-project_path = os.path.dirname(os.path.dirname(__file__))
-sys.path.append(project_path)
 from common_ios.basic_operation import *
 from utils.handle_ini import translation_ini,test_user_ini
 

@@ -1,12 +1,5 @@
-# -*- encoding=utf8 -*-
-__author__ = "admin"
-
-
 import unittest
-import os.path
-import sys
-project_path = os.path.dirname(os.path.dirname(__file__))
-sys.path.append(project_path)
+
 from common_android.assert_methods import assert_ele_is_exist
 from common_android.app_operation import *
 

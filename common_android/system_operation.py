@@ -1,7 +1,3 @@
-# -*- encoding=utf8 -*-
-__author__ = "admin"
-
-
 from basic_operation import *
 
 

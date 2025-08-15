@@ -1,9 +1,3 @@
-# -*- encoding=utf8 -*-
-__author__ = "admin"
-import os.path
-import sys
-project_path = os.path.dirname(os.path.dirname(__file__))
-sys.path.append(project_path)
 from utils.handle_ini import local_element_ios_ini
 from airtest.core.api import *
 from airtest.cli.parser import cli_setup

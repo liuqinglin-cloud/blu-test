@@ -1,6 +1,4 @@
-# -*- encoding=utf8 -*-
 __author__ = "刘青林"
-
 
 import unittest
 import unittestreport
