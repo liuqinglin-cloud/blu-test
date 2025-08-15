@@ -312,12 +312,15 @@ def get_ele_text(section,key):
     """
     ele = ele_is_exist(section, key)
     if ele:
-        try:
-            ele_text = ele.get_text()
-            log(f"获取到《{section}》页面《{key}》元素文本内容：{ele_text}")
-            return ele_text
-        except:
-            log(f"没有获取到《{section}》页面《{key}》元素文本内容")
+        if type(ele) is not list:
+            try:
+                ele_text = ele.get_text()
+                log(f"获取到《{section}》页面《{key}》元素文本内容：{ele_text}")
+                return ele_text
+            except:
+                log(f"没有获取到《{section}》页面《{key}》元素文本内容")
+        else:
+            log(f"《{section}》页面《{key}》元素是坐标定位")
 
 def get_len_of_text(section,key):
     """
@@ -361,11 +364,14 @@ def input_text(section,key,txt):
     """
     ele = ele_is_exist(section, key)
     if ele:
-        try:
-            ele.set_text(txt)
-            log(f"《{section}》页面《{key}》元素输入{txt}成功")
-        except:
-            log(f"《{section}》页面《{key}》元素输入{txt}失败")
+        if type(ele) is not list:
+            try:
+                ele.set_text(txt)
+                log(f"《{section}》页面《{key}》元素输入{txt}成功")
+            except:
+                log(f"《{section}》页面《{key}》元素输入{txt}失败")
+        else:
+            log(f"《{section}》页面《{key}》元素是坐标定位")
 
 def input_text_enter(section,key,txt):
     """
@@ -375,13 +381,12 @@ def input_text_enter(section,key,txt):
     :param txt: 输入内容
     :return:
     """
-    ele = ele_is_exist(section, key)
-    if ele:
-        try:
-            text(txt,enter=True)
-            log(f"《{section}》页面《{key}》元素输入{txt}并按回车键")
-        except:
-            log(f"《{section}》页面《{key}》元素'输入{txt}并按回车键'操作失败")
+    del_text(section,key)
+    try:
+        text(txt,enter=True)
+        log(f"《{section}》页面《{key}》元素输入{txt}并按回车键")
+    except:
+        log(f"《{section}》页面《{key}》元素'输入{txt}并按回车键'操作失败")
 
 def input_text_search(section,key,txt):
     """
@@ -391,13 +396,12 @@ def input_text_search(section,key,txt):
     :param txt: 输入内容
     :return:
     """
-    ele = ele_is_exist(section, key)
-    if ele:
-        try:
-            text(txt,search=True)
-            log(f"《{section}》页面《{key}》元素输入{txt}并搜索")
-        except:
-            log(f"《{section}》页面《{key}》元素'输入{txt}并搜索'操作失败")
+    del_text(section,key)
+    try:
+        text(txt,search=True)
+        log(f"《{section}》页面《{key}》元素输入{txt}并搜索")
+    except:
+        log(f"《{section}》页面《{key}》元素'输入{txt}并搜索'操作失败")
 
 if __name__ == "__main__":
     pass

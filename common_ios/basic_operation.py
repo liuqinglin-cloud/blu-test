@@ -1,7 +1,7 @@
 from utils.handle_ini import local_element_ios_ini
 from airtest.core.api import *
 
-devices = '00008110-00112DA90E07801E'
+devices = '00008103-0005491036D9001E'
 auto_setup(__file__, devices=[f"ios:///http+usbmux://{devices}", ])
 from poco.drivers.ios import iosPoco
 dev = connect_device(f"iOS:///http+usbmux://{devices}")
@@ -17,23 +17,15 @@ def element(section,key):
     value = local_element_ios_ini.get_value(section, key)
     if value:
         if "=" not in value:
-            ele = poco(text=value)
-            log(f"获取到《{section}》页面《{key}》元素text定位信息")
+            ele = poco(value)
+            log(f"获取到《{section}》页面《{key}》元素name定位信息")
             return ele
         else:
             value_list = value.split("=")
             method = value_list[0]
             log_info_success = f"获取到《{section}》页面《{key}》元素{method}定位信息"
             log_info_fail = f"《{section}》页面《{key}》元素{method}定位方式，属性值写法不符合要求"
-            if method == "name":
-                try:
-                    ele_attribute_name = value_list[1]
-                    log(log_info_success)
-                    ele = poco(name=ele_attribute_name)
-                    return ele
-                except:
-                    log(log_info_fail)
-            elif method == "position":
+            if method == "position":
                 try:
                     x = int(value_list[1])
                     y = int(value_list[2])
@@ -42,21 +34,12 @@ def element(section,key):
                     return position
                 except:
                     log(log_info_fail)
-            elif method == "name&text":
+            elif method == "name&type":
                 try:
                     ele_attribute_name = value_list[1]
                     ele_attribute_text = value_list[2]
                     log(log_info_success)
                     ele = poco(name=ele_attribute_name,text=ele_attribute_text)
-                    return ele
-                except:
-                    log(log_info_fail)
-            elif method == "RegExp_name_text":
-                try:
-                    regexp_name = value_list[1]
-                    regexp_text = value_list[2]
-                    log(log_info_success)
-                    ele = poco(nameMatches=regexp_name,textMatches=regexp_text)
                     return ele
                 except:
                     log(log_info_fail)
@@ -69,16 +52,6 @@ def element(section,key):
                     return ele
                 except:
                     log(log_info_fail)
-            elif method == "path":
-                path_list = value_list.pop(0)
-                path_list_len = len(path_list)
-                paths = []
-                for i in range(path_list_len):
-                    path_x = "path_"+str(i)
-                    paths.append(path_x)
-                for i in range(path_list_len):
-                    locals()[paths[i]] = path_list
-                log("当前无法实现通用的path定位")
             else:
                 log(f"定位方式《{method}》不符合规则")
     else:
@@ -202,42 +175,24 @@ def times_click_ele(section,key,times=5):
         except:
             log(f"连续点击{times}次《{section}》页面《{key}》元素失败")
 
-def click_ele_for_translation(ele_attribute):
+def click_ele_for_translation(txt):
     """
     翻译专用，一般测试的元素定位属性都写在ini文件，是中文格式，
     不值得每个语种维护一套，所以测试翻译时，需要传入元素对应语言属性值定位并点击，
-    此处仅支持text或name定位，其他定位方式可使用通用点击
-    :param ele_attribute: 元素属性
+    此处仅支持text定位
+    :param txt: 元素text属性
     :return:
     """
     try:
-        try:
-            poco(text=ele_attribute).click()
-            log("text定位点击元素成功")
-            sleep()
-        except:
-            poco(name=ele_attribute).click()
-            log("name定位点击元素成功")
-            sleep()
+        poco(txt).click()
+        log("text定位点击元素成功")
+        sleep()
     except:
         log("点击元素失败")
 
-def key_back(times=1):
-    """
-    安卓key_event返回
-    :param times: 次数，默认1
-    :return:
-    """
-    log(f"计划点击{times}次返回按键")
-    for i in range(times):
-        keyevent("BACK")
-        i += 1
-        log(f"第{i}次点击返回按键成功")
-        sleep()
-
 def click_back_button(times=1):
     """
-    点击返回按钮，慎用
+    点击返回按钮
     :param times: 次数，默认1
     :return:
     """
@@ -254,103 +209,60 @@ def click_back_button(times=1):
 
 def swipe_bottom_top(coordinates=1900):
     """
-    从下往上滑动，展示下方内容
+    从下往上滑动，展示下方内容，for ipad pro12.9，暂时固定滑动点，根据后期需要再修改
     :coordinates:起点纵坐标，根据不同手机自定义,默认pixel6可用
     :return:
     """
-    swipe((500, coordinates), (500, 500))
+    swipe((1000, 2000), (1000, 1000))
     log("从下往上滑动，展示下方内容")
 
-def swipe_top_bottom(coordinates=1900):
+def swipe_top_bottom():
     """
-    从上往下滑动,展示上方内容
-    :coordinates:终点纵坐标，根据不同手机自定义,默认pixel6可用
+    从上往下滑动,展示上方内容，for ipad pro12.9，暂时固定滑动点，根据后期需要再修改
     :return:
     """
-    swipe((500, 500), (500, coordinates))
+    swipe((1000, 1000), (1000, 2000))
     log("从上往下滑动,展示上方内容")
 
-def swipe_left_right(coordinates=1186):
+def swipe_left_right(coordinates=1350):
     """
-    从左往右滑动，展示左方内容
-    :coordinates:纵坐标，根据不同手机自定义,默认pixel6可用
+    从左往右滑动，展示左方内容，for ipad pro12.9
+    :coordinates:纵坐标，，默认在屏幕中段
     :return:
     """
-    swipe((172, coordinates), (899, coordinates))
+    swipe((600, coordinates), (1400, coordinates))
     log("从左往右滑动，展示左方内容")
 
-def swipe_right_left(coordinates=1186):
+def swipe_right_left(coordinates=1350):
     """
-    从右往左滑动，展示右方内容
-    :coordinates:纵坐标，根据不同手机自定义,默认pixel6可用
+    从右往左滑动，展示右方内容，for ipad pro12.9
+    :coordinates:纵坐标，默认在屏幕中段
     :return:
     """
-    swipe((899, coordinates), (172, coordinates))
+    swipe((1400, coordinates), (600, coordinates))
     log("从右往左滑动，展示右方内容")
 
-def get_ele_text(section,key):
-    """
-    获取元素文案
-    :param section: 页面名称
-    :param key: 元素名称
-    :return: 元素文案
-    """
-    ele = ele_is_exist(section, key)
-    if ele:
-        try:
-            ele_text = ele.get_text()
-            log(f"获取到《{section}》页面《{key}》元素文本内容：{ele_text}")
-            return ele_text
-        except:
-            log(f"没有获取到《{section}》页面《{key}》元素文本内容")
-
-def get_len_of_text(section,key):
-    """
-    获取元素文本长度
-    :param section: 页面名称
-    :param key: 元素名称
-    :return: 元素文本长度
-    """
-    ele_text = get_ele_text(section,key)
-    len_of_text = len(ele_text)
-    return len_of_text
-
-def del_text(section,key):
+def del_text():
     """
     删除输入框的文本
-    :param section: 页面名称
-    :param key: 元素名称
     :return:
     """
-    text1 = get_ele_text(section,key)
-    len_text = len(text1)
-    click_ele(section,key)
-    log(f"《{section}》页面《{key}》元素，需要按{len_text}次删除按键删除内容")
-    for i in range(len_text):
-        keyevent("KEYCODE_DEL")
-        i += 1
-        log(f"第{i}次按删除按键")
-    text2 = get_ele_text(section, key)
-    if text2 not in text1:
-        log(f"《{section}》页面《{key}》元素内容删除完成")
-    else:
-        log("删除异常，请检查")
+    try:
+        click_ele("通用","清除文本")
+    except:
+        log("文本清除失败")
 
 def input_text(section,key,txt):
     """
-    poco输入内容,输入前不需要清除
+    输入内容
     :param section: 页面名字
     :param key: 元素名字
     :param txt: 输入内容
     :return:
     """
-    ele = ele_is_exist(section, key)
-    if ele:
-        try:
-            ele.set_text(txt)
-            log(f"《{section}》页面《{key}》元素输入{txt}成功")
-        except:
-            log(f"《{section}》页面《{key}》元素输入{txt}失败")
+    click_ele(section,key)
+    del_text()
+    text(txt)
 
 def input_text_enter(section,key,txt):
     """
@@ -360,13 +272,13 @@ def input_text_enter(section,key,txt):
     :param txt: 输入内容
     :return:
     """
-    ele = ele_is_exist(section, key)
-    if ele:
-        try:
-            text(txt,enter=True)
-            log(f"《{section}》页面《{key}》元素输入{txt}并按回车键")
-        except:
-            log(f"《{section}》页面《{key}》元素'输入{txt}并按回车键'操作失败")
+    click_ele(section, key)
+    del_text()
+    try:
+        text(txt,enter=True)
+        log(f"《{section}》页面《{key}》元素输入{txt}并按回车键")
+    except:
+        log(f"《{section}》页面《{key}》元素'输入{txt}并按回车键'操作失败")
 
 def input_text_search(section,key,txt):
     """
@@ -376,13 +288,13 @@ def input_text_search(section,key,txt):
     :param txt: 输入内容
     :return:
     """
-    ele = ele_is_exist(section, key)
-    if ele:
-        try:
-            text(txt,search=True)
-            log(f"《{section}》页面《{key}》元素输入{txt}并搜索")
-        except:
-            log(f"《{section}》页面《{key}》元素'输入{txt}并搜索'操作失败")
+    click_ele(section,key)
+    del_text()
+    try:
+        text(txt,search=True)
+        log(f"《{section}》页面《{key}》元素输入{txt}并搜索")
+    except:
+        log(f"《{section}》页面《{key}》元素'输入{txt}并搜索'操作失败")
 
 if __name__ == "__main__":
     pass

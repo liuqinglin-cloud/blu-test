@@ -11,8 +11,9 @@ testsuite = unittest.TestSuite()
 tests = unittest.TestLoader().discover(case_path,pattern='test_*.py',top_level_dir=None)
 testsuite.addTests(tests)
 report_path = os.path.join(project_path, "report\\unittest_report\\api_test")
-current_time = time.strftime('%Y%m%d %H%M%S')
-file_name = f"report{current_time}.html"
+#current_time = time.strftime('%Y%m%d %H%M%S')
+#file_name = f"report{current_time}.html"
+file_name = "report.html"
 runner = unittestreport.TestRunner(testsuite,
                                    tester='lql',
                                    filename=file_name,

@@ -129,6 +129,7 @@ def main_page():
             keyevent("BACK")
             sleep()
             log(f"第{i}次点击返回按键，尝试返回启动页或一级页面")
+    swipe_top_bottom()
 
 def current_environment():
     """

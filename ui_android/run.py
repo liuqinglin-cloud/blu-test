@@ -18,10 +18,11 @@ tests = [TestMe('test_my_account')]
 #tests = unittest.TestLoader().discover(case_path,pattern='test_*.py',top_level_dir=None)
 testsuite.addTests(tests)
 
-#unittest报告,按时间命名,不会覆盖
+
 report_path = os.path.join(project_path,"report\\unittest_report\\ui_android")
-current_time = time.strftime('%Y%m%d %H%M%S')
-file_name = f"report{current_time}.html"
+#current_time = time.strftime('%Y%m%d %H%M%S')
+#file_name = f"report{current_time}.html"
+file_name = "report.html"
 runner = unittestreport.TestRunner(testsuite,
                                    tester='lql',
                                    filename=file_name,
