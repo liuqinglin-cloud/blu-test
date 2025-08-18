@@ -30,7 +30,7 @@ runner = unittestreport.TestRunner(testsuite,
                                    report_dir=report_path,
                                    title="翻译测试报告",
                                    desc="android翻译测试",
-                                   templates=3
+                                   templates=1
                                    )
 
 #执行

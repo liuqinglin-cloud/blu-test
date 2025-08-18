@@ -29,7 +29,7 @@ runner = unittestreport.TestRunner(testsuite,
                                    report_dir=report_path,
                                    title="UI测试报告",
                                    desc="android UI测试",
-                                   templates=3
+                                   templates=1
                                    )
 
 #执行
