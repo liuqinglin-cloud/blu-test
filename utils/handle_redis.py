@@ -29,6 +29,20 @@ class HandleRedis:
         count = len(keys)
         return count
 
+    def del_prefix(self,prefix):
+        """
+        删除符合前缀的key
+        :param prefix: 前缀，比如'BluUc:GROUP:USERS*'
+        :return:
+        """
+        keys_to_delete = self.__redis.keys(prefix)
+        print("找到的keys：", keys_to_delete)
+        if keys_to_delete:
+            self.__redis.delete(*keys_to_delete)
+            print(f"成功删除 {len(keys_to_delete)} 个 keys")
+        else:
+            print("没有找到匹配的 keys")
+
     def __del__(self):
         """
         销毁对象时close
