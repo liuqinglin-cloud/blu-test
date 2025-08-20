@@ -321,6 +321,7 @@ def get_ele_text(section,key):
                 log(f"没有获取到《{section}》页面《{key}》元素文本内容")
         else:
             log(f"《{section}》页面《{key}》元素是坐标定位")
+            return ele
 
 def get_len_of_text(section,key):
     """
@@ -341,22 +342,35 @@ def del_text(section,key):
     :return:
     """
     text1 = get_ele_text(section,key)
-    len_text = len(text1)
-    click_ele(section,key)
-    log(f"《{section}》页面《{key}》元素，需要按{len_text}次删除按键删除内容")
-    for i in range(len_text):
+    if type(text1) is not list:
+        len_text = len(text1)
+        log(f"《{section}》页面《{key}》元素，需要按{len_text}次删除按键删除内容")
+        key_del_text(section, key,len_text)
+        text2 = get_ele_text(section, key)
+        if text2 not in text1:
+            log(f"《{section}》页面《{key}》元素内容删除完成")
+        else:
+            log("删除异常，请检查")
+    else:
+        log(f"《{section}》页面《{key}》元素是position定位，请使用key_del_text删除文本")
+
+def key_del_text(section,key,num=20):
+    """
+    按删除按键，删除文本
+    :param section: 页面名称
+    :param key: 元素名称
+    :param num: 次数，默认30次
+    :return:
+    """
+    click_ele(section, key)
+    for i in range(num):
         keyevent("KEYCODE_DEL")
         i += 1
         log(f"第{i}次按删除按键")
-    text2 = get_ele_text(section, key)
-    if text2 not in text1:
-        log(f"《{section}》页面《{key}》元素内容删除完成")
-    else:
-        log("删除异常，请检查")
 
 def input_text(section,key,txt):
     """
-    poco输入内容,输入前不需要清除
+    输入内容
     :param section: 页面名字
     :param key: 元素名字
     :param txt: 输入内容
@@ -371,7 +385,9 @@ def input_text(section,key,txt):
             except:
                 log(f"《{section}》页面《{key}》元素输入{txt}失败")
         else:
-            log(f"《{section}》页面《{key}》元素是坐标定位")
+            log(f"《{section}》页面《{key}》元素是坐标定位,先清除文本再输入")
+            key_del_text(section, key)
+            text(txt)
 
 def input_text_enter(section,key,txt):
     """
@@ -381,12 +397,17 @@ def input_text_enter(section,key,txt):
     :param txt: 输入内容
     :return:
     """
-    del_text(section,key)
-    try:
-        text(txt,enter=True)
-        log(f"《{section}》页面《{key}》元素输入{txt}并按回车键")
-    except:
-        log(f"《{section}》页面《{key}》元素'输入{txt}并按回车键'操作失败")
+    ele = ele_is_exist(section, key)
+    if ele:
+        if type(ele) is not list:
+            del_text(section, key)
+        else:
+            key_del_text(section, key)
+        try:
+            text(txt,enter=True)
+            log(f"《{section}》页面《{key}》元素输入{txt}并按回车键")
+        except:
+            log(f"《{section}》页面《{key}》元素'输入{txt}并按回车键'操作失败")
 
 def input_text_search(section,key,txt):
     """
@@ -396,12 +417,46 @@ def input_text_search(section,key,txt):
     :param txt: 输入内容
     :return:
     """
-    del_text(section,key)
+    ele = ele_is_exist(section, key)
+    if ele:
+        if type(ele) is not list:
+            del_text(section, key)
+        else:
+            key_del_text(section, key)
+        try:
+            text(txt, search=True)
+            log(f"《{section}》页面《{key}》元素输入{txt}并按回车键")
+        except:
+            log(f"《{section}》页面《{key}》元素'输入{txt}并按回车键'操作失败")
+
+def select_data(data):
+    """
+    选择数据，比如在设备列表选择设备，在国家列表选择国家
+    :param data:数据
+    :return:
+    """
     try:
-        text(txt,search=True)
-        log(f"《{section}》页面《{key}》元素输入{txt}并搜索")
+        try:
+            try:
+                try:
+                    poco(text=data).click()
+                except:
+                    swipe_bottom_top()
+                    poco(text=data).click()
+            except:
+                swipe_bottom_top()
+                poco(text=data).click()
+        except:
+            swipe_bottom_top()
+            poco(text=data).click()
     except:
-        log(f"《{section}》页面《{key}》元素'输入{txt}并搜索'操作失败")
+        swipe_bottom_top()
+        poco(text=data).click()
+
+
+
+
 
 if __name__ == "__main__":
+    click_ele("我的", "push入口")
     pass

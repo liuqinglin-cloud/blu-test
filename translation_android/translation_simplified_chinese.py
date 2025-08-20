@@ -14,7 +14,7 @@ class TestSimplifiedChinese(unittest.TestCase):
     def setUpClass(cls):
         cls.lang = "简体中文"
         ST.SAVE_IMAGE = False
-        login_by_mail("china")
+        #login_by_mail("us")
         switch_lang(cls.lang)
         log("测试简体中文翻译")
         ST.SAVE_IMAGE = True
@@ -31,6 +31,7 @@ class TestSimplifiedChinese(unittest.TestCase):
     def tearDown(self):
         ST.SAVE_IMAGE = False
         main_page()
+        swipe_top_bottom()
         ST.SAVE_IMAGE = True
 
     def test_me(self):
@@ -67,6 +68,17 @@ class TestSimplifiedChinese(unittest.TestCase):
         click_ele("安全中心", "注销账户")
         assert_translation_by_find_ele("注销账户", self.lang)
         key_back(3)
+    def test_push(self):
+        """
+        “push”翻译测试
+        """
+        click_ele("我的", "我的")
+        click_ele("我的", "push入口")
+        assert_translation_by_find_ele("push消息列表", self.lang)
+        click_ele("push消息列表", "设置")
+        assert_translation_by_find_ele("push消息设置", self.lang)
+        key_back(2)
+
 
     def test_address(self):
         """
@@ -88,6 +100,25 @@ class TestSimplifiedChinese(unittest.TestCase):
         assert_translation_by_find_ele("省州", self.lang)
         key_back(3)
 
+    def test_feedback(self):
+        """
+        “问题反馈”翻译测试
+        """
+        click_ele("我的", "我的")
+        click_ele("我的", "问题反馈")
+        assert_translation_by_find_ele("问题反馈", self.lang)
+        click_ele("问题反馈", "自助报障")
+        assert_translation_by_find_ele("自助报障", self.lang)
+        key_back()
+        click_ele("问题反馈", "物流")
+        assert_translation_by_find_ele("物流", self.lang)
+        key_back()
+        click_ele("问题反馈", "客服问题")
+        assert_translation_by_find_ele("客服问题", self.lang)
+        key_back()
+        click_ele("问题反馈", "BLUETTI APP")
+        assert_translation_by_find_ele("BLUETTI APP", self.lang)
+        key_back(2)
 
 
 if __name__ == "__main__":
