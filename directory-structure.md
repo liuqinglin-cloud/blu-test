@@ -37,6 +37,7 @@ blu-test/
 ├── report-----------------------------------报告
 │   ├── airtest_report-----------------------airtest报告，有截图，方便测试翻译时检查UI效果，每次会覆盖上一次的报告
 │   │   ├── translation_android--------------Android翻译测试报告
+│   │   ├── translation_h5-------------------H5翻译测试报告
 │   │   ├── ui_android-----------------------Android UI测试报告
 │   │   ├── translation_ios------------------iOS翻译测试报告
 │   │   └── ui_ios---------------------------iOS UI测试报告
