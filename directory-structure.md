@@ -59,6 +59,10 @@ blu-test/
 │   ├── translation_spanish.py---------------西班牙语翻译测试
 │   ├── translation_traditional_chinese.py---繁体中文翻译测试
 │   └── translation_ukrainian.py-------------乌克兰语翻译测试
+├── translation_h5----------------------H5翻译测试，用于测试H5活动翻译
+│   ├── run.py-------------------------------执行用例
+│   ├── translation_english_20250902.py------20250902活动需求，英语翻译测试
+│   └── translation_japanese_20250902.py-----20250902活动需求，日语翻译测试
 ├── translation_ios--------------------------iOS翻译测试
 │   ├── run.py-------------------------------执行用例
 │   ├── translation_english.py---------------英语翻译测试
