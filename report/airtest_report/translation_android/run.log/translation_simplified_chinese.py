@@ -31,6 +31,7 @@ class TestSimplifiedChinese(unittest.TestCase):
     def tearDown(self):
         ST.SAVE_IMAGE = False
         main_page()
+        swipe_top_bottom()
         ST.SAVE_IMAGE = True
 
     def test_me(self):
@@ -88,8 +89,7 @@ class TestSimplifiedChinese(unittest.TestCase):
         assert_translation_by_find_ele("地址管理", self.lang)
         click_ele("地址管理", "新增地址")
         assert_translation_by_find_ele("新增地址", self.lang)
-        swipe_top_bottom()
-        swipe_top_bottom()
+        swipe_top_bottom(num=2)
         swipe_bottom_top()
         click_ele("新增地址", "国家地区")
         assert_translation_by_find_ele("国家地区", self.lang)

@@ -156,11 +156,11 @@
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">开始时间</button>
-                <span class="text-dark">2025-08-20 15:36:28</span>
+                <span class="text-dark">2025-08-21 09:10:07</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">执行时间</button>
-                <span class="text-dark">214.30 S</span>
+                <span class="text-dark">225.39 S</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">用例总数</button>
@@ -175,11 +175,11 @@
 
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">成功用例</button>
-                <span class="text-success">3</span>
+                <span class="text-success">5</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-warning">失败用例</button>
-                <span class="text-warning">2</span>
+                <span class="text-warning">0</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-danger">错误用例</button>
@@ -256,7 +256,7 @@
                     <td class="TestSimplifiedChinese">TestSimplifiedChinese</td>
                     <td>test_address</td>
                     <td>“地址管理”翻译测试</td>
-                    <td>59.7s</td>
+                    <td>55.5s</td>
                     
                         <td class="text-success">成功</td>
                     
@@ -284,9 +284,9 @@ test_address (translation_simplified_chinese.TestSimplifiedChinese)执行——>
                     <td class="TestSimplifiedChinese">TestSimplifiedChinese</td>
                     <td>test_feedback</td>
                     <td>“问题反馈”翻译测试</td>
-                    <td>50.1s</td>
+                    <td>62.3s</td>
                     
-                        <td class="text-warning">失败</td>
+                        <td class="text-success">成功</td>
                     
                     <td>
                         <button type="button" class="btn btn-success btn_info">查看详情</button>
@@ -298,137 +298,7 @@ test_address (translation_simplified_chinese.TestSimplifiedChinese)执行——>
                     <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
                         
 
-                            <pre>test_feedback (translation_simplified_chinese.TestSimplifiedChinese)执行——>【失败】
-</pre>
-                        
-
-                            <pre>Traceback (most recent call last):
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 19, in assert_translation_by_find_ele
-    assert_equal(poco(text=single_translation).exists(), True, assert_text)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\utils\logwraper.py", line 134, in wrapper
-    res = f(*args, **kwargs)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\assertions.py", line 69, in assert_equal
-    assert first == second, "%s and %s are not equal, message: %s" % (first, second, msg)
-</pre>
-                        
-
-                            <pre>AssertionError: False and True are not equal, message: 简体中文--《物流》页面《如果您能告诉我们有关您的反馈的详细信息，我们将不胜感激。》元素
-</pre>
-                        
-
-                            <pre>
-During handling of the above exception, another exception occurred:
-
-</pre>
-                        
-
-                            <pre>Traceback (most recent call last):
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 23, in assert_translation_by_find_ele
-    assert_equal(poco(text=single_translation).exists(), True, assert_text)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\utils\logwraper.py", line 134, in wrapper
-    res = f(*args, **kwargs)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\assertions.py", line 69, in assert_equal
-    assert first == second, "%s and %s are not equal, message: %s" % (first, second, msg)
-</pre>
-                        
-
-                            <pre>AssertionError: False and True are not equal, message: 简体中文--《物流》页面《如果您能告诉我们有关您的反馈的详细信息，我们将不胜感激。》元素
-</pre>
-                        
-
-                            <pre>
-During handling of the above exception, another exception occurred:
-
-</pre>
-                        
-
-                            <pre>Traceback (most recent call last):
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 27, in assert_translation_by_find_ele
-    assert_equal(poco(text=single_translation).exists(), True, assert_text)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\utils\logwraper.py", line 134, in wrapper
-    res = f(*args, **kwargs)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\assertions.py", line 69, in assert_equal
-    assert first == second, "%s and %s are not equal, message: %s" % (first, second, msg)
-</pre>
-                        
-
-                            <pre>AssertionError: False and True are not equal, message: 简体中文--《物流》页面《如果您能告诉我们有关您的反馈的详细信息，我们将不胜感激。》元素
-</pre>
-                        
-
-                            <pre>
-During handling of the above exception, another exception occurred:
-
-</pre>
-                        
-
-                            <pre>Traceback (most recent call last):
-</pre>
-                        
-
-                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 59, in testPartExecutor
-    yield
-</pre>
-                        
-
-                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 593, in run
-    self._callTestMethod(testMethod)
-</pre>
-                        
-
-                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 550, in _callTestMethod
-    method()
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\translation_android\translation_simplified_chinese.py", line 113, in test_feedback
-    assert_translation_by_find_ele("物流", self.lang)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 31, in assert_translation_by_find_ele
-    assert_equal(poco(text=single_translation).exists(), True, assert_text)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\utils\logwraper.py", line 134, in wrapper
-    res = f(*args, **kwargs)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\assertions.py", line 69, in assert_equal
-    assert first == second, "%s and %s are not equal, message: %s" % (first, second, msg)
-</pre>
-                        
-
-                            <pre>AssertionError: False and True are not equal, message: 简体中文--《物流》页面《如果您能告诉我们有关您的反馈的详细信息，我们将不胜感激。》元素
+                            <pre>test_feedback (translation_simplified_chinese.TestSimplifiedChinese)执行——>【通过】
 </pre>
                         
                         
@@ -440,7 +310,7 @@ During handling of the above exception, another exception occurred:
                     <td class="TestSimplifiedChinese">TestSimplifiedChinese</td>
                     <td>test_me</td>
                     <td>“我的”页面翻译测试</td>
-                    <td>18.1s</td>
+                    <td>17.4s</td>
                     
                         <td class="text-success">成功</td>
                     
@@ -466,7 +336,7 @@ During handling of the above exception, another exception occurred:
                     <td class="TestSimplifiedChinese">TestSimplifiedChinese</td>
                     <td>test_my_account</td>
                     <td>“我的账户”翻译测试</td>
-                    <td>68.4s</td>
+                    <td>64.3s</td>
                     
                         <td class="text-success">成功</td>
                     
@@ -492,9 +362,9 @@ During handling of the above exception, another exception occurred:
                     <td class="TestSimplifiedChinese">TestSimplifiedChinese</td>
                     <td>test_push</td>
                     <td>“push”翻译测试</td>
-                    <td>11.5s</td>
+                    <td>19.4s</td>
                     
-                        <td class="text-warning">失败</td>
+                        <td class="text-success">成功</td>
                     
                     <td>
                         <button type="button" class="btn btn-success btn_info">查看详情</button>
@@ -506,137 +376,7 @@ During handling of the above exception, another exception occurred:
                     <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
                         
 
-                            <pre>test_push (translation_simplified_chinese.TestSimplifiedChinese)执行——>【失败】
-</pre>
-                        
-
-                            <pre>Traceback (most recent call last):
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 19, in assert_translation_by_find_ele
-    assert_equal(poco(text=single_translation).exists(), True, assert_text)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\utils\logwraper.py", line 134, in wrapper
-    res = f(*args, **kwargs)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\assertions.py", line 69, in assert_equal
-    assert first == second, "%s and %s are not equal, message: %s" % (first, second, msg)
-</pre>
-                        
-
-                            <pre>AssertionError: False and True are not equal, message: 简体中文--《push消息列表》页面《我的消息》元素
-</pre>
-                        
-
-                            <pre>
-During handling of the above exception, another exception occurred:
-
-</pre>
-                        
-
-                            <pre>Traceback (most recent call last):
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 23, in assert_translation_by_find_ele
-    assert_equal(poco(text=single_translation).exists(), True, assert_text)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\utils\logwraper.py", line 134, in wrapper
-    res = f(*args, **kwargs)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\assertions.py", line 69, in assert_equal
-    assert first == second, "%s and %s are not equal, message: %s" % (first, second, msg)
-</pre>
-                        
-
-                            <pre>AssertionError: False and True are not equal, message: 简体中文--《push消息列表》页面《我的消息》元素
-</pre>
-                        
-
-                            <pre>
-During handling of the above exception, another exception occurred:
-
-</pre>
-                        
-
-                            <pre>Traceback (most recent call last):
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 27, in assert_translation_by_find_ele
-    assert_equal(poco(text=single_translation).exists(), True, assert_text)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\utils\logwraper.py", line 134, in wrapper
-    res = f(*args, **kwargs)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\assertions.py", line 69, in assert_equal
-    assert first == second, "%s and %s are not equal, message: %s" % (first, second, msg)
-</pre>
-                        
-
-                            <pre>AssertionError: False and True are not equal, message: 简体中文--《push消息列表》页面《我的消息》元素
-</pre>
-                        
-
-                            <pre>
-During handling of the above exception, another exception occurred:
-
-</pre>
-                        
-
-                            <pre>Traceback (most recent call last):
-</pre>
-                        
-
-                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 59, in testPartExecutor
-    yield
-</pre>
-                        
-
-                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 593, in run
-    self._callTestMethod(testMethod)
-</pre>
-                        
-
-                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 550, in _callTestMethod
-    method()
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\translation_android\translation_simplified_chinese.py", line 76, in test_push
-    assert_translation_by_find_ele("push消息列表", self.lang)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 31, in assert_translation_by_find_ele
-    assert_equal(poco(text=single_translation).exists(), True, assert_text)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\utils\logwraper.py", line 134, in wrapper
-    res = f(*args, **kwargs)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\assertions.py", line 69, in assert_equal
-    assert first == second, "%s and %s are not equal, message: %s" % (first, second, msg)
-</pre>
-                        
-
-                            <pre>AssertionError: False and True are not equal, message: 简体中文--《push消息列表》页面《我的消息》元素
+                            <pre>test_push (translation_simplified_chinese.TestSimplifiedChinese)执行——>【通过】
 </pre>
                         
                         
@@ -768,8 +508,8 @@ During handling of the above exception, another exception occurred:
                     show: false
                 },
                 data: [
-                    {value: 3, name: '通过'},
-                    {value: 2, name: '失败'},
+                    {value: 5, name: '通过'},
+                    {value: 0, name: '失败'},
                     {value: 0, name: '错误'},
                     {value: 0, name: '跳过'}
                 ]
@@ -790,8 +530,8 @@ During handling of the above exception, another exception occurred:
             {
                 name: '测试结果',
                 type: 'gauge',
-                detail: {formatter: '60.00%'},
-                data: [{value: '60.00', name: '用例通过率'}],
+                detail: {formatter: '100.00%'},
+                data: [{value: '100.00', name: '用例通过率'}],
                 axisLine: {
                     lineStyle: {
                         color: [
