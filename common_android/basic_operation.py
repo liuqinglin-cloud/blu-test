@@ -480,5 +480,5 @@ def select_data(data):
 
 
 if __name__ == "__main__":
-    swipe_bottom_top()
+    click_ele("忠诚度计划","权益等级")
     pass

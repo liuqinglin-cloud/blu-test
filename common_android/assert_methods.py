@@ -7,7 +7,7 @@ def assert_translation_by_find_ele(section, key, num=4):
     通过翻译语言定位控件，能定位到表示翻译正确
     :param section: 页面名称
     :param key: 语种名称
-    :param num: 如果没找到，下滑后再尝试，最大下滑次数，默认4
+    :param num: 如果没找到，上滑后再尝试，最大上滑次数，默认4
     :return:
     """
     translation = translation_ini.get_value(section,key)
@@ -39,3 +39,14 @@ def assert_ele_is_exist(section, key, is_exist=True):
     else:
         log(f"{section}页面{key}元素是坐标定位")
 
+
+def assert_ele_text(section,key,txt):
+    """
+    断言元素文本
+    :param section: 页面名称
+    :param key: 元素名称
+    :param txt: 期望文本
+    :return:
+    """
+    ele_text = get_ele_text(section,key)
+    assert_equal(ele_text,txt,f"{section}页面{key}元素文本是{txt}")
