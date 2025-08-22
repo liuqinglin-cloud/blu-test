@@ -9,7 +9,7 @@ class TestSimplifiedChinese(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         ST.SAVE_IMAGE = False
-        # login_by_mail("us")
+        login_by_mail("us")
         switch_lang()
         log("测试简体中文翻译")
         ST.SAVE_IMAGE = True
@@ -259,10 +259,39 @@ class TestSimplifiedChinese(unittest.TestCase):
         assert_translation_by_find_ele("安装商")
         key_back()
 
+    def test_bluetti_star(self):
+        """
+        安装商
+        """
+        click_ele("我的", "我的")
+        click_ele("我的", "BLUETTI STAR")
+        assert_translation_by_find_ele("BLUETTI STAR")
+        key_back()
 
-if __name__ == "__main__":
-    suite = unittest.TestSuite()
-    tests = [TestSimplifiedChinese("test_my_account")]
-    suite.addTests(tests)
-    runner = unittest.TextTestRunner()
-    runner.run(suite)
+    def test_loyalty_program(self):
+        """
+        Loyalty Program忠诚度计划
+        """
+        click_ele("我的", "我的")
+        click_ele("我的", "忠诚度计划")
+        assert_translation_by_find_ele("忠诚度计划")
+        click_ele("忠诚度计划", "获得X项权益")
+        assert_translation_by_find_ele("权益等级")
+        click_ele("权益等级", "等级说明")
+        assert_translation_by_find_ele("等级说明")
+        key_back(2)
+        click_ele("忠诚度计划", "我的积分")
+        assert_translation_by_find_ele("我的积分")
+        click_ele("我的积分", "兑换记录")
+        assert_translation_by_find_ele("兑换记录")
+        key_back()
+        click_ele("忠诚度计划", "活动规则")
+        assert_translation_by_find_ele("活动规则")
+        key_back()
+        click_ele("忠诚度计划", "积分商城")
+        assert_translation_by_find_ele("积分商城")
+        key_back()
+        swipe_bottom_top()
+        click_ele("忠诚度计划", "历史记录")
+        assert_translation_by_find_ele("历史记录")
+        key_back(2)
