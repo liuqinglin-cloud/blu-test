@@ -2,17 +2,17 @@ from utils.handle_ini import translation_ini
 from common_android.basic_operation import *
 
 
-def assert_translation_by_find_ele(section, key, num=4, expectation=None):
+def assert_translation_by_find_ele(section, key="简体中文", num=4, expectation=None):
     """
     通过翻译语言定位控件，能定位到表示翻译正确
     :param section: 页面名称
-    :param key: 语种名称
+    :param key: 语种名称，默认简体中文
     :param num: 如果没找到，上滑后再尝试，最大上滑次数，默认4
     :param expectation: 期望值，无法直接通过定位断言，可以获取文本传入
     :return:
     """
     translation = translation_ini.get_value(section,key)
-    translation_list = translation.split("=")
+    translation_list = translation.split("==")
     ele_exists = False
     if expectation is None:
         for single_translation in translation_list:

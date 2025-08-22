@@ -156,11 +156,11 @@
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">开始时间</button>
-                <span class="text-dark">2025-08-22 09:29:46</span>
+                <span class="text-dark">2025-08-22 14:51:17</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">执行时间</button>
-                <span class="text-dark">19.86 S</span>
+                <span class="text-dark">132.12 S</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">用例总数</button>
@@ -175,11 +175,11 @@
 
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">成功用例</button>
-                <span class="text-success">1</span>
+                <span class="text-success">0</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-warning">失败用例</button>
-                <span class="text-warning">0</span>
+                <span class="text-warning">1</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-danger">错误用例</button>
@@ -254,11 +254,11 @@
                 <tr>
                     <td>1</td>
                     <td class="TestSimplifiedChinese">TestSimplifiedChinese</td>
-                    <td>test_subscribe</td>
-                    <td>None</td>
-                    <td>14.7s</td>
+                    <td>test_setting</td>
+                    <td>通用设置</td>
+                    <td>1.25e+02s</td>
                     
-                        <td class="text-success">成功</td>
+                        <td class="text-warning">失败</td>
                     
                     <td>
                         <button type="button" class="btn btn-success btn_info">查看详情</button>
@@ -272,7 +272,50 @@
 
                             <pre>D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\android\cap_methods\adbcap.py:10: UserWarning: Currently using ADB screenshots, the efficiency may be very low.
   warnings.warn("Currently using ADB screenshots, the efficiency may be very low.")
-test_subscribe (translation_simplified_chinese.TestSimplifiedChinese)执行——>【通过】
+test_setting (translation_simplified_chinese.TestSimplifiedChinese)执行——>【失败】
+</pre>
+                        
+
+                            <pre>Traceback (most recent call last):
+</pre>
+                        
+
+                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 59, in testPartExecutor
+    yield
+</pre>
+                        
+
+                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 593, in run
+    self._callTestMethod(testMethod)
+</pre>
+                        
+
+                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 550, in _callTestMethod
+    method()
+</pre>
+                        
+
+                            <pre>  File "D:\pythonProjects\blu-test\translation_android\translation_simplified_chinese.py", line 192, in test_setting
+    assert_translation_by_find_ele("碳排量系数说明", self.lang)
+</pre>
+                        
+
+                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 26, in assert_translation_by_find_ele
+    assert_equal(ele_exists, True, f"{key}--《{section}》页面《{single_translation}》元素")
+</pre>
+                        
+
+                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\utils\logwraper.py", line 134, in wrapper
+    res = f(*args, **kwargs)
+</pre>
+                        
+
+                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\assertions.py", line 69, in assert_equal
+    assert first == second, "%s and %s are not equal, message: %s" % (first, second, msg)
+</pre>
+                        
+
+                            <pre>AssertionError: False and True are not equal, message: 简体中文--《碳排量系数说明》页面《减少碳排放量=光伏发电量x碳排量系数》元素
 </pre>
                         
                         
@@ -404,8 +447,8 @@ test_subscribe (translation_simplified_chinese.TestSimplifiedChinese)执行—�
                     show: false
                 },
                 data: [
-                    {value: 1, name: '通过'},
-                    {value: 0, name: '失败'},
+                    {value: 0, name: '通过'},
+                    {value: 1, name: '失败'},
                     {value: 0, name: '错误'},
                     {value: 0, name: '跳过'}
                 ]
@@ -426,8 +469,8 @@ test_subscribe (translation_simplified_chinese.TestSimplifiedChinese)执行—�
             {
                 name: '测试结果',
                 type: 'gauge',
-                detail: {formatter: '100.00%'},
-                data: [{value: '100.00', name: '用例通过率'}],
+                detail: {formatter: '0.00%'},
+                data: [{value: '0.00', name: '用例通过率'}],
                 axisLine: {
                     lineStyle: {
                         color: [

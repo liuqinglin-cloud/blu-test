@@ -45,10 +45,10 @@ def current_lang():
     except:
         log("获取当前语言失败，请检查是否为登录状态")
 
-def switch_lang(expectation):
+def switch_lang(expectation="简体中文"):
     """
     切换至任意语言
-    :param expectation: 期望语言的中文文案，如英语
+    :param expectation: 期望语言的中文文案，默认简体中文
     """
     lang = current_lang()
     log(f"当前语言是{lang}")

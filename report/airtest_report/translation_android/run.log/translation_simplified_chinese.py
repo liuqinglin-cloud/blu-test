@@ -32,14 +32,14 @@ class TestSimplifiedChinese(unittest.TestCase):
 
     def test_me(self):
         """
-        “我的”页面翻译测试
+        我的
         """
         click_ele("我的", "我的")
         assert_translation_by_find_ele("我的", self.lang)
 
     def test_my_account(self):
         """
-        “我的账户”翻译测试
+        我的账户
         """
         click_ele("我的", "我的")
         click_ele("我的", "我的账户")
@@ -67,7 +67,7 @@ class TestSimplifiedChinese(unittest.TestCase):
 
     def test_push(self):
         """
-        “push”翻译测试
+        push
         """
         click_ele("我的", "我的")
         click_ele("我的", "push入口")
@@ -78,7 +78,7 @@ class TestSimplifiedChinese(unittest.TestCase):
 
     def test_address(self):
         """
-        “地址管理”翻译测试
+        地址管理
         """
         click_ele("我的", "我的")
         click_ele("我的", "地址管理")
@@ -97,7 +97,7 @@ class TestSimplifiedChinese(unittest.TestCase):
 
     def test_feedback(self):
         """
-        “问题反馈”翻译测试
+        问题反馈
         """
         click_ele("我的", "我的")
         click_ele("我的", "问题反馈")
@@ -117,20 +117,108 @@ class TestSimplifiedChinese(unittest.TestCase):
 
     def test_sign(self):
         """
-        签到翻译测试
+        签到
         """
         click_ele("我的", "我的")
         click_ele("我的", "签到")
         pass
 
     def test_subscribe(self):
+        """
+        订阅品牌
+        """
         click_ele("我的", "我的")
         swipe_bottom_top()
         click_ele("我的", "订阅品牌")
+        sleep()
         text1 = poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child(
             "android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child(
             "android.widget.TextView")[2].get_text()
-        assert_translation_by_find_ele("订阅品牌", "简体中文客服支持",expectation=text1)
+        assert_translation_by_find_ele("订阅品牌", "简体中文服务内容",expectation=text1)
+        text2 = poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child(
+            "android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child(
+            "android.widget.TextView")[4].get_text()
+        assert_translation_by_find_ele("订阅品牌", "简体中文订阅方式", expectation=text2)
+        swipe_bottom_top()
+        text3=poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child("android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child("android.widget.TextView")[3].get_text()
+        assert_translation_by_find_ele("订阅品牌", "简体中文数据保护承诺", expectation=text3)
+        swipe_top_bottom()
+        assert_translation_by_find_ele("订阅品牌", self.lang)
+
+    def test_setting(self):
+        """
+        通用设置
+        """
+        click_ele("我的", "我的")
+        swipe_bottom_top()
+        click_ele("我的", "通用设置")
+        assert_translation_by_find_ele("通用设置", self.lang)
+        click_ele("通用设置", "字体大小")
+        assert_translation_by_find_ele("字体大小", self.lang)
+        click_ele("字体大小", "关闭按钮")
+        click_ele("通用设置", "主题模式")
+        assert_translation_by_find_ele("主题模式", self.lang)
+        click_ele("主题模式", "关闭按钮")
+        click_ele("通用设置", "时区")
+        assert_translation_by_find_ele("时区", self.lang)
+        key_back()
+        click_ele("通用设置", "温度单位")
+        assert_translation_by_find_ele("温度单位", self.lang)
+        click_ele("温度单位", "关闭按钮")
+        click_ele("通用设置", "货币单位")
+        assert_translation_by_find_ele("货币单位", self.lang)
+        key_back()
+        click_ele("通用设置", "电价设置")
+        assert_translation_by_find_ele("电价设置", self.lang)
+        click_ele("电价设置", "电价设置方式")
+        assert_translation_by_find_ele("电价设置方式", self.lang)
+        click_ele("电价设置", "固定电价")
+        assert_translation_by_find_ele("固定电价", self.lang)
+        click_ele("固定电价", "买电电价")
+        assert_translation_by_find_ele("固定买电电价", self.lang)
+        key_back()
+        click_ele("固定电价", "售电电价")
+        assert_translation_by_find_ele("固定售电电价", self.lang)
+        key_back(2)
+        click_ele("电价设置", "峰谷电价")
+        assert_translation_by_find_ele("峰谷电价", self.lang)
+        click_ele("峰谷电价", "波峰时间")
+        click_ele("峰谷电价", "关闭按钮")
+        click_ele("峰谷电价", "波谷买电电价")
+        key_back(4)
+        click_ele("通用设置", "碳排量系数")
+        assert_translation_by_find_ele("碳排量系数", self.lang)
+        click_ele("碳排量系数", "碳排量系数说明")
+        assert_translation_by_find_ele("碳排量系数说明", self.lang)
+        key_back(2)
+        click_ele("通用设置", "数据统计服务")
+        assert_translation_by_find_ele("数据统计服务未授权", self.lang)
+        click_ele("数据统计服务", "授权")
+        assert_translation_by_find_ele("数据统计服务已授权", self.lang)
+        click_ele("数据统计服务", "取消授权")
+        click_ele("通用", "确定")
+        key_back(2)
+
+    def test_privacy_policy(self):
+        """
+        隐私政策
+        """
+        click_ele("我的", "我的")
+        swipe_bottom_top()
+        click_ele("我的", "隐私政策")
+        sleep()
+        assert_translation_by_find_ele("隐私政策", self.lang)
+        key_back()
+
+    def test_user_agreement(self):
+        """
+        通用设置
+        """
+        click_ele("我的", "我的")
+        swipe_bottom_top()
+        click_ele("我的", "用户协议")
+        assert_translation_by_find_ele("用户协议", self.lang)
+
 
 
 if __name__ == "__main__":

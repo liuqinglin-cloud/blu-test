@@ -152,3 +152,13 @@ class TestMe(unittest.TestCase):
             assert_ele_is_exist("签到", "积分")
         else:
             assert_ele_text("签到", "签到","已签到")
+
+    def test_installer(self):
+        """
+        安装商跳转联系我们
+        """
+        click_ele("我的", "我的")
+        click_ele("我的", "安装商")
+        click_ele("安装商", "联系我们")
+        assert_ele_is_exist("联系我们", "电话服务")
+        key_back(2)

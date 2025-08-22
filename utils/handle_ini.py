@@ -21,9 +21,12 @@ class HandleIni:
         加载文件
         :return:
         """
-        cf = configparser.ConfigParser()
-        cf.read(self.path, encoding="utf-8-sig")
-        return cf
+        try:
+            cf = configparser.ConfigParser()
+            cf.read(self.path, encoding="utf-8-sig")
+            return cf
+        except:
+            print("文件有误")
 
     def get_value(self,section,key):
         """

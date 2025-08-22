@@ -472,5 +472,8 @@ def select_data(data, num=4):
 
 
 if __name__ == "__main__":
-    swipe_bottom_top()
+    text = poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child(
+        "android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child(
+        "android.widget.TextView")[4].get_text()
+    print(text)
     pass
