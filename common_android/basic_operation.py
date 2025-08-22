@@ -454,31 +454,23 @@ def input_text_search(section, key, txt):
             log(f"《{section}》页面《{key}》元素'输入{txt}并按回车键'操作失败")
 
 
-def select_data(data):
+def select_data(data, num=4):
     """
     选择数据，比如在设备列表选择设备，在国家列表选择国家
     :param data:数据
+    :param num: 尝试次数，默认4
     :return:
     """
-    try:
+    for i in range(num):
         try:
-            try:
-                try:
-                    poco(text=data).click()
-                except:
-                    swipe_bottom_top()
-                    poco(text=data).click()
-            except:
-                swipe_bottom_top()
-                poco(text=data).click()
-        except:
-            swipe_bottom_top()
             poco(text=data).click()
-    except:
-        swipe_bottom_top()
-        poco(text=data).click()
+            break
+        except:
+            if i == num-1:
+                break
+            swipe_bottom_top()
 
 
 if __name__ == "__main__":
-    click_ele("忠诚度计划","权益等级")
+    swipe_bottom_top()
     pass

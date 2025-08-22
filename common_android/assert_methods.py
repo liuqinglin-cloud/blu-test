@@ -2,27 +2,34 @@ from utils.handle_ini import translation_ini
 from common_android.basic_operation import *
 
 
-def assert_translation_by_find_ele(section, key, num=4):
+def assert_translation_by_find_ele(section, key, num=4, expectation=None):
     """
     通过翻译语言定位控件，能定位到表示翻译正确
     :param section: 页面名称
     :param key: 语种名称
     :param num: 如果没找到，上滑后再尝试，最大上滑次数，默认4
+    :param expectation: 期望值，无法直接通过定位断言，可以获取文本传入
     :return:
     """
     translation = translation_ini.get_value(section,key)
     translation_list = translation.split("=")
-    for single_translation in translation_list:
-        assert_text = f"{key}--《{section}》页面《{single_translation}》元素"
-        ele_exists = False
-        for i in range(num):
-            if poco(text=single_translation).exists():
+    ele_exists = False
+    if expectation is None:
+        for single_translation in translation_list:
+            for i in range(num):
+                if poco(text=single_translation).exists():
+                    ele_exists = True
+                    break
+                else:
+                    log(f"没找到《{section}》页面《{single_translation}》元素，向上滑一下，再试试")
+                    swipe_bottom_top()
+            assert_equal(ele_exists, True, f"{key}--《{section}》页面《{single_translation}》元素")
+    else:
+        for single_translation in translation_list:
+            if single_translation in expectation:
                 ele_exists = True
-                break
-            else:
-                log("没找到元素，向上滑一下，再试试")
-                swipe_bottom_top()
-        assert_equal(ele_exists, True, assert_text)
+            assert_equal(ele_exists, True, f"{key}相关元素--《{section}》页面《{single_translation}》文案")
+
 
 
 def assert_ele_is_exist(section, key, is_exist=True):

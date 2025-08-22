@@ -14,9 +14,9 @@ project_path = os.path.dirname(os.path.dirname(__file__))
 
 testsuite = unittest.TestSuite()
 #部分用例，按需添加
-#tests = [TestSimplifiedChinese('test_me'),TestEnglish("test_me")]
+tests = [TestSimplifiedChinese('test_subscribe')]
 #匹配用例文件
-tests = unittest.TestLoader().discover(case_path,pattern='translation_si*.py',top_level_dir=None)
+#tests = unittest.TestLoader().discover(case_path,pattern='translation_si*.py',top_level_dir=None)
 testsuite.addTests(tests)
 
 
