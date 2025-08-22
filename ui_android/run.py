@@ -13,9 +13,9 @@ project_path = os.path.dirname(os.path.dirname(__file__))
 
 testsuite = unittest.TestSuite()
 #部分用例，按需添加
-tests = [TestMe('test_my_account')]
+#tests = [TestMe('test_my_account')]
 #所有用例
-#tests = unittest.TestLoader().discover(case_path,pattern='test_*.py',top_level_dir=None)
+tests = unittest.TestLoader().discover(case_path,pattern='test_*.py',top_level_dir=None)
 testsuite.addTests(tests)
 
 

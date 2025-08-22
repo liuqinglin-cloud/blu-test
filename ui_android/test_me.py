@@ -8,26 +8,33 @@ class TestMe(unittest.TestCase):
     
     @classmethod
     def setUpClass(cls):
+        ST.SAVE_IMAGE = False
+        log("------测试类前置处理------")
         login_by_mail("us")
         switch_lang("简体中文")
 
 
     @classmethod
     def tearDownClass(cls):
+        log("------测试类后置处理------")
         pass
 
     def setUp(self):
+        log("------测试方法前置处理------")
         pass
+        ST.SAVE_IMAGE = True
 
     def tearDown(self):
+        ST.SAVE_IMAGE = False
+        log("------测试方法后置处理------")
         main_page()
         swipe_top_bottom()
-
 
     def test_my_account(self):
         """
         测试“我的账户”各处输入框为空时，点确定，是否会出现异常
         """
+        log("测试------《我的账户》")
         click_ele("我的","我的")
         click_ele("我的","我的账户")
         click_ele("我的账户", "昵称")
@@ -60,6 +67,7 @@ class TestMe(unittest.TestCase):
         """
         测试“地址管理”各处输入框为空等情况，点确定，是否会出现异常
         """
+        log("测试------《地址管理》")
         click_ele("我的", "我的")
         click_ele("我的", "地址管理")
         click_ele("地址管理", "新增地址")
@@ -68,6 +76,7 @@ class TestMe(unittest.TestCase):
         assert_ele_is_exist("通用", "确定")
         swipe_top_bottom(num=2)
         key_del_text("新增地址", "联系邮箱")
+        key_back()
         swipe_bottom_top(num=2)
         click_ele("通用", "确定")
         assert_ele_is_exist("通用", "确定")
@@ -80,6 +89,7 @@ class TestMe(unittest.TestCase):
         """
         app评分跳转测试
         """
+        log("测试------《app评分跳转测试》")
         click_ele("我的", "App评分")
         assert_ele_is_exist("pixel6手机","商店登录")
         home()
@@ -87,8 +97,9 @@ class TestMe(unittest.TestCase):
 
     def test_feedback(self):
         """
-        测试“地址管理”各处输入框为空等情况，点确定，是否会出现异常
+        测试“问题反馈”各处输入框为空等情况，点确定，是否会出现异常
         """
+        log("测试------《问题反馈》")
         click_ele("我的", "我的")
         click_ele("我的", "问题反馈")
         click_ele("问题反馈", "自助报障")
@@ -128,6 +139,7 @@ class TestMe(unittest.TestCase):
         """
         测试清理缓存
         """
+        log("测试------《清理缓存》")
         click_ele("我的", "我的")
         swipe_bottom_top()
         click_ele("我的", "清理缓存")
@@ -143,6 +155,7 @@ class TestMe(unittest.TestCase):
         """
         测试签到
         """
+        log("测试------《签到》")
         click_ele("我的", "我的")
         swipe_bottom_top()
         click_ele("我的", "签到")
@@ -157,6 +170,7 @@ class TestMe(unittest.TestCase):
         """
         安装商跳转联系我们
         """
+        log("测试------《安装商跳转联系我们》")
         click_ele("我的", "我的")
         click_ele("我的", "安装商")
         click_ele("安装商", "联系我们")

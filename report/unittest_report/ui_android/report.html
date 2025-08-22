@@ -156,11 +156,11 @@
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">开始时间</button>
-                <span class="text-dark">2025-08-21 16:31:00</span>
+                <span class="text-dark">2025-08-22 20:06:26</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">执行时间</button>
-                <span class="text-dark">162.83 S</span>
+                <span class="text-dark">192.15 S</span>
             </li>
             <li class="list-group-item">
                 <button type="button" class="btn btn-success">用例总数</button>
@@ -255,10 +255,10 @@
                     <td>1</td>
                     <td class="TestMe">TestMe</td>
                     <td>test_address</td>
-                    <td>None</td>
-                    <td>0.0s</td>
+                    <td>测试“地址管理”各处输入框为空等情况，点确定，是否会出现异常</td>
+                    <td>33.9s</td>
                     
-                        <td class="text-success">成功</td>
+                        <td class="text-warning">失败</td>
                     
                     <td>
                         <button type="button" class="btn btn-success btn_info">查看详情</button>
@@ -270,7 +270,52 @@
                     <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
                         
 
-                            <pre>test_address (test_comunity.TestMe)执行——>【通过】
+                            <pre>D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\android\cap_methods\adbcap.py:10: UserWarning: Currently using ADB screenshots, the efficiency may be very low.
+  warnings.warn("Currently using ADB screenshots, the efficiency may be very low.")
+test_address (test_me.TestMe)执行——>【失败】
+</pre>
+                        
+
+                            <pre>Traceback (most recent call last):
+</pre>
+                        
+
+                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 59, in testPartExecutor
+    yield
+</pre>
+                        
+
+                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 593, in run
+    self._callTestMethod(testMethod)
+</pre>
+                        
+
+                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 550, in _callTestMethod
+    method()
+</pre>
+                        
+
+                            <pre>  File "D:\pythonProjects\blu-test\ui_android\test_me.py", line 81, in test_address
+    assert_ele_is_exist("通用", "确定")
+</pre>
+                        
+
+                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 45, in assert_ele_is_exist
+    assert_equal(ele.exists(), is_exist, f"{section}页面{key}元素存在性为{is_exist}")
+</pre>
+                        
+
+                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\utils\logwraper.py", line 134, in wrapper
+    res = f(*args, **kwargs)
+</pre>
+                        
+
+                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\assertions.py", line 69, in assert_equal
+    assert first == second, "%s and %s are not equal, message: %s" % (first, second, msg)
+</pre>
+                        
+
+                            <pre>AssertionError: False and True are not equal, message: 通用页面确定元素存在性为True
 </pre>
                         
                         
@@ -280,35 +325,9 @@
                 <tr>
                     <td>2</td>
                     <td class="TestMe">TestMe</td>
-                    <td>test_address</td>
-                    <td>测试“地址管理”各处输入框为空等情况，点确定，是否会出现异常</td>
-                    <td>41.7s</td>
-                    
-                        <td class="text-success">成功</td>
-                    
-                    <td>
-                        <button type="button" class="btn btn-success btn_info">查看详情</button>
-                    </td>
-                </tr>
-
-                <tr class="test_log">
-
-                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
-                        
-
-                            <pre>test_address (test_me.TestMe)执行——>【通过】
-</pre>
-                        
-                        
-                    </td>
-                </tr>
-            
-                <tr>
-                    <td>3</td>
-                    <td class="TestMe">TestMe</td>
                     <td>test_app_mark</td>
                     <td>app评分跳转测试</td>
-                    <td>8.33s</td>
+                    <td>6.19s</td>
                     
                         <td class="text-success">成功</td>
                     
@@ -330,11 +349,11 @@
                 </tr>
             
                 <tr>
-                    <td>4</td>
+                    <td>3</td>
                     <td class="TestMe">TestMe</td>
                     <td>test_clear_cache</td>
                     <td>测试清理缓存</td>
-                    <td>14.9s</td>
+                    <td>15.3s</td>
                     
                         <td class="text-success">成功</td>
                     
@@ -356,11 +375,11 @@
                 </tr>
             
                 <tr>
-                    <td>5</td>
+                    <td>4</td>
                     <td class="TestMe">TestMe</td>
                     <td>test_feedback</td>
-                    <td>测试“地址管理”各处输入框为空等情况，点确定，是否会出现异常</td>
-                    <td>34.6s</td>
+                    <td>测试“问题反馈”各处输入框为空等情况，点确定，是否会出现异常</td>
+                    <td>43.7s</td>
                     
                         <td class="text-warning">失败</td>
                     
@@ -397,12 +416,12 @@
 </pre>
                         
 
-                            <pre>  File "D:\pythonProjects\blu-test\ui_android\test_me.py", line 99, in test_feedback
-    assert_ele_is_exist("自助报障", "提交")
+                            <pre>  File "D:\pythonProjects\blu-test\ui_android\test_me.py", line 118, in test_feedback
+    assert_ele_is_exist("物流", "提交")
 </pre>
                         
 
-                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 38, in assert_ele_is_exist
+                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 45, in assert_ele_is_exist
     assert_equal(ele.exists(), is_exist, f"{section}页面{key}元素存在性为{is_exist}")
 </pre>
                         
@@ -417,7 +436,7 @@
 </pre>
                         
 
-                            <pre>AssertionError: False and True are not equal, message: 自助报障页面提交元素存在性为True
+                            <pre>AssertionError: False and True are not equal, message: 物流页面提交元素存在性为True
 </pre>
                         
                         
@@ -425,13 +444,13 @@
                 </tr>
             
                 <tr>
-                    <td>6</td>
+                    <td>5</td>
                     <td class="TestMe">TestMe</td>
-                    <td>test_my_account</td>
-                    <td>测试“我的账户”各处输入框为空时，点确定，是否会出现异常</td>
-                    <td>40.3s</td>
+                    <td>test_installer</td>
+                    <td>安装商跳转联系我们</td>
+                    <td>12.1s</td>
                     
-                        <td class="text-warning">失败</td>
+                        <td class="text-success">成功</td>
                     
                     <td>
                         <button type="button" class="btn btn-success btn_info">查看详情</button>
@@ -443,50 +462,33 @@
                     <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
                         
 
-                            <pre>test_my_account (test_me.TestMe)执行——>【失败】
+                            <pre>test_installer (test_me.TestMe)执行——>【通过】
 </pre>
                         
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>6</td>
+                    <td class="TestMe">TestMe</td>
+                    <td>test_my_account</td>
+                    <td>测试“我的账户”各处输入框为空时，点确定，是否会出现异常</td>
+                    <td>58.0s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
 
-                            <pre>Traceback (most recent call last):
-</pre>
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
                         
 
-                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 59, in testPartExecutor
-    yield
-</pre>
-                        
-
-                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 593, in run
-    self._callTestMethod(testMethod)
-</pre>
-                        
-
-                            <pre>  File "C:\Users\admin\AppData\Local\Programs\Python\Python39\lib\unittest\case.py", line 550, in _callTestMethod
-    method()
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\ui_android\test_me.py", line 56, in test_my_account
-    assert_ele_is_exist("通用", "下一步")
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\common_android\assert_methods.py", line 38, in assert_ele_is_exist
-    assert_equal(ele.exists(), is_exist, f"{section}页面{key}元素存在性为{is_exist}")
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\utils\logwraper.py", line 134, in wrapper
-    res = f(*args, **kwargs)
-</pre>
-                        
-
-                            <pre>  File "D:\pythonProjects\blu-test\.venv\lib\site-packages\airtest\core\assertions.py", line 69, in assert_equal
-    assert first == second, "%s and %s are not equal, message: %s" % (first, second, msg)
-</pre>
-                        
-
-                            <pre>AssertionError: False and True are not equal, message: 通用页面下一步元素存在性为True
+                            <pre>test_my_account (test_me.TestMe)执行——>【通过】
 </pre>
                         
                         
@@ -498,7 +500,7 @@
                     <td class="TestMe">TestMe</td>
                     <td>test_sign</td>
                     <td>测试签到</td>
-                    <td>16.3s</td>
+                    <td>14.3s</td>
                     
                         <td class="text-success">成功</td>
                     

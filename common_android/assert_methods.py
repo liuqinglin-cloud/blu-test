@@ -23,6 +23,7 @@ def assert_translation_by_find_ele(section, key="简体中文", num=4, expectati
                 else:
                     log(f"没找到《{section}》页面《{single_translation}》元素，向上滑一下，再试试")
                     swipe_bottom_top()
+                    sleep()
             assert_equal(ele_exists, True, f"{key}--《{section}》页面《{single_translation}》元素")
     else:
         for single_translation in translation_list:
@@ -42,9 +43,9 @@ def assert_ele_is_exist(section, key, is_exist=True):
     """
     ele = element(section,key)
     if type(ele) is not list:
-        assert_equal(ele.exists(), is_exist, f"{section}页面{key}元素存在性为{is_exist}")
+        assert_equal(ele.exists(), is_exist, f"《{section}》页面《{key}》元素存在性为{is_exist}")
     else:
-        log(f"{section}页面{key}元素是坐标定位")
+        log(f"《{section}》页面《{key}》元素是坐标定位")
 
 
 def assert_ele_text(section,key,txt):
@@ -56,4 +57,4 @@ def assert_ele_text(section,key,txt):
     :return:
     """
     ele_text = get_ele_text(section,key)
-    assert_equal(ele_text,txt,f"{section}页面{key}元素文本是{txt}")
+    assert_equal(ele_text,txt,f"《{section}》页面《{key}》元素文本是{txt}")

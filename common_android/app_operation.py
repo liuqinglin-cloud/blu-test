@@ -1,6 +1,5 @@
 from common_android.basic_operation import *
-from utils.handle_ini import translation_ini,test_user_ini
-
+from utils.handle_ini import translation_ini, test_user_ini
 
 
 def current_lang():
@@ -45,6 +44,7 @@ def current_lang():
     except:
         log("获取当前语言失败，请检查是否为登录状态")
 
+
 def switch_lang(expectation="简体中文"):
     """
     切换至任意语言
@@ -79,6 +79,7 @@ def switch_lang(expectation="简体中文"):
         log(f"已切换语言为{expectation}")
         sleep(3)
         main_page()
+
 
 def main_page():
     """
@@ -131,22 +132,24 @@ def main_page():
             log(f"第{i}次点击返回按键，尝试返回启动页或一级页面")
     swipe_top_bottom()
 
+
 def current_environment():
     """
     App当前测试环境
     :return: 当前测试环境
     """
     logout()
-    times_click_ele("启动","logo")
-    if element("开发者模式","测试环境api").exists():
+    times_click_ele("启动", "logo")
+    if element("开发者模式", "测试环境api").exists():
         log("当前是测试环境")
         return "测试环境"
-    elif element("开发者模式","开发环境api").exists():
+    elif element("开发者模式", "开发环境api").exists():
         log("当前是开发环境")
         return "开发环境"
     else:
         log("当前是生产环境")
         return "生产环境"
+
 
 def switch_environment(expectation):
     """
@@ -158,14 +161,15 @@ def switch_environment(expectation):
         log(f"当前是环境是{expectation}，不用切换")
         main_page()
     else:
-        click_ele("开发者模式",expectation)
-        click_ele("通用","确定")
+        click_ele("开发者模式", expectation)
+        click_ele("通用", "确定")
         log(f"环境已切换为{expectation}")
     try:
         start_app("net.poweroak.bluetticloud.debug")
         log("重启App成功")
     except:
         pass
+
 
 def is_login():
     """
@@ -181,6 +185,7 @@ def is_login():
         log("未登录")
         return False
 
+
 def login_by_mail(account_key):
     """
     邮箱登录
@@ -188,11 +193,11 @@ def login_by_mail(account_key):
     :return:
     """
     if not is_login():
-        click_ele("启动","登录")
+        click_ele("启动", "登录")
         mail = None
         password = None
         try:
-            user = test_user_ini.get_value("mail",account_key)
+            user = test_user_ini.get_value("mail", account_key)
             mail = user.split("-")[0]
             password = user.split("-")[1]
         except:
@@ -210,6 +215,7 @@ def login_by_mail(account_key):
         else:
             log("登录失败")
 
+
 def logout():
     """
     退出登录
@@ -226,6 +232,7 @@ def logout():
         else:
             log("退出登录失败")
 
+
 def get_version():
     """
     获取App版本
@@ -238,10 +245,11 @@ def get_version():
             version = get_ele_text("我的", "版本")
             return version
         except:
-            version = get_ele_text("启动","版本号")
+            version = get_ele_text("启动", "版本号")
             return version
     except:
         log("当前疑似不在首页/一级页面/启动页")
+
 
 def upgrade(is_upgrade=False):
     """
@@ -260,6 +268,7 @@ def upgrade(is_upgrade=False):
         except:
             log("没有升级弹窗")
 
+
 def user_agreement(is_agree=True):
     """
     用户协议弹窗操作
@@ -275,6 +284,7 @@ def user_agreement(is_agree=True):
             click_ele("通用", "取消")
         except:
             log("没有用户协议弹窗")
+
 
 def subscribe(is_subscribe=False):
     """
@@ -293,14 +303,16 @@ def subscribe(is_subscribe=False):
         except:
             log("没有订阅弹窗")
 
+
 def get_user_nickname():
     """
     获取用户昵称
     :return: 用户昵称
     """
     if is_login() is True:
-        nickname = get_ele_text("我的","昵称")
+        nickname = get_ele_text("我的", "昵称")
         return nickname
+
 
 if __name__ == "__main__":
     #start_app("net.poweroak.bluetticloud.debug")

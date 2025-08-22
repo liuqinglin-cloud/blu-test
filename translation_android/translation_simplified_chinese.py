@@ -9,30 +9,33 @@ class TestSimplifiedChinese(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         ST.SAVE_IMAGE = False
+        log("------测试类前置处理------")
         login_by_mail("us")
         switch_lang()
-        log("测试简体中文翻译")
-        ST.SAVE_IMAGE = True
+        log("----开始测试简体中文翻译----")
 
     @classmethod
     def tearDownClass(cls):
-        ST.SAVE_IMAGE = False
+        log("------测试类后置处理------")
         main_page()
-        ST.SAVE_IMAGE = True
 
     def setUp(self):
+        log("------测试方法前置处理------")
         pass
+        ST.SAVE_IMAGE = True
 
     def tearDown(self):
         ST.SAVE_IMAGE = False
+        log("------测试方法后置处理------")
         main_page()
         swipe_top_bottom()
-        ST.SAVE_IMAGE = True
+
 
     def test_me(self):
         """
         我的
         """
+        log("测试------《我的》")
         click_ele("我的", "我的")
         assert_translation_by_find_ele("我的")
 
@@ -40,45 +43,48 @@ class TestSimplifiedChinese(unittest.TestCase):
         """
         我的账户
         """
+        log("测试------《我的账户》")
         click_ele("我的", "我的")
         click_ele("我的", "我的账户")
-        assert_translation_by_find_ele("我的账户", self.lang)
+        assert_translation_by_find_ele("我的账户")
         click_ele("我的账户", "昵称")
-        assert_translation_by_find_ele("修改昵称", self.lang)
+        assert_translation_by_find_ele("修改昵称")
         click_ele("通用", "确定")
         click_ele("我的账户", "安全中心")
-        assert_translation_by_find_ele("安全中心", self.lang)
+        assert_translation_by_find_ele("安全中心")
         click_ele("安全中心", "安全邮箱")
-        assert_translation_by_find_ele("安全邮箱", self.lang)
+        assert_translation_by_find_ele("安全邮箱")
         key_back()
         click_ele("安全中心", "更改密码")
-        assert_translation_by_find_ele("更改密码", self.lang)
+        assert_translation_by_find_ele("更改密码")
         key_back()
         click_ele("安全中心", "google")
-        assert_translation_by_find_ele("google账号绑定", self.lang)
+        assert_translation_by_find_ele("google账号绑定")
         key_back()
         click_ele("安全中心", "twitter")
-        assert_translation_by_find_ele("twitter账号绑定", self.lang)
+        assert_translation_by_find_ele("twitter账号绑定")
         key_back()
         click_ele("安全中心", "注销账户")
-        assert_translation_by_find_ele("注销账户", self.lang)
+        assert_translation_by_find_ele("注销账户")
         key_back(3)
 
     def test_push(self):
         """
         push
         """
+        log("测试------《push》")
         click_ele("我的", "我的")
         click_ele("我的", "push入口")
-        assert_translation_by_find_ele("push消息列表", self.lang)
+        assert_translation_by_find_ele("push消息列表")
         click_ele("push消息列表", "设置")
-        assert_translation_by_find_ele("push消息设置", self.lang)
+        assert_translation_by_find_ele("push消息设置")
         key_back(2)
 
     def test_address(self):
         """
         地址管理
         """
+        log("测试------《地址管理》")
         click_ele("我的", "我的")
         click_ele("我的", "地址管理")
         assert_translation_by_find_ele("地址管理",)
@@ -98,6 +104,7 @@ class TestSimplifiedChinese(unittest.TestCase):
         """
         问题反馈
         """
+        log("测试------《问题反馈》")
         click_ele("我的", "我的")
         click_ele("我的", "问题反馈")
         assert_translation_by_find_ele("问题反馈")
@@ -118,6 +125,7 @@ class TestSimplifiedChinese(unittest.TestCase):
         """
         签到
         """
+        log("测试------《签到》")
         click_ele("我的", "我的")
         click_ele("我的", "签到")
         assert_translation_by_find_ele("签到")
@@ -129,6 +137,7 @@ class TestSimplifiedChinese(unittest.TestCase):
         """
         订阅品牌
         """
+        log("测试------《订阅品牌》")
         click_ele("我的", "我的")
         swipe_bottom_top()
         click_ele("我的", "订阅品牌")
@@ -151,6 +160,7 @@ class TestSimplifiedChinese(unittest.TestCase):
         """
         通用设置
         """
+        log("测试------《通用设置》")
         click_ele("我的", "我的")
         swipe_bottom_top()
         click_ele("我的", "通用设置")
@@ -205,6 +215,7 @@ class TestSimplifiedChinese(unittest.TestCase):
         """
         隐私政策
         """
+        log("测试------《隐私政策》")
         click_ele("我的", "我的")
         swipe_bottom_top()
         click_ele("我的", "隐私政策")
@@ -214,8 +225,9 @@ class TestSimplifiedChinese(unittest.TestCase):
 
     def test_user_agreement(self):
         """
-        通用设置
+        用户协议
         """
+        log("测试------《用户协议》")
         click_ele("我的", "我的")
         swipe_bottom_top()
         click_ele("我的", "用户协议")
@@ -225,8 +237,9 @@ class TestSimplifiedChinese(unittest.TestCase):
         """
         大转盘
         """
+        log("测试------《大转盘》")
         click_ele("我的", "我的")
-        swipe_bottom_top()
+        swipe_bottom_top()#需要修改滑动位置
         click_ele("我的", "大转盘")
         assert_translation_by_find_ele("大转盘")
         click_ele("大转盘", "右上角按钮")
@@ -243,6 +256,7 @@ class TestSimplifiedChinese(unittest.TestCase):
         """
         引荐计划
         """
+        log("测试------《引荐计划》")
         click_ele("我的", "我的")
         click_ele("我的", "引荐计划")
         assert_translation_by_find_ele("引荐计划")
@@ -254,6 +268,7 @@ class TestSimplifiedChinese(unittest.TestCase):
         """
         安装商
         """
+        log("测试------《安装商》")
         click_ele("我的", "我的")
         click_ele("我的", "安装商")
         assert_translation_by_find_ele("安装商")
@@ -261,8 +276,9 @@ class TestSimplifiedChinese(unittest.TestCase):
 
     def test_bluetti_star(self):
         """
-        安装商
+        bluetti_star
         """
+        log("测试------《bluetti_star》")
         click_ele("我的", "我的")
         click_ele("我的", "BLUETTI STAR")
         assert_translation_by_find_ele("BLUETTI STAR")
@@ -272,10 +288,13 @@ class TestSimplifiedChinese(unittest.TestCase):
         """
         Loyalty Program忠诚度计划
         """
+        log("测试------《Loyalty Program忠诚度计划》")
         click_ele("我的", "我的")
         click_ele("我的", "忠诚度计划")
         assert_translation_by_find_ele("忠诚度计划")
+        swipe_top_bottom()
         click_ele("忠诚度计划", "获得X项权益")
+        sleep()
         assert_translation_by_find_ele("权益等级")
         click_ele("权益等级", "等级说明")
         assert_translation_by_find_ele("等级说明")

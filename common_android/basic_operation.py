@@ -8,7 +8,7 @@ if not cli_setup():
 
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
-poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=True)
+poco = AndroidUiautomationPoco(use_airtest_input=False, screenshot_each_action=False)
 
 ST.FIND_TIMEOUT = 20
 ST.FIND_TIMEOUT_TMP = 3

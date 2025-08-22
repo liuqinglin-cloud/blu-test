@@ -8,20 +8,22 @@ class TestEnglish(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        log("------测试类前置处理------")
         cls.lang = "英语"
         ST.SAVE_IMAGE = False
         switch_lang(cls.lang)
-        ST.SAVE_IMAGE = True
+
     @classmethod
     def tearDownClass(cls):
+        log("------测试类后置处理------")
         pass
 
     def setUp(self):
-        ST.SAVE_IMAGE = False
+        log("------测试方法前置处理------")
         main_page()
         ST.SAVE_IMAGE = True
 
     def tearDown(self):
+        log("------测试方法后置处理------")
         ST.SAVE_IMAGE = False
         main_page()
-        ST.SAVE_IMAGE = True
