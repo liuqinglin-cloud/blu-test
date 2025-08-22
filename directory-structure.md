@@ -1,17 +1,15 @@
 # Project Directory Structure
 
-*Generated: 2025-08-11 14:00:56*
-
 
 
 ```
-有部分还在开发中，整体设计如下
-pyhton3.9
+python版本：pyhton3.9
+设备支持：当前仅支持pixel6、ipad pro12.9，如需要更多设备，需要自行编写相关代码，或者开发统一调整
 
 blu-test/
 ├── api_test---------------------------------接口测试
 │   ├── basic_request.py---------------------基本请求方法
-│   ├── case.xlsx----------------------------用例&测试结果，设计是以sheet区分不同场景或者不同服务
+│   ├── case.xlsx----------------------------用例（支持返回内容任意字段断言、sql断言、redis断言）&测试结果，设计是以sheet区分不同场景或者不同服务
 │   ├── run.py-------------------------------执行用例
 │   └── test_case.py-------------------------单个场景或者单个服务的测试
 ├── common_android---------------------------安卓的公共方法
@@ -56,7 +54,7 @@ blu-test/
 │   ├── translation_japanese.py--------------日语翻译测试
 │   ├── translation_korean.py----------------韩语翻译测试
 │   ├── translation_portuguese.py------------葡萄牙语翻译测试
-│   ├── translation_simplified_chinese.py----简体中文翻译测试
+│   ├── translation_simplified_chinese.py----简体中文翻译测试，顺便测试各页面
 │   ├── translation_spanish.py---------------西班牙语翻译测试
 │   ├── translation_traditional_chinese.py---繁体中文翻译测试
 │   └── translation_ukrainian.py-------------乌克兰语翻译测试
@@ -73,24 +71,24 @@ blu-test/
 │   ├── translation_japanese.py--------------日语翻译测试
 │   ├── translation_korean.py----------------韩语翻译测试
 │   ├── translation_portuguese.py------------葡萄牙语翻译测试
-│   ├── translation_simplified_chinese.py----简体中文翻译测试
+│   ├── translation_simplified_chinese.py----简体中文翻译测试，顺便测试各页面
 │   ├── translation_spanish.py---------------西班牙语翻译测试
 │   ├── translation_traditional_chinese.py---繁体中文翻译测试
 │   └── translation_ukrainian.py-------------乌克兰语翻译测试
-├── ui_android-------------------------------Android UI功能测试
+├── ui_android-------------------------------Android UI功能测试，回归容易出错的地方
 │   ├── run.py-------------------------------执行用例
 │   ├── test_comunity.py---------------------“社区”页面所有功能测试用例，用例也可以按照功能、场景来区分，此处计划以4个一级页面区分
 │   ├── test_me.py---------------------------“我的”页面所有功能测试用例
 │   ├── test_home.py-------------------------“首页”页面所有功能测试用例
 │   └── test_service.py----------------------“服务”页面所有功能测试用例
-├── ui_ios-----------------------------------iOS UI功能测试
+├── ui_ios-----------------------------------iOS UI功能测试，回归容易出错的地方
 │   ├── run.py-------------------------------执行用例
 │   ├── test_comunity.py---------------------“社区”页面所有功能测试用例，用例也可以按照功能、场景来区分，此处计划以4个一级页面区分
 │   ├── test_me.py---------------------------“我的”页面所有功能测试用例
 │   ├── test_home.py-------------------------“首页”页面所有功能测试用例
 │   └── test_service.py----------------------“服务”页面所有功能测试用例
 └── utils------------------------------------实用方法
-    ├── handle_dependent_data.py-------------处理接口测试时接口间的依赖
+    ├── handle_dependent_data.py-------------处理接口测试时接口间的依赖、接口测试断言
     ├── handle_excel.py----------------------读写excel
     ├── handle_ini.py------------------------ini文件处理
     ├── handle_json.py-----------------------json文件处理

@@ -31,7 +31,7 @@ class HandleRedis:
 
     def del_prefix(self,prefix):
         """
-        删除符合前缀的key
+        删除符合前缀的key，慎用
         :param prefix: 前缀，比如'BluUc:GROUP:USERS*'
         :return:
         """

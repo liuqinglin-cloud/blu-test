@@ -46,7 +46,7 @@ class HandleMysql:
 
     def update(self, table, val_obj, range_str):
         """
-        更新数据
+        更新数据，慎用
         :param table:表名
         :param val_obj:更新数据
         :param range_str:条件
@@ -67,7 +67,7 @@ class HandleMysql:
 
     def delete(self, table, range_str):
         """
-        删除数据
+        删除数据，慎用
         :param table:表名
         :param range_str:条件
         :return:
