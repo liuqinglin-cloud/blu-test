@@ -28,7 +28,6 @@ class TestMe(unittest.TestCase):
         ST.SAVE_IMAGE = False
         log("------测试方法后置处理------")
         main_page()
-        swipe_top_bottom()
 
     def test_my_account(self):
         """

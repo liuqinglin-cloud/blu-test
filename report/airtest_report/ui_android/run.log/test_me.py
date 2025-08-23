@@ -28,7 +28,6 @@ class TestMe(unittest.TestCase):
         ST.SAVE_IMAGE = False
         log("------测试方法后置处理------")
         main_page()
-        swipe_top_bottom()
 
     def test_my_account(self):
         """
@@ -76,6 +75,7 @@ class TestMe(unittest.TestCase):
         assert_ele_is_exist("通用", "确定")
         swipe_top_bottom(num=2)
         key_del_text("新增地址", "联系邮箱")
+        key_back()
         swipe_bottom_top(num=2)
         click_ele("通用", "确定")
         assert_ele_is_exist("通用", "确定")

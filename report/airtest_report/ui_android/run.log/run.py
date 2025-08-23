@@ -7,15 +7,16 @@ import os.path
 import  time
 from airtest.report.report import LogToHtml
 from test_me import TestMe
+from universal_test_for_all_device import TestUniversal
 
 case_path = os.path.dirname(__file__)
 project_path = os.path.dirname(os.path.dirname(__file__))
 
 testsuite = unittest.TestSuite()
 #部分用例，按需添加
-#tests = [TestMe('test_my_account')]
+tests = [TestUniversal('test_installer')]
 #所有用例
-tests = unittest.TestLoader().discover(case_path,pattern='test_*.py',top_level_dir=None)
+#tests = unittest.TestLoader().discover(case_path,pattern='universal_*.py',top_level_dir=None)
 testsuite.addTests(tests)
 
 

@@ -1,9 +1,9 @@
 from utils.handle_ini import local_element_ios_ini
 from airtest.core.api import *
+from poco.drivers.ios import iosPoco
 
 devices = '00008103-0005491036D9001E'
 auto_setup(__file__, logdir=True, devices=[f"ios:///http+usbmux://{devices}", ])
-from poco.drivers.ios import iosPoco
 dev = connect_device(f"iOS:///http+usbmux://{devices}")
 poco = iosPoco(device=dev,use_airtest_input=True, screenshot_each_action=True)
 

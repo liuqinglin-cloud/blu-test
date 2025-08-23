@@ -2,12 +2,12 @@ from utils.handle_ini import translation_ini
 from common_android.basic_operation import *
 
 
-def assert_translation_by_find_ele(section, key="简体中文", num=4, expectation=None):
+def assert_translation_by_find_ele(section, key="简体中文", num=6, expectation=None):
     """
     通过翻译语言定位控件，能定位到表示翻译正确
     :param section: 页面名称
     :param key: 语种名称，默认简体中文
-    :param num: 如果没找到，上滑后再尝试，最大上滑次数，默认4
+    :param num: 如果没找到，上滑后再尝试，最大上滑次数，默认6
     :param expectation: 期望值，无法直接通过定位断言，可以获取文本传入
     :return:
     """
@@ -22,7 +22,7 @@ def assert_translation_by_find_ele(section, key="简体中文", num=4, expectati
                     break
                 else:
                     log(f"没找到《{section}》页面《{single_translation}》元素，向上滑一下，再试试")
-                    swipe_bottom_top()
+                    swipe_universal(0.5,0.6,0.5,0.3)
                     sleep()
             assert_equal(ele_exists, True, f"{key}--《{section}》页面《{single_translation}》元素")
     else:

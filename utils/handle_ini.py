@@ -52,4 +52,5 @@ device_ini = HandleIni(device_path)
 environment_ini = HandleIni(environment_path)
 
 if __name__ == '__main__':
+    print(local_element_ios_path)
     pass

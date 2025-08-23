@@ -5,7 +5,7 @@ from common_android.app_operation import *
 from common_android.basic_operation import *
 
 
-class TestMe(unittest.TestCase):
+class TestCommunity(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -28,5 +28,4 @@ class TestMe(unittest.TestCase):
         ST.SAVE_IMAGE = False
         log("------测试方法后置处理------")
         main_page()
-        swipe_top_bottom()
 

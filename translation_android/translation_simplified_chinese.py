@@ -28,7 +28,6 @@ class TestSimplifiedChinese(unittest.TestCase):
         ST.SAVE_IMAGE = False
         log("------测试方法后置处理------")
         main_page()
-        swipe_top_bottom()
 
 
     def test_me(self):
@@ -150,8 +149,8 @@ class TestSimplifiedChinese(unittest.TestCase):
             "android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child(
             "android.widget.TextView")[4].get_text()
         assert_translation_by_find_ele("订阅品牌", "简体中文订阅方式", expectation=text2)
-        swipe_bottom_top()
-        text3=poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child("android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child("android.widget.TextView")[3].get_text()
+        swipe_universal(0.5, 0.6, 0.5, 0.3)
+        text3=poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child("android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child("android.widget.TextView")[5].get_text()
         assert_translation_by_find_ele("订阅品牌", "简体中文数据保护承诺", expectation=text3)
         swipe_top_bottom()
         assert_translation_by_find_ele("订阅品牌")
@@ -239,8 +238,9 @@ class TestSimplifiedChinese(unittest.TestCase):
         """
         log("测试------《大转盘》")
         click_ele("我的", "我的")
-        swipe_bottom_top()#需要修改滑动位置
+        swipe_bottom_top()
         click_ele("我的", "大转盘")
+        sleep(2)
         assert_translation_by_find_ele("大转盘")
         click_ele("大转盘", "右上角按钮")
         assert_translation_by_find_ele("右上角按钮")
@@ -261,6 +261,7 @@ class TestSimplifiedChinese(unittest.TestCase):
         click_ele("我的", "引荐计划")
         assert_translation_by_find_ele("引荐计划")
         swipe_top_bottom()
+        sleep()
         click_ele("引荐计划", "你的朋友")
         assert_translation_by_find_ele("引荐计划-你的朋友")
 
@@ -305,6 +306,7 @@ class TestSimplifiedChinese(unittest.TestCase):
         assert_translation_by_find_ele("兑换记录")
         key_back()
         click_ele("忠诚度计划", "活动规则")
+        sleep()
         assert_translation_by_find_ele("活动规则")
         key_back()
         click_ele("忠诚度计划", "积分商城")

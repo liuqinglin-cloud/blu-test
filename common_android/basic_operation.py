@@ -1,19 +1,23 @@
 from utils.handle_ini import local_element_android_ini
 from airtest.core.api import *
 from airtest.cli.parser import cli_setup
-
-if not cli_setup():
-    auto_setup(__file__, logdir=True,
-               devices=["android://127.0.0.1:5037/1C231FDF60050J?cap_method=ADBCAP&touch_method=MAXTOUCH&", ])
-
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
+auto_setup(__file__, logdir=True)
 poco = AndroidUiautomationPoco(use_airtest_input=False, screenshot_each_action=False)
 
 ST.FIND_TIMEOUT = 20
 ST.FIND_TIMEOUT_TMP = 3
-sleep(1)
+"""
+pixel6_serial = "1C231FDF60050J"
+device = pixel6_serial
+if not cli_setup():
+    auto_setup(__file__, logdir=True,
+               devices=[f"android://127.0.0.1:5037/{device}?cap_method=ADBCAP&touch_method=MAXTOUCH&", ])
 
+dev = connect_device(f"android://127.0.0.1:5037/{device}")
+poco = AndroidUiautomationPoco(device=dev,use_airtest_input=False, screenshot_each_action=False)
+"""
 """
 class BasicOperation:
     
@@ -22,7 +26,7 @@ class BasicOperation:
             auto_setup(__file__, 
                        logdir=True,
                        devices=["android://127.0.0.1:5037/1C231FDF60050J?cap_method=ADBCAP&touch_method=MAXTOUCH&", ])
-        self.poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
+            self.poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
 """
 
 
@@ -252,7 +256,6 @@ def key_back(times=1):
         keyevent("BACK")
         i += 1
         log(f"第{i}次点击返回按键成功")
-        sleep()
 
 
 def click_back_button(times=1):
@@ -275,8 +278,8 @@ def click_back_button(times=1):
 
 def swipe_bottom_top(coordinates=1900, num=1):
     """
-    从下往上滑动，展示下方内容
-    :coordinates:起点纵坐标，根据不同手机自定义,默认pixel6可用
+    从下往上滑动，展示下方内容,默认pixel6可用,分辨率1080×2400
+    :coordinates:起点纵坐标
     :num: 滑动次数，默认1
     :return:
     """
@@ -287,8 +290,8 @@ def swipe_bottom_top(coordinates=1900, num=1):
 
 def swipe_top_bottom(coordinates=1900, num=1):
     """
-    从上往下滑动,展示上方内容
-    :coordinates:终点纵坐标，根据不同手机自定义,默认pixel6可用
+    从上往下滑动,展示上方内容,默认pixel6可用,分辨率1080×2400
+    :coordinates:终点纵坐标
     :num: 滑动次数，默认1
     :return:
     """
@@ -299,8 +302,8 @@ def swipe_top_bottom(coordinates=1900, num=1):
 
 def swipe_left_right(coordinates=1186, num=1):
     """
-    从左往右滑动，展示左方内容
-    :coordinates:纵坐标，根据不同手机自定义,默认pixel6可用
+    从左往右滑动，展示左方内容,默认pixel6可用,分辨率1080×2400
+    :coordinates:纵坐标
     :num: 滑动次数，默认1
     :return:
     """
@@ -311,8 +314,8 @@ def swipe_left_right(coordinates=1186, num=1):
 
 def swipe_right_left(coordinates=1186, num=1):
     """
-    从右往左滑动，展示右方内容
-    :coordinates:纵坐标，根据不同手机自定义,默认pixel6可用
+    从右往左滑动，展示右方内容,默认pixel6可用,分辨率1080×2400
+    :coordinates:纵坐标
     :num: 滑动次数，默认1
     :return:
     """
@@ -471,9 +474,43 @@ def select_data(data, num=4):
             swipe_bottom_top()
 
 
+def swipe_universal(start_x,start_y,end_x,end_y,num=1):
+    """
+    通用的滑动
+    :param start_x: 起点横坐标倍数，范围0-1
+    :param start_y: 起点纵坐标倍数，范围0-1
+    :param end_x: 起点横坐标倍数，范围0-1
+    :param end_y: 起点纵坐标倍数，范围0-1
+    :param num: 次数，默认1
+    :return:
+    """
+    xy = poco.get_screen_size()
+    x = xy[0]
+    y = xy[1]
+    for i in range(num):
+        swipe((start_x * x, start_y * y), (end_x * x, end_y * y))
+
+
+def wait_for_ele(section,key,timeout=5,appearance=True):
+    """
+    等待元素出现或者消失
+    :param section: 页面名称
+    :param key: 元素名称
+    :param timeout: 最长等待时间，默认5秒
+    :param appearance: 出现/消失，默认出现
+    :return:
+    """
+    ele = element(section,key)
+    if type(ele) is not list:
+        if appearance is True:
+            ele.wait_for_appearance(timeout=timeout)
+        else:
+            ele.wait_for_disappearance()
+
+
+
 if __name__ == "__main__":
-    text = poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child(
-        "android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child(
-        "android.widget.TextView")[4].get_text()
-    print(text)
+    #touch(Template(r"D:\pythonProjects\blu-test\common_android\picture\关于我们.png", record_pos=(0.239, 0.406), resolution=(1080, 2400)))
+    swipe_universal(0.5, 0.6, 0.5, 0.3)
     pass
+
