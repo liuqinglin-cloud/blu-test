@@ -9,7 +9,6 @@ def assert_translation_by_find_ele(section, key="简体中文", num=6, expectati
     :param key: 语种名称，默认简体中文
     :param num: 如果没找到，上滑后再尝试，最大上滑次数，默认6
     :param expectation: 期望值，无法直接通过定位断言，可以获取文本传入
-    :return:
     """
     translation = translation_ini.get_value(section,key)
     translation_list = translation.split("==")
@@ -39,7 +38,6 @@ def assert_ele_is_exist(section, key, is_exist=True):
     :param section: 页面名称
     :param key: 元素名称
     :param is_exist: 是否存在，默认断言存在
-    :return:
     """
     ele = element(section,key)
     if type(ele) is not list:
@@ -54,7 +52,6 @@ def assert_ele_text(section,key,txt):
     :param section: 页面名称
     :param key: 元素名称
     :param txt: 期望文本
-    :return:
     """
     ele_text = get_ele_text(section,key)
     assert_equal(ele_text,txt,f"《{section}》页面《{key}》元素文本是{txt}")

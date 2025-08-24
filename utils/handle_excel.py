@@ -17,16 +17,15 @@ class HandleExcel:
     def load_excel(self):
         """
         加载表格
-        :return:
         """
         open_excel = openpyxl.load_workbook(self.path)
         return open_excel
 
     def get_sheet_data(self, index=None):
         """
-        获取所有sheet的内容
-        :param index:sheet
-        :return:
+        获取sheet的内容
+        :param index:sheet编号
+        :return: data
         """
         sheet_name = self.load_excel().sheetnames
         if index is None:
@@ -39,7 +38,7 @@ class HandleExcel:
         获取某个单元格的内容
         :param row:行
         :param column:列
-        :return:
+        :return:data
         """
         data = self.get_sheet_data().cell(row=row, column=column).value
         return data
@@ -48,7 +47,7 @@ class HandleExcel:
         """
         获取行数
         :param index:sheet
-        :return:
+        :return:行数
         """
         row = self.get_sheet_data(index).max_row
         return row
@@ -58,7 +57,7 @@ class HandleExcel:
         获取行的内容
         :param row:行
         :param index:sheet
-        :return:
+        :return:data
         """
         row_list = []
         for i in self.get_sheet_data(index)[row]:
@@ -71,7 +70,6 @@ class HandleExcel:
         :param row:行
         :param cols:列
         :param value:数据
-        :return:
         """
         wb = self.load_excel()
         wr = wb.active
@@ -82,7 +80,7 @@ class HandleExcel:
         """
         默认key为空，获取A列数据:所有的case编号
         :param key:列
-        :return:
+        :return:data
         """
         column_list_data = []
         if key is None:
@@ -94,9 +92,9 @@ class HandleExcel:
 
     def get_row_number(self, case_id):
         """
-        根据被依赖case_id获取被依赖case行号：传入case_id，拿到case_id的行号
-        :param case_id: condition_data中的方法分离前置条件获得
-        :return: 返回被依赖case的行号，从而执行case
+        获取case_id行号（根据被依赖case_id获取被依赖case行号：传入case_id，拿到case_id的行号）
+        :param case_id: 用例id（condition_data中的方法分离前置条件获得）
+        :return: 行号（返回被依赖case的行号，从而执行case）
         """
         num = 1
         cols_data = self.get_columns_value()
@@ -108,9 +106,9 @@ class HandleExcel:
 
     def get_excel_data(self, index=None):
         """
-        获取excel的所有数据，用做ddt的数据源
-        :param index:sheet
-        :return:
+        获取excel数据，用做ddt的数据源
+        :param index:sheet编号
+        :return:data
         """
         data_list = []
         for i in range(self.get_rows()):

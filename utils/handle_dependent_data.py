@@ -23,8 +23,6 @@ def dependent_data(data):
     """
     case_id = split_data(data)[0]
     row_num = case_data.get_row_number(int(case_id))
-    # row_list = API_case_data.get_rows_value(row_num)
-    # return row_list
     data = case_data.get_cell_value(row_num, 16)
     return data
 
@@ -34,7 +32,7 @@ def get_dependent_data(res_data, key):
     获取具体的依赖字段数据
     :param res_data: 依赖的结果数据
     :param key: 前置条件的依赖数据规则
-    :return:
+    :return: 依赖数据
     """
     res_data = json.loads(res_data)
     json_exe = parse(key)
@@ -46,7 +44,7 @@ def get_data(data):
     """
     获取依赖数据
     :param data: precondition的数据
-    :return:
+    :return: 依赖数据
     """
     res_data = dependent_data(data)
     rule_data = split_data(data)[1]

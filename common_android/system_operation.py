@@ -6,7 +6,6 @@ def sys_photo_permission_setting(permission="始终全部允许"):
     """
     系统设置APP照片权限，pixel6
     :param permission: 三选一"不允许"、"始终全部允许"（默认）、"每次都询问"
-    :return:
     """
     home()
     stop_app("com.android.settings")
@@ -31,7 +30,7 @@ def sys_photo_permission_setting(permission="始终全部允许"):
 
 def current_navigation():
     """
-    获取当前系统导航方式
+    获取pixel6手机当前系统导航方式
     :return: 导航方式
     """
     home()
@@ -45,7 +44,6 @@ def switch_navigation_method(navigation = "三按钮导航"):
     """
     切换系统导航方式
     :param navigation: 期望导航方式，默认三按钮导航，测试场景三按钮用得比较多
-    :return:
     """
     home()
     current = current_navigation()
@@ -63,14 +61,6 @@ def switch_navigation_method(navigation = "三按钮导航"):
         home()
 
 
-
-def switch_wifi():
-    """
-    原计划使用poco，页面操作，直接传入wifi名字，切换WiFi，
-    但是wifi不稳定造成连接时间不确定，
-    所以建议使用adb连接wifi
-    """
-    pass
 
 if __name__ == "__main__":
     switch_navigation_method("手势导航")

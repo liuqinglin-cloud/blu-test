@@ -33,7 +33,6 @@ class HandleRedis:
         """
         删除符合前缀的key，慎用
         :param prefix: 前缀，比如'BluUc:GROUP:USERS*'
-        :return:
         """
         keys_to_delete = self.__redis.keys(prefix)
         print("找到的keys：", keys_to_delete)
@@ -46,14 +45,12 @@ class HandleRedis:
     def __del__(self):
         """
         销毁对象时close
-        :return:
         """
         self.__redis.close()
 
     def close(self):
         """
         关闭
-        :return:
         """
         self.__del__()
 

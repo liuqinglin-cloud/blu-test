@@ -85,7 +85,6 @@ def click_ele(section,key):
     单击元素
     :param section: 页面名字
     :param key: 元素名字
-    :return:
     """
     ele = ele_is_exist(section,key)
     if ele:
@@ -115,7 +114,6 @@ def long_click_ele(section,key,duration=2):#
     :param section: 页面名称
     :param key: 元素名称
     :param duration: 长按时间，默认2
-    :return:
     """
     ele = ele_is_exist(section, key)
     if ele:
@@ -144,7 +142,6 @@ def double_click_ele(section,key):
     双击元素
     :param section: 页面名称
     :param key: 元素名称
-    :return:
     """
     ele = ele_is_exist(section, key)
     if ele:
@@ -167,7 +164,6 @@ def times_click_ele(section,key,times=5):
     :param section: 页面名称
     :param key: 元素名称
     :param times: 次数，默认5次
-    :return:
     """
     ele = ele_is_exist(section, key)
     if ele:
@@ -186,7 +182,6 @@ def click_ele_for_translation(txt):
     不值得每个语种维护一套，所以测试翻译时，需要传入元素对应语言属性值定位并点击，
     此处仅支持text定位
     :param txt: 元素text属性
-    :return:
     """
     try:
         poco(txt).click()
@@ -199,7 +194,6 @@ def click_back_button(times=1):
     """
     点击返回按钮
     :param times: 次数，默认1
-    :return:
     """
     log(f"计划点击{times}次返回按钮")
     for i in range(times):
@@ -216,7 +210,6 @@ def swipe_bottom_top(coordinates=1050):
     """
     从下往上滑动，展示下方内容，for ipad pro12.9，暂时固定滑动点，根据后期需要再修改
     :coordinates: 横坐标，默认在屏幕中间
-    :return:
     """
     swipe((coordinates, 2000), (coordinates, 1000))
     log("从下往上滑动，展示下方内容")
@@ -225,7 +218,6 @@ def swipe_top_bottom(coordinates=1050):
     """
     从上往下滑动,展示上方内容，for ipad pro12.9，暂时固定滑动点，根据后期需要再修改
     :coordinates: 横坐标，默认在屏幕中间
-    :return:
     """
     swipe((coordinates, 1000), (coordinates, 2000))
     log("从上往下滑动,展示上方内容")
@@ -234,7 +226,6 @@ def swipe_left_right(coordinates=1350):
     """
     从左往右滑动，展示左方内容，for ipad pro12.9
     :coordinates:纵坐标，，默认在屏幕中段
-    :return:
     """
     swipe((600, coordinates), (1400, coordinates))
     log("从左往右滑动，展示左方内容")
@@ -243,7 +234,6 @@ def swipe_right_left(coordinates=1350):
     """
     从右往左滑动，展示右方内容，for ipad pro12.9
     :coordinates:纵坐标，默认在屏幕中段
-    :return:
     """
     swipe((1400, coordinates), (600, coordinates))
     log("从右往左滑动，展示右方内容")
@@ -251,7 +241,6 @@ def swipe_right_left(coordinates=1350):
 def del_text():
     """
     删除输入框的文本
-    :return:
     """
     try:
         click_ele("通用","清除文本")
@@ -264,7 +253,6 @@ def input_text(section,key,txt):
     :param section: 页面名字
     :param key: 元素名字
     :param txt: 输入内容
-    :return:
     """
     click_ele(section,key)
     del_text()
@@ -276,7 +264,6 @@ def input_text_enter(section,key,txt):
     :param section: 页面名字
     :param key: 元素名字
     :param txt: 输入内容
-    :return:
     """
     click_ele(section, key)
     del_text()
@@ -292,7 +279,6 @@ def input_text_search(section,key,txt):
     :param section: 页面名字
     :param key: 元素名字
     :param txt: 输入内容
-    :return:
     """
     click_ele(section,key)
     del_text()

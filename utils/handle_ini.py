@@ -19,7 +19,6 @@ class HandleIni:
     def load_ini(self):
         """
         加载文件
-        :return:
         """
         try:
             cf = configparser.ConfigParser()
@@ -33,12 +32,12 @@ class HandleIni:
         获取文件数据
         :param section:section
         :param key:key
-        :return:
+        :return:value
         """
         cf = self.load_ini()
         try:
             data = cf.get(section, key)
-        except Exception:
+        except:
             print("没有获取到ini文件value值")
             data = None
         return data

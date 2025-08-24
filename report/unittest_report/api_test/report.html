@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试报告</title>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src=" https://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/5.1.2/echarts.min.js"></script>
+    <!--    页面样式-->
+    <style type="text/css">
+        /*标题样式*/
+        .title {
+            width: auto;
+            height: 60px;
+            text-align: center;
+            font: bolder 38px/60px "Microsoft YaHei UI";
+        }
+
+        /*汇总信息样式*/
+        .summary {
+            width: 90%;
+            position: absolute;
+            top: 120px;
+            margin-left: 5%;
+
+        }
+
+        .text-left {
+            font: bolder 20px/30px "Microsoft YaHei UI";
+        }
+
+        .left {
+            width: 50%;
+            float: left;
+
+        }
+
+        .right {
+            width: 50%;
+            float: right;
+
+        }
+
+        .desc {
+            float: left;
+            width: 100%;
+        }
+
+        .list-group-item span {
+            font: normal 16px/38px "Microsoft YaHei UI";
+            padding: 30px;
+
+        }
+
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: .4rem 1.25rem;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, .125);
+        }
+
+        /* 执行信息样式   */
+        .test_info {
+            width: 90%;
+            position: absolute;
+            top: 900px;
+            margin-left: 5%;
+
+            color: #28a745 !important;
+        }
+
+        .table td, th {
+            border: solid 2px rgba(9, 122, 51, 0.11) !important;
+            padding: 0;
+            line-height: 40px;
+            text-align: center;
+
+        }
+
+
+        select {
+            border: 0;
+            padding: 0;
+            margin: 0;
+            height: 2em;
+            width: 8em;
+            margin-left: 2em;
+        }
+
+        option {
+            text-align: center;
+            height: 36px;
+            font: none 18px/36px "Microsoft YaHei UI";
+            color: #28a745 !important;
+        }
+
+        .test_log {
+            background: rgba(163, 171, 189, 0.15);
+            width: 100%;
+            height: 50px;
+            border-top: none;
+            border-bottom: none;
+            display: none;
+            text-align: left;
+        }
+
+        .test_log td {
+            text-align: left;
+            height: 30px;
+            margin: 0;
+            padding-left: 3em;
+            padding-right:3em;
+            font: none 18px/24px "Microsoft YaHei UI";
+            color: #9e141a;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -o-pre-wrap;
+            word-wrap: break-word;
+            line-height: 22px;
+            font-size: 14px
+        }
+
+        /*    测试图表显示*/
+        .char {
+            width: 90%;
+            position: absolute;
+            top: 450px;
+            margin-left: 5%;
+            color: #28a745 !important;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<!--报告标题-->
+<div class="title text-success">
+    <div class="shadow-lg p-3 mb-5 bg-white rounded">接口测试报告</div>
+</div>
+
+<!--汇总信息-->
+<div class="summary">
+    <p class="text-left text-success">测试结果汇总</p>
+    <div class="left">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">测试人员</button>
+                <span class="text-dark">lql</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">开始时间</button>
+                <span class="text-dark">2025-08-24 18:04:55</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">执行时间</button>
+                <span class="text-dark">2.09 S</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">用例总数</button>
+                <span class="text-dark">56</span>
+            </li>
+
+
+        </ul>
+    </div>
+    <div class="right">
+        <ul class="list-group">
+
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">成功用例</button>
+                <span class="text-success">56</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-warning">失败用例</button>
+                <span class="text-warning">0</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-danger">错误用例</button>
+                <span class="text-danger">0</span>
+            </li>
+            <li class="list-group-item">
+                <button type="button" class="btn btn-secondary">跳过用例</button>
+                <span class="text-secondary">0</span>
+            </li>
+        </ul>
+    </div>
+    <div class="desc">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <button type="button" class="btn btn-success">描述信息</button>
+                <span class="text-secondary">接口测试</span>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+
+<!--测试图表-->
+<div class="char">
+    <p class="text-left text-success">图表展示</p>
+    <div id="char2" style="width: 49%;height: 400px;float: left"></div>
+    <div id="char" style="width: 49%;height: 400px ;float: left"></div>
+</div>
+
+<!--详细信息-->
+<div class="test_info">
+
+    <p class="text-left text-success">详细信息</p>
+    <div class="table_data">
+
+        <table class="table">
+            <thead class="bg-success text-light">
+            <tr>
+                <th scope="col" style="width: 5%;padding: 0">编号</th>
+                <th scope="col" style="width: 20%;padding: 0">
+                    <span>测试类</span>
+                    <select id="testClass">
+                        <option>所有</option>
+                        
+                            <option>TestRunCaseDdt</option>
+                        
+                    </select>
+
+                </th>
+
+                <th scope="col" style="width: 15%;padding: 0">测试方法</th>
+                <th scope="col" style="width: 20%;padding: 0">用例描述</th>
+                <th scope="col" style="width: 15%;padding: 0">执行时间</th>
+                <th scope="col" style="width: 20%;padding: 0">
+
+                    <span>执行结果</span>
+                    <select id="testResult">
+                        <option>所有</option>
+                        <option class="text-success">成功</option>
+                        <option class="text-warning">失败</option>
+                        <option class="text-danger">错误</option>
+                        <option class="text-info">跳过</option>
+                    </select>
+
+                </th>
+                <th scope="col" style="width: 10%;padding: 0">详细信息</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+                <tr>
+                    <td>1</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_01__1___获取百科子目录____yes___None__None___test_hk____营销_____wiki_children____get______n_____id____196f6d8b65d0e756a060a359e49__n_____no____yes____message____OK____通过______appId___null___msgId____17c504a22e5f79115029cdbe2b4____msgCode___0___message____OK____data______id____196f6d8e8b40e756a060a359e4e____pid____196f6d8b65d0e756a060a359e49____leafLevel___4___title____GeneralA____extensionType___1___image________imageUrl________productModel____AC180____remark____备注____sort___1___status___true___fileName____GeneralA____filePath_____FAQ_AC_series_12_AC200_B300____rootCode___1___fileStaticUrl____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_series_12_AC200_B300_GeneralA_h5_html____countries______countryId____6252001____countryCode____US____countryName____美国______countryId____1861060____countryCode____JP____countryName____日本______extensionData________requiredFieldsCheck_____countries___false___image___false___model___false___siteProduct___false______error___null___code___0___</td>
+                    <td>None</td>
+                    <td>0.301s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>get
+http://172.20.20.103:20109/wiki/children
+{'id': '196f6d8b65d0e756a060a359e49'}
+None
+{'Content-Type': 'application/json'}
+{'appId': None, 'msgId': '17c504a22e5f79115029cdbe2b4', 'msgCode': 0, 'message': 'OK', 'data': [{'id': '196f6d8e8b40e756a060a359e4e', 'pid': '196f6d8b65d0e756a060a359e49', 'leafLevel': 4, 'title': 'GeneralA', 'extensionType': 1, 'image': '', 'imageUrl': '', 'productModel': 'AC180', 'remark': '备注', 'sort': 1, 'status': True, 'fileName': 'GeneralA', 'filePath': '/FAQ/AC series-12/AC200+B300', 'rootCode': 1, 'fileStaticUrl': 'https://test-oss.poweroak.ltd:18443/static/FAQ/AC series-12/AC200+B300/GeneralA-h5.html', 'countries': [{'countryId': '6252001', 'countryCode': 'US', 'countryName': '美国'}, {'countryId': '1861060', 'countryCode': 'JP', 'countryName': '日本'}], 'extensionData': [], 'requiredFieldsCheck': {'countries': False, 'image': False, 'model': False, 'siteProduct': False}}], 'error': None, 'code': 0}
+test_main_case_01__1___获取百科子目录____yes___None__None___test_hk____营销_____wiki_children____get______n_____id____196f6d8b65d0e756a060a359e49__n_____no____yes____message____OK____通过______appId___null___msgId____17c504a22e5f79115029cdbe2b4____msgCode___0___message____OK____data______id____196f6d8e8b40e756a060a359e4e____pid____196f6d8b65d0e756a060a359e49____leafLevel___4___title____GeneralA____extensionType___1___image________imageUrl________productModel____AC180____remark____备注____sort___1___status___true___fileName____GeneralA____filePath_____FAQ_AC_series_12_AC200_B300____rootCode___1___fileStaticUrl____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_series_12_AC200_B300_GeneralA_h5_html____countries______countryId____6252001____countryCode____US____countryName____美国______countryId____1861060____countryCode____JP____countryName____日本______extensionData________requiredFieldsCheck_____countries___false___image___false___model___false___siteProduct___false______error___null___code___0___ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>2</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_02__2___获取百科内容____yes____1_data_0__id____wikiId____test_hk____营销_____wiki_article_page____post______n_____title_______n_____wikiId_______n_____status_______n_____pageNo___1__n_____pageSize___10__n_____creTimeEndDate_______n_____creTimeStartDate_______n_____modTimeStartDate_______n_____modTimeEndDate_______n_____creTime_______n_____modTime_______n_____wikiFlag___true_n_____no____yes____message____OK____通过______appId___null___msgId____17c504a22e5f79115029cdbe2b4____msgCode___0___message____OK____data_____content______id____196f6da175d0e756a060a359e61____wikiId____196f6d8e8b40e756a060a359e4e____wikiDisplay____FAQ_AC_series_AC200_B300_GeneralA____title____文章1____status___true___sort___1___useful___1___useless___0___content____吃的是草考试____contentHtml_____p_吃的是草考试__p___n____staticContent____吃的是草考试____staticContentHtml_____p_吃的是草考试__p___n____lastModBy____刘青林____modTime____2025_08_01_09_32_15____creBy____193956196a1dce640551875b80c____creByName____刘青林____visits___2___creTime____2025_05_22_15_16_50____fileId___null___fileName____196f6da175d0e756a060a359e61____suffixNum___null___fileServer___null___filePath_____FAQ_AC_series_12_AC200_B300_GeneralA____size___null___wikiTitle____GeneralA____rootCode___1___productModel___null___outline____吃的是草考试____staticFileUrl____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_series_12_AC200_B300_GeneralA_196f6da175d0e756a060a359e61_h5_html______id____196f6da75390e756a060a359e62____wikiId____196f6d8e8b40e756a060a359e4e____wikiDisplay____FAQ_AC_series_AC200_B300_GeneralA____title____修改文章2引用文章1____status___true___sort___2___useful___0___useless___0___content____修改_文章1__https___test_app_h5_poweroak_ltd_18443_app_bluetti_wiki_dist_index_html_id_196f6da175d0e756a060a359e61___n__n_手动阀萨芬__https___test_app_h5_poweroak_ltd_18443_app_bluetti_wiki_dist_index_html_id_196f6e44b8f0e756a060a359ed1_____contentHtml_____p_修改_a_href____https___test_app_h5_poweroak_ltd_18443_app_bluetti_wiki_dist_index_html_id_196f6da175d0e756a060a359e61____文章1__a___p___n_p__a_href____https___test_app_h5_poweroak_ltd_18443_app_bluetti_wiki_dist_index_html_id_196f6e44b8f0e756a060a359ed1____手动阀萨芬__a___p___n____staticContent____修改_文章1__https___test_oss_poweroak_ltd_18443_static_FAQ_AC_20series_12_AC200_B300_GeneralA_196f6da175d0e756a060a359e61_h5_html___n__n_手动阀萨芬__https___test_oss_poweroak_ltd_18443_static_Trouble_20Shooting_BC_20series_11_BC500_General_196f6e44b8f0e756a060a359ed1_h5_html_____staticContentHtml_____p_修改_a_href____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_20series_12_AC200_B300_GeneralA_196f6da175d0e756a060a359e61_h5_html____文章1__a___p___n_p__a_href____https___test_oss_poweroak_ltd_18443_static_Trouble_20Shooting_BC_20series_11_BC500_General_196f6e44b8f0e756a060a359ed1_h5_html____手动阀萨芬__a___p___n____lastModBy____刘青林____modTime____2025_05_27_20_39_04____creBy____193956196a1dce640551875b80c____creByName____刘青林____visits___0___creTime____2025_05_22_15_17_14____fileId___null___fileName____196f6da75390e756a060a359e62____suffixNum___null___fileServer___null___filePath_____FAQ_AC_series_12_AC200_B300_GeneralA____size___null___wikiTitle____GeneralA____rootCode___1___productModel___null___outline____修改____staticFileUrl____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_series_12_AC200_B300_GeneralA_196f6da75390e756a060a359e62_h5_html______id____196fc65a48f0e756a076ba3229b____wikiId____196f6d8e8b40e756a060a359e4e____wikiDisplay____FAQ_AC_series_AC200_B300_GeneralA____title____是多少的____status___true___sort___3___useful___0___useless___0___content____潇洒成都市____contentHtml_____p_潇洒成都市__p___n____staticContent____潇洒成都市____staticContentHtml_____p_潇洒成都市__p___n____lastModBy____刘青林____modTime____2025_07_14_16_18_16____creBy____193956196a1dce640551875b80c____creByName____刘青林____visits___1___creTime____2025_05_23_17_07_22____fileId___null___fileName____196fc65a48f0e756a076ba3229b____suffixNum___null___fileServer___null___filePath_____FAQ_AC_series_12_AC200_B300_GeneralA____size___null___wikiTitle____GeneralA____rootCode___1___productModel___null___outline____潇洒成都市____staticFileUrl____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_series_12_AC200_B300_GeneralA_196fc65a48f0e756a076ba3229b_h5_html______id____198161dcc420e756a7d93fa63e6____wikiId____196f6d8e8b40e756a060a359e4e____wikiDisplay____FAQ_AC_series_AC200_B300_GeneralA____title____冲冲冲____status___true___sort___4___useful___0___useless___0___content____发多少____contentHtml_____p_发多少__p___n____staticContent____发多少____staticContentHtml_____p_发多少__p___n____lastModBy____blu98765____modTime____2025_07_17_10_04_05____creBy____18a540d2a9b6f8a3c5dde08bc6a____creByName____blu98765____visits___0___creTime____2025_07_17_10_01_48____fileId___null___fileName____198161dcc420e756a7d93fa63e6____suffixNum___null___fileServer___null___filePath_____FAQ_AC_series_12_AC200_B300_GeneralA____size___null___wikiTitle____GeneralA____rootCode___1___productModel___null___outline____发多少____staticFileUrl____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_series_12_AC200_B300_GeneralA_198161dcc420e756a7d93fa63e6_h5_html______additions___null___pageNo___1___totalElements____4____last___true___totalPages___1___numberOfElements___4___first___true___empty___false___pageSize___10____error___null___code___0___</td>
+                    <td>None</td>
+                    <td>0.246s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>post
+http://172.20.20.103:20109/wiki/article/page
+{"creTime":[],"creTimeEndDate":"","creTimeStartDate":"","modTime":[],"modTimeEndDate":"","modTimeStartDate":"","pageNo":1,"pageSize":10,"status":"","title":"","wikiFlag":true,"wikiId":"196f6d8e8b40e756a060a359e4e"}
+None
+{'Content-Type': 'application/json'}
+{'appId': None, 'msgId': '17c504a22e5f79115029cdbe2b4', 'msgCode': 0, 'message': 'OK', 'data': {'content': [{'id': '196f6da175d0e756a060a359e61', 'wikiId': '196f6d8e8b40e756a060a359e4e', 'wikiDisplay': 'FAQ/AC series/AC200+B300/GeneralA', 'title': '文章1修改修改', 'status': True, 'sort': 1, 'useful': 1, 'useless': 1, 'content': '吃的是草考试修改修改', 'visibleRange': 2, 'contentHtml': '<p>吃的是草考试修改修改</p>\n', 'staticContent': '吃的是草考试修改修改', 'staticContentHtml': '<p>吃的是草考试修改修改</p>\n', 'lastModBy': '刘青林', 'modTime': '2025-08-19 11:54:29', 'creBy': '193956196a1dce640551875b80c', 'creByName': '刘青林', 'visits': 3, 'creTime': '2025-05-22 15:16:50', 'fileId': None, 'fileName': '196f6da175d0e756a060a359e61', 'suffixNum': None, 'fileServer': None, 'filePath': '/FAQ/AC series-12/AC200+B300/GeneralA', 'size': None, 'wikiTitle': 'GeneralA', 'rootCode': 1, 'productModel': None, 'outline': '吃的是草考试修改修改', 'staticFileUrl': 'https://test-oss.poweroak.ltd:18443/static/FAQ/AC series-12/AC200+B300/GeneralA/196f6da175d0e756a060a359e61-h5.html'}, {'id': '196f6da75390e756a060a359e62', 'wikiId': '196f6d8e8b40e756a060a359e4e', 'wikiDisplay': 'FAQ/AC series/AC200+B300/GeneralA', 'title': '修改文章2引用文章1', 'status': True, 'sort': 2, 'useful': 0, 'useless': 0, 'content': '修改[文章1](https://test-app-h5.poweroak.ltd:18443/app/bluetti-wiki/dist/index.html?id=196f6da175d0e756a060a359e61)\n\n[手动阀萨芬](https://test-app-h5.poweroak.ltd:18443/app/bluetti-wiki/dist/index.html?id=196f6e44b8f0e756a060a359ed1)', 'visibleRange': 1, 'contentHtml': '<p>修改<a href="https://test-app-h5.poweroak.ltd:18443/app/bluetti-wiki/dist/index.html?id=196f6da175d0e756a060a359e61">文章1</a></p>\n<p><a href="https://test-app-h5.poweroak.ltd:18443/app/bluetti-wiki/dist/index.html?id=196f6e44b8f0e756a060a359ed1">手动阀萨芬</a></p>\n', 'staticContent': '修改[文章1](https://test-oss.poweroak.ltd:18443/static/FAQ/AC%20series-12/AC200+B300/GeneralA/196f6da175d0e756a060a359e61-h5.html)\n\n[手动阀萨芬](https://test-oss.poweroak.ltd:18443/static/Trouble%20Shooting/BC%20series-11/BC500/General/196f6e44b8f0e756a060a359ed1-h5.html)', 'staticContentHtml': '<p>修改<a href="https://test-oss.poweroak.ltd:18443/static/FAQ/AC%20series-12/AC200+B300/GeneralA/196f6da175d0e756a060a359e61-h5.html">文章1</a></p>\n<p><a href="https://test-oss.poweroak.ltd:18443/static/Trouble%20Shooting/BC%20series-11/BC500/General/196f6e44b8f0e756a060a359ed1-h5.html">手动阀萨芬</a></p>\n', 'lastModBy': '刘青林', 'modTime': '2025-08-18 14:57:17', 'creBy': '193956196a1dce640551875b80c', 'creByName': '刘青林', 'visits': 1, 'creTime': '2025-05-22 15:17:14', 'fileId': None, 'fileName': '196f6da75390e756a060a359e62', 'suffixNum': None, 'fileServer': None, 'filePath': '/FAQ/AC series-12/AC200+B300/GeneralA', 'size': None, 'wikiTitle': 'GeneralA', 'rootCode': 1, 'productModel': None, 'outline': '修改', 'staticFileUrl': 'https://test-oss.poweroak.ltd:18443/static/FAQ/AC series-12/AC200+B300/GeneralA/196f6da75390e756a060a359e62-h5.html'}, {'id': '198bbe7a7e60e756a63e3e6a1df', 'wikiId': '196f6d8e8b40e756a060a359e4e', 'wikiDisplay': 'FAQ/AC series/AC200+B300/GeneralA', 'title': '内部新增', 'status': True, 'sort': 2, 'useful': 0, 'useless': 0, 'content': '删掉时代的所产生的', 'visibleRange': 1, 'contentHtml': '<p>删掉时代的所产生的</p>\n', 'staticContent': '删掉时代的所产生的', 'staticContentHtml': '<p>删掉时代的所产生的</p>\n', 'lastModBy': '刘青林', 'modTime': '2025-08-18 14:42:38', 'creBy': '193956196a1dce640551875b80c', 'creByName': None, 'visits': None, 'creTime': '2025-08-18 14:39:38', 'fileId': None, 'fileName': '198bbe7a7e60e756a63e3e6a1df', 'suffixNum': None, 'fileServer': None, 'filePath': '/FAQ/AC series-12/AC200+B300/GeneralA', 'size': None, 'wikiTitle': 'GeneralA', 'rootCode': 1, 'productModel': None, 'outline': '删掉时代的所产生的', 'staticFileUrl': 'https://test-oss.poweroak.ltd:18443/static/FAQ/AC series-12/AC200+B300/GeneralA/198bbe7a7e60e756a63e3e6a1df-h5.html'}, {'id': '196fc65a48f0e756a076ba3229b', 'wikiId': '196f6d8e8b40e756a060a359e4e', 'wikiDisplay': 'FAQ/AC series/AC200+B300/GeneralA', 'title': '是多少的', 'status': True, 'sort': 3, 'useful': 0, 'useless': 0, 'content': '潇洒成都市', 'visibleRange': 1, 'contentHtml': '<p>潇洒成都市</p>\n', 'staticContent': '潇洒成都市', 'staticContentHtml': '<p>潇洒成都市</p>\n', 'lastModBy': '刘青林', 'modTime': '2025-08-18 14:57:22', 'creBy': '193956196a1dce640551875b80c', 'creByName': '刘青林', 'visits': 1, 'creTime': '2025-05-23 17:07:22', 'fileId': None, 'fileName': '196fc65a48f0e756a076ba3229b', 'suffixNum': None, 'fileServer': None, 'filePath': '/FAQ/AC series-12/AC200+B300/GeneralA', 'size': None, 'wikiTitle': 'GeneralA', 'rootCode': 1, 'productModel': None, 'outline': '潇洒成都市', 'staticFileUrl': 'https://test-oss.poweroak.ltd:18443/static/FAQ/AC series-12/AC200+B300/GeneralA/196fc65a48f0e756a076ba3229b-h5.html'}, {'id': '198bbe7a8460e756a63e3e6a1e0', 'wikiId': '196f6d8e8b40e756a060a359e4e', 'wikiDisplay': 'FAQ/AC series/AC200+B300/GeneralA', 'title': '外部新增', 'status': True, 'sort': 3, 'useful': 0, 'useless': 0, 'content': '色的涩涩的得瑟得瑟', 'visibleRange': 1, 'contentHtml': '<p>色的涩涩的得瑟得瑟</p>\n', 'staticContent': '色的涩涩的得瑟得瑟', 'staticContentHtml': '<p>色的涩涩的得瑟得瑟</p>\n', 'lastModBy': '刘青林', 'modTime': '2025-08-18 14:57:26', 'creBy': '193956196a1dce640551875b80c', 'creByName': None, 'visits': None, 'creTime': '2025-08-18 14:39:38', 'fileId': None, 'fileName': '198bbe7a8460e756a63e3e6a1e0', 'suffixNum': None, 'fileServer': None, 'filePath': '/FAQ/AC series-12/AC200+B300/GeneralA', 'size': None, 'wikiTitle': 'GeneralA', 'rootCode': 1, 'productModel': None, 'outline': '色的涩涩的得瑟得瑟', 'staticFileUrl': 'https://test-oss.poweroak.ltd:18443/static/FAQ/AC series-12/AC200+B300/GeneralA/198bbe7a8460e756a63e3e6a1e0-h5.html'}, {'id': '198161dcc420e756a7d93fa63e6', 'wikiId': '196f6d8e8b40e756a060a359e4e', 'wikiDisplay': 'FAQ/AC series/AC200+B300/GeneralA', 'title': '冲冲冲', 'status': True, 'sort': 4, 'useful': 0, 'useless': 0, 'content': '发多少', 'visibleRange': 1, 'contentHtml': '<p>发多少</p>\n', 'staticContent': '发多少', 'staticContentHtml': '<p>发多少</p>\n', 'lastModBy': '刘青林', 'modTime': '2025-08-18 14:57:30', 'creBy': '18a540d2a9b6f8a3c5dde08bc6a', 'creByName': 'blu98765', 'visits': 0, 'creTime': '2025-07-17 10:01:48', 'fileId': None, 'fileName': '198161dcc420e756a7d93fa63e6', 'suffixNum': None, 'fileServer': None, 'filePath': '/FAQ/AC series-12/AC200+B300/GeneralA', 'size': None, 'wikiTitle': 'GeneralA', 'rootCode': 1, 'productModel': None, 'outline': '发多少', 'staticFileUrl': 'https://test-oss.poweroak.ltd:18443/static/FAQ/AC series-12/AC200+B300/GeneralA/198161dcc420e756a7d93fa63e6-h5.html'}], 'additions': None, 'totalElements': '6', 'pageNo': 1, 'totalPages': 1, 'last': True, 'numberOfElements': 6, 'first': True, 'empty': False, 'pageSize': 10}, 'error': None, 'code': 0}
+test_main_case_02__2___获取百科内容____yes____1_data_0__id____wikiId____test_hk____营销_____wiki_article_page____post______n_____title_______n_____wikiId_______n_____status_______n_____pageNo___1__n_____pageSize___10__n_____creTimeEndDate_______n_____creTimeStartDate_______n_____modTimeStartDate_______n_____modTimeEndDate_______n_____creTime_______n_____modTime_______n_____wikiFlag___true_n_____no____yes____message____OK____通过______appId___null___msgId____17c504a22e5f79115029cdbe2b4____msgCode___0___message____OK____data_____content______id____196f6da175d0e756a060a359e61____wikiId____196f6d8e8b40e756a060a359e4e____wikiDisplay____FAQ_AC_series_AC200_B300_GeneralA____title____文章1____status___true___sort___1___useful___1___useless___0___content____吃的是草考试____contentHtml_____p_吃的是草考试__p___n____staticContent____吃的是草考试____staticContentHtml_____p_吃的是草考试__p___n____lastModBy____刘青林____modTime____2025_08_01_09_32_15____creBy____193956196a1dce640551875b80c____creByName____刘青林____visits___2___creTime____2025_05_22_15_16_50____fileId___null___fileName____196f6da175d0e756a060a359e61____suffixNum___null___fileServer___null___filePath_____FAQ_AC_series_12_AC200_B300_GeneralA____size___null___wikiTitle____GeneralA____rootCode___1___productModel___null___outline____吃的是草考试____staticFileUrl____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_series_12_AC200_B300_GeneralA_196f6da175d0e756a060a359e61_h5_html______id____196f6da75390e756a060a359e62____wikiId____196f6d8e8b40e756a060a359e4e____wikiDisplay____FAQ_AC_series_AC200_B300_GeneralA____title____修改文章2引用文章1____status___true___sort___2___useful___0___useless___0___content____修改_文章1__https___test_app_h5_poweroak_ltd_18443_app_bluetti_wiki_dist_index_html_id_196f6da175d0e756a060a359e61___n__n_手动阀萨芬__https___test_app_h5_poweroak_ltd_18443_app_bluetti_wiki_dist_index_html_id_196f6e44b8f0e756a060a359ed1_____contentHtml_____p_修改_a_href____https___test_app_h5_poweroak_ltd_18443_app_bluetti_wiki_dist_index_html_id_196f6da175d0e756a060a359e61____文章1__a___p___n_p__a_href____https___test_app_h5_poweroak_ltd_18443_app_bluetti_wiki_dist_index_html_id_196f6e44b8f0e756a060a359ed1____手动阀萨芬__a___p___n____staticContent____修改_文章1__https___test_oss_poweroak_ltd_18443_static_FAQ_AC_20series_12_AC200_B300_GeneralA_196f6da175d0e756a060a359e61_h5_html___n__n_手动阀萨芬__https___test_oss_poweroak_ltd_18443_static_Trouble_20Shooting_BC_20series_11_BC500_General_196f6e44b8f0e756a060a359ed1_h5_html_____staticContentHtml_____p_修改_a_href____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_20series_12_AC200_B300_GeneralA_196f6da175d0e756a060a359e61_h5_html____文章1__a___p___n_p__a_href____https___test_oss_poweroak_ltd_18443_static_Trouble_20Shooting_BC_20series_11_BC500_General_196f6e44b8f0e756a060a359ed1_h5_html____手动阀萨芬__a___p___n____lastModBy____刘青林____modTime____2025_05_27_20_39_04____creBy____193956196a1dce640551875b80c____creByName____刘青林____visits___0___creTime____2025_05_22_15_17_14____fileId___null___fileName____196f6da75390e756a060a359e62____suffixNum___null___fileServer___null___filePath_____FAQ_AC_series_12_AC200_B300_GeneralA____size___null___wikiTitle____GeneralA____rootCode___1___productModel___null___outline____修改____staticFileUrl____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_series_12_AC200_B300_GeneralA_196f6da75390e756a060a359e62_h5_html______id____196fc65a48f0e756a076ba3229b____wikiId____196f6d8e8b40e756a060a359e4e____wikiDisplay____FAQ_AC_series_AC200_B300_GeneralA____title____是多少的____status___true___sort___3___useful___0___useless___0___content____潇洒成都市____contentHtml_____p_潇洒成都市__p___n____staticContent____潇洒成都市____staticContentHtml_____p_潇洒成都市__p___n____lastModBy____刘青林____modTime____2025_07_14_16_18_16____creBy____193956196a1dce640551875b80c____creByName____刘青林____visits___1___creTime____2025_05_23_17_07_22____fileId___null___fileName____196fc65a48f0e756a076ba3229b____suffixNum___null___fileServer___null___filePath_____FAQ_AC_series_12_AC200_B300_GeneralA____size___null___wikiTitle____GeneralA____rootCode___1___productModel___null___outline____潇洒成都市____staticFileUrl____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_series_12_AC200_B300_GeneralA_196fc65a48f0e756a076ba3229b_h5_html______id____198161dcc420e756a7d93fa63e6____wikiId____196f6d8e8b40e756a060a359e4e____wikiDisplay____FAQ_AC_series_AC200_B300_GeneralA____title____冲冲冲____status___true___sort___4___useful___0___useless___0___content____发多少____contentHtml_____p_发多少__p___n____staticContent____发多少____staticContentHtml_____p_发多少__p___n____lastModBy____blu98765____modTime____2025_07_17_10_04_05____creBy____18a540d2a9b6f8a3c5dde08bc6a____creByName____blu98765____visits___0___creTime____2025_07_17_10_01_48____fileId___null___fileName____198161dcc420e756a7d93fa63e6____suffixNum___null___fileServer___null___filePath_____FAQ_AC_series_12_AC200_B300_GeneralA____size___null___wikiTitle____GeneralA____rootCode___1___productModel___null___outline____发多少____staticFileUrl____https___test_oss_poweroak_ltd_18443_static_FAQ_AC_series_12_AC200_B300_GeneralA_198161dcc420e756a7d93fa63e6_h5_html______additions___null___pageNo___1___totalElements____4____last___true___totalPages___1___numberOfElements___4___first___true___empty___false___pageSize___10____error___null___code___0___ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>3</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_03__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0273s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_03__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>4</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_04__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.038s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_04__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>5</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_05__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0254s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_05__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>6</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_06__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0264s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_06__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>7</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_07__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0273s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_07__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>8</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_08__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0264s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_08__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>9</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_09__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0263s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_09__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>10</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_10__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0293s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_10__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>11</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_11__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0273s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_11__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>12</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_12__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0254s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_12__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>13</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_13__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0264s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_13__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>14</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_14__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0263s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_14__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>15</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_15__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0273s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_15__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>16</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_16__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0273s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_16__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>17</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_17__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.04s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_17__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>18</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_18__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0293s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_18__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>19</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_19__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0303s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_19__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>20</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_20__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0293s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_20__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>21</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_21__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0264s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_21__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>22</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_22__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0263s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_22__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>23</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_23__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0263s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_23__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>24</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_24__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0273s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_24__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>25</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_25__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0254s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_25__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>26</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_26__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0293s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_26__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>27</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_27__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0303s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_27__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>28</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_28__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0303s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_28__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>29</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_29__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0264s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_29__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>30</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_30__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.04s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_30__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>31</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_31__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0264s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_31__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>32</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_32__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0254s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_32__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>33</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_33__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0263s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_33__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>34</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_34__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0303s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_34__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>35</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_35__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0312s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_35__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>36</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_36__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0264s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_36__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>37</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_37__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0273s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_37__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>38</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_38__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0254s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_38__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>39</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_39__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0264s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_39__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>40</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_40__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0263s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_40__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>41</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_41__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0293s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_41__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>42</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_42__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0332s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_42__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>43</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_43__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0322s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_43__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>44</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_44__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.041s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_44__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>45</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_45__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0264s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_45__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>46</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_46__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0273s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_46__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>47</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_47__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0254s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_47__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>48</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_48__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0263s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_48__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>49</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_49__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0312s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_49__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>50</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_50__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0283s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_50__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>51</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_51__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0263s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_51__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>52</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_52__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0273s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_52__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>53</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_53__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0273s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_53__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>54</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_54__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0254s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_54__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>55</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_55__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0263s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_55__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td>56</td>
+                    <td class="TestRunCaseDdt">TestRunCaseDdt</td>
+                    <td>test_main_case_56__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_</td>
+                    <td>None</td>
+                    <td>0.0303s</td>
+                    
+                        <td class="text-success">成功</td>
+                    
+                    <td>
+                        <button type="button" class="btn btn-success btn_info">查看详情</button>
+                    </td>
+                </tr>
+
+                <tr class="test_log">
+
+                    <td colspan="7" class="small text-muted" style=" word-wrap:break-word; word-break:break-all">
+                        
+
+                            <pre>test_main_case_56__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None__None_ (test_case.TestRunCaseDdt)执行——>【通过】
+</pre>
+                        
+                        
+                    </td>
+                </tr>
+            
+
+            </tbody>
+        </table>
+    </div>
+
+    <div style="height: 200px"></div>
+</div>
+
+
+<script>
+    var tbodyTr = $('tbody tr');
+    var testResult = $("#testResult");
+    var testClass = $("#testClass");
+    <!--    用例执行详细信息显示切换-->
+    $(".btn_info").click(function () {
+        $(this).parent().parent().next().toggle();
+
+    });
+    // 当选择用例类之后触发
+    testClass.change(function () {
+        var cls = $(this).val();
+        var res = testResult.val();
+        elementDisplay(cls, res);
+        sort()
+    });
+    testResult.change(function () {
+        var res = $(this).val();
+        var cls = testClass.val();
+        elementDisplay(cls, res);
+        sort()
+    });
+
+    function elementDisplay(cls, res) {
+        // 用例数据的显示
+        if (cls === "所有") {
+            if (res === "所有") {
+                tbodyTr.has('button').show();
+            } else if (res === '成功') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-success').show()
+
+            } else if (res === '失败') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-warning').show()
+
+            } else if (res === '错误') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-danger').show()
+
+            } else if (res === '跳过') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.text-info').show()
+            }
+        } else {
+            if (res === "所有") {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').show()
+            } else if (res === '成功') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-success').show()
+            } else if (res === '失败') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-warning').show()
+            } else if (res === '错误') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-danger').show()
+            } else if (res === '跳过') {
+                tbodyTr.hide();
+                tbodyTr.has('button').has('.' + cls + '').has('.text-info').show()
+            }
+        }
+    }
+
+    function sort() {
+        //重新排列显示序号
+        // 选择所有可以见的tr
+        var visibleTr = tbodyTr.filter(":visible");
+
+        visibleTr.each(function (index, element) {
+            element.firstElementChild.innerHTML = index + 1;
+
+        })
+
+    }
+
+
+</script>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('char'));
+    var myChart2 = echarts.init(document.getElementById('char2'));
+    // 指定图表的配置项和数据
+    option = {
+        color: ['#00a10a', '#ddb518', 'rgba(204,46,41,0.73)', '#85898c'],
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} ({d}%)'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 10,
+            data: ['通过', '失败', '错误', '跳过']
+        },
+        series: [
+            {
+                name: '测试结果',
+                type: 'pie',
+                radius: ['50%', '70%'],
+                avoidLabelOverlap: false,
+                label: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    label: {
+                        show: true,
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                },
+                labelLine: {
+                    show: false
+                },
+                data: [
+                    {value: 56, name: '通过'},
+                    {value: 0, name: '失败'},
+                    {value: 0, name: '错误'},
+                    {value: 0, name: '跳过'}
+                ]
+            }
+        ]
+    };
+    option2 = {
+        tooltip: {
+            formatter: '{a} <br/>{b} : {c}%'
+        },
+        toolbox: {
+            feature: {
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        series: [
+            {
+                name: '测试结果',
+                type: 'gauge',
+                detail: {formatter: '100.00%'},
+                data: [{value: '100.00', name: '用例通过率'}],
+                axisLine: {
+                    lineStyle: {
+                        color: [
+                            [0.2, '#c20000'],
+                            [0.8, '#ddb518'],
+                            [1, '#00a10a']]
+                    }
+                }
+            }
+        ]
+    };
+
+
+    myChart2.setOption(option2);
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+
+</body>
+</html>

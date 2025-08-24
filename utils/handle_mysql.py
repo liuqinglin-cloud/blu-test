@@ -19,15 +19,15 @@ class HandleMysql:
                 charset="utf8",
                 cursorclass=pymysql.cursors.DictCursor)
             self.connected = True
-        except pymysql.Error as e:
-            print('数据库连接失败:', end='')
+        except:
+            print(f"{environment}环境{database}数据库连接失败")
 
     def insert(self, table, val_obj):
         """
         插入数据
         :param table:表名
         :param val_obj:插入数据
-        :return:
+        :return: 结果
         """
         sql_top = 'INSERT INTO ' + table + ' ('
         sql_tail = ') VALUES ('
@@ -40,7 +40,7 @@ class HandleMysql:
                 cursor.execute(sql)
             self.__conn.commit()
             return self.__conn.insert_id()
-        except pymysql.Error as e:
+        except:
             self.__conn.rollback()
             return False
 
@@ -50,7 +50,7 @@ class HandleMysql:
         :param table:表名
         :param val_obj:更新数据
         :param range_str:条件
-        :return:
+        :return: 结果
         """
         sql = 'UPDATE ' + table + ' SET '
         try:
@@ -61,7 +61,7 @@ class HandleMysql:
                 cursor.execute(sql)
             self.__conn.commit()
             return cursor.rowcount
-        except pymysql.Error as e:
+        except:
             self.__conn.rollback()
             return False
 
@@ -70,7 +70,7 @@ class HandleMysql:
         删除数据，慎用
         :param table:表名
         :param range_str:条件
-        :return:
+        :return: 结果
         """
         sql = 'DELETE FROM ' + table + ' WHERE ' + range_str
         try:
@@ -78,7 +78,7 @@ class HandleMysql:
                 cursor.execute(sql)
             self.__conn.commit()
             return cursor.rowcount
-        except pymysql.Error as e:
+        except:
             self.__conn.rollback()
             return False
 
@@ -88,7 +88,7 @@ class HandleMysql:
         :param table:表名
         :param factor_str:条件
         :param field:查询字段，默认所有
-        :return:
+        :return: 结果
         """
         sql = 'SELECT ' + field + ' FROM ' + table + ' WHERE ' + factor_str
         try:
@@ -96,7 +96,7 @@ class HandleMysql:
                 cursor.execute(sql)
             self.__conn.commit()
             return cursor.fetchall()[0]
-        except pymysql.Error as e:
+        except:
             return False
 
     def select_more(self, table, range_str, field='*'):
@@ -105,7 +105,7 @@ class HandleMysql:
         :param table:表名
         :param range_str:条件
         :param field:查询字段，默认所有
-        :return:
+        :return: 结果
         """
         sql = 'SELECT ' + field + ' FROM ' + table + ' WHERE ' + range_str
         try:
@@ -113,7 +113,7 @@ class HandleMysql:
                 cursor.execute(sql)
             self.__conn.commit()
             return cursor.fetchall()
-        except pymysql.Error as e:
+        except:
             return False
 
     def count(self, table, range_str='1'):
@@ -121,7 +121,7 @@ class HandleMysql:
         计数
         :param table:表名
         :param range_str:条件
-        :return:
+        :return: 结果
         """
         sql = 'SELECT count(*)res FROM ' + table + ' WHERE ' + range_str
         try:
@@ -129,7 +129,7 @@ class HandleMysql:
                 cursor.execute(sql)
             self.__conn.commit()
             return cursor.fetchall()[0]['res']
-        except pymysql.Error as e:
+        except:
             return False
 
     def sum(self, table, field, range_str='1'):
@@ -138,7 +138,7 @@ class HandleMysql:
         :param table:表名
         :param field:字段
         :param range_str:条件
-        :return:
+        :return: 结果
         """
         sql = 'SELECT SUM(' + field + ') AS res FROM ' + table + ' WHERE ' + range_str
         try:
@@ -152,7 +152,6 @@ class HandleMysql:
     def __del__(self):
         """
         销毁对象时关闭数据库
-        :return:
         """
         try:
             self.__conn.close()
@@ -162,7 +161,6 @@ class HandleMysql:
     def close(self):
         """
         关闭数据库
-        :return:
         """
         self.__del__()
 

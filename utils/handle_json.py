@@ -13,7 +13,6 @@ class HandleJson:
     def read_json_file(self):
         """
         读取json文件
-        :return:
         """
         with open(self.path, encoding="utf-8") as f:
             data = json.load(f)
@@ -22,8 +21,8 @@ class HandleJson:
     def get_json_by_key(self,key):
         """
         获取json里key对应的值
-        :param key:
-        :return:
+        :param key: key
+        :return: value
         """
         data = self.read_json_file()
         return data.get(key)
@@ -32,7 +31,6 @@ class HandleJson:
         """
         写入json文件
         :param data: 数据
-        :return:
         """
         data_value = json.dumps(data)
         with open(self.path,"w") as f:

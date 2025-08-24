@@ -10,6 +10,7 @@ from basic_request import request
 
 test_data = case_data.get_excel_data()
 
+
 @ddt.ddt
 class TestRunCaseDdt(unittest.TestCase):
 
@@ -29,13 +30,12 @@ class TestRunCaseDdt(unittest.TestCase):
                     depend_data = get_data(is_depend)
                     request_data[depend_key] = depend_data
                     request_data = demjson3.encode(request_data)
-                    #request_data = json.loads(request_data)
                 method = data[8]
                 url = data[7]
                 environment = data[5]
                 server_name = data[6]
-                host = environment_ini.get_value(server_name,environment)
-                url = host+url
+                host = environment_ini.get_value(server_name, environment)
+                url = host + url
                 except_method = data[12]
                 except_result = data[13]
                 cookie_method = data[10]
@@ -51,7 +51,7 @@ class TestRunCaseDdt(unittest.TestCase):
                 print(header)
                 res = request(method, url, request_data, cookie, header)
                 print(res)
-                if except_method == "message":
+                if except_method == "message":  # 可扩展其他断言方式
                     try:
                         msg = res["message"]
                         self.assertEqual(msg, except_result)
@@ -64,6 +64,7 @@ class TestRunCaseDdt(unittest.TestCase):
             except Exception as e:
                 case_data.excel_write_data(row_num, 15, "失败")
                 raise e
+
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()

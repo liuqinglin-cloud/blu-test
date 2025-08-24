@@ -2,33 +2,26 @@ from utils.handle_ini import translation_ini
 from common_ios.basic_operation import *
 
 
-def assert_translation_by_find_ele(section, key):
+def assert_translation_by_find_ele(section, key, num=5):
     """
     通过翻译语言定位控件，能定位到表示翻译正确
     :param section: 页面名称
     :param key: 语种名称
-    :return:
+    :param num: 没定位到时，最大上传次数，默认5
     """
     translation = translation_ini.get_value(section,key)
     translation_list = translation.split("=")
+    ele_exists = False
     for single_translation in translation_list:
-        assert_text = f"{key}--《{section}》页面《{single_translation}》元素"
-        try:
-            try:
-                try:
-                    assert_equal(poco(single_translation).exists(), True, assert_text)
-                except:
-                    log("没找到元素，向上滑一下，再试试")
-                    swipe_bottom_top()
-                    assert_equal(poco(single_translation).exists(), True, assert_text)
-            except:
-                log("没找到元素，再向上滑一下，再试试")
+        for i in range(num):
+            if poco(text=single_translation).exists():
+                ele_exists = True
+                break
+            else:
+                log(f"没找到《{section}》页面《{single_translation}》元素，向上滑一下，再试试")
                 swipe_bottom_top()
-                assert_equal(poco(text=single_translation).exists(), True, assert_text)
-        except:
-            log("没找到元素，再再向上滑一下，再试试")
-            swipe_bottom_top()
-            assert_equal(poco(text=single_translation).exists(), True, assert_text)
+                sleep()
+        assert_equal(ele_exists, True, f"{key}--《{section}》页面《{single_translation}》元素")
 
 
 def assert_ele_is_exist(section, key, is_exist=True):

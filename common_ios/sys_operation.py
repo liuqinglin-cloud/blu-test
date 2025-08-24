@@ -6,7 +6,6 @@ def sys_photo_permission_setting(permission="完全访问"):
     """
     系统设置BLUETTI-BETA照片访问权限
     :param permission: 权限，"完全访问"、"受限访问"、"无"三选一，默认"完全访问"
-    :return:
     """
     home()
     click_ele("ios","设置")

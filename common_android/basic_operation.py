@@ -125,7 +125,6 @@ def click_ele(section, key):
     单击元素
     :param section: 页面名字
     :param key: 元素名字
-    :return:
     """
     ele = ele_is_exist(section, key)
     if ele:
@@ -156,7 +155,6 @@ def long_click_ele(section, key, duration=2):  #
     :param section: 页面名称
     :param key: 元素名称
     :param duration: 长按时间，默认2
-    :return:
     """
     ele = ele_is_exist(section, key)
     if ele:
@@ -186,7 +184,6 @@ def double_click_ele(section, key):
     双击元素
     :param section: 页面名称
     :param key: 元素名称
-    :return:
     """
     ele = ele_is_exist(section, key)
     if ele:
@@ -210,7 +207,6 @@ def times_click_ele(section, key, times=5):
     :param section: 页面名称
     :param key: 元素名称
     :param times: 次数，默认5次
-    :return:
     """
     ele = ele_is_exist(section, key)
     if ele:
@@ -230,7 +226,6 @@ def click_ele_for_translation(ele_attribute):
     不值得每个语种维护一套，所以测试翻译时，需要传入元素对应语言属性值定位并点击，
     此处仅支持text或name定位，其他定位方式可使用通用点击
     :param ele_attribute: 元素属性
-    :return:
     """
     try:
         try:
@@ -247,9 +242,8 @@ def click_ele_for_translation(ele_attribute):
 
 def key_back(times=1):
     """
-    安卓key_event返回
+    安卓key_event返回，页面展示弹窗时必用此方法返回
     :param times: 次数，默认1
-    :return:
     """
     log(f"计划点击{times}次返回按键")
     for i in range(times):
@@ -260,9 +254,8 @@ def key_back(times=1):
 
 def click_back_button(times=1):
     """
-    点击返回按钮，慎用
+    点击返回按钮，页面弹窗时请用key_back返回
     :param times: 次数，默认1
-    :return:
     """
     log(f"计划点击{times}次返回按钮")
     for i in range(times):
@@ -281,7 +274,6 @@ def swipe_bottom_top(coordinates=1900, num=1):
     从下往上滑动，展示下方内容,默认pixel6可用,分辨率1080×2400
     :coordinates:起点纵坐标
     :num: 滑动次数，默认1
-    :return:
     """
     for i in range(num):
         swipe((500, coordinates), (500, 500))
@@ -293,7 +285,6 @@ def swipe_top_bottom(coordinates=1900, num=1):
     从上往下滑动,展示上方内容,默认pixel6可用,分辨率1080×2400
     :coordinates:终点纵坐标
     :num: 滑动次数，默认1
-    :return:
     """
     for i in range(num):
         swipe((500, 500), (500, coordinates))
@@ -305,7 +296,6 @@ def swipe_left_right(coordinates=1186, num=1):
     从左往右滑动，展示左方内容,默认pixel6可用,分辨率1080×2400
     :coordinates:纵坐标
     :num: 滑动次数，默认1
-    :return:
     """
     for i in range(num):
         swipe((172, coordinates), (899, coordinates))
@@ -317,7 +307,6 @@ def swipe_right_left(coordinates=1186, num=1):
     从右往左滑动，展示右方内容,默认pixel6可用,分辨率1080×2400
     :coordinates:纵坐标
     :num: 滑动次数，默认1
-    :return:
     """
     for i in range(num):
         swipe((899, coordinates), (172, coordinates))
@@ -362,7 +351,6 @@ def del_text(section, key):
     删除输入框的文本
     :param section: 页面名称
     :param key: 元素名称
-    :return:
     """
     text1 = get_ele_text(section, key)
     if type(text1) is not list:
@@ -384,7 +372,6 @@ def key_del_text(section, key, num=20):
     :param section: 页面名称
     :param key: 元素名称
     :param num: 次数，默认20次
-    :return:
     """
     click_ele(section, key)
     for i in range(num):
@@ -399,7 +386,6 @@ def input_text(section, key, txt):
     :param section: 页面名字
     :param key: 元素名字
     :param txt: 输入内容
-    :return:
     """
     ele = ele_is_exist(section, key)
     if ele:
@@ -421,7 +407,6 @@ def input_text_enter(section, key, txt):
     :param section: 页面名字
     :param key: 元素名字
     :param txt: 输入内容
-    :return:
     """
     ele = ele_is_exist(section, key)
     if ele:
@@ -442,7 +427,6 @@ def input_text_search(section, key, txt):
     :param section: 页面名字
     :param key: 元素名字
     :param txt: 输入内容
-    :return:
     """
     ele = ele_is_exist(section, key)
     if ele:
@@ -462,7 +446,6 @@ def select_data(data, num=4):
     选择数据，比如在设备列表选择设备，在国家列表选择国家
     :param data:数据
     :param num: 尝试次数，默认4
-    :return:
     """
     for i in range(num):
         try:
@@ -482,7 +465,6 @@ def swipe_universal(start_x,start_y,end_x,end_y,num=1):
     :param end_x: 起点横坐标倍数，范围0-1
     :param end_y: 起点纵坐标倍数，范围0-1
     :param num: 次数，默认1
-    :return:
     """
     xy = poco.get_screen_size()
     x = xy[0]
@@ -498,7 +480,6 @@ def wait_for_ele(section,key,timeout=5,appearance=True):
     :param key: 元素名称
     :param timeout: 最长等待时间，默认5秒
     :param appearance: 出现/消失，默认出现
-    :return:
     """
     ele = element(section,key)
     if type(ele) is not list:

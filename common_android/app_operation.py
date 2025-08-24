@@ -87,8 +87,7 @@ def main_page():
     返回启动页，仅支持中文
     """
     upgrade()
-    subscribe()
-    #还需要增加点击同意协议的操作
+    subscribe()  # 如有协议弹窗，需要增加点击同意协议的操作
     for i in range(10):
         main_page_info = f"经过{i}次点击返回按键，找到'我的'元素，当前在一级页面"
         start_page_info = f"经过{i}次点击返回按键，找到'无网模式'元素，当前在启动页"
@@ -130,7 +129,7 @@ def main_page():
             keyevent("BACK")
             sleep()
             log(f"第{i}次点击返回按键，尝试返回启动页或一级页面")
-    swipe_universal(0.5,0.2,0.5,0.8)
+    swipe_universal(0.5, 0.2, 0.5, 0.8)
 
 
 def current_environment():
@@ -174,7 +173,7 @@ def switch_environment(expectation):
 def is_login():
     """
     判断是否是登录状态
-    :return:
+    :return: 是否是登录状态
     """
     main_page()
     ele = element("我的", "我的")
@@ -190,7 +189,6 @@ def login_by_mail(account_key):
     """
     邮箱登录
     :param account_key: 账号ini文件的key
-    :return:
     """
     if not is_login():
         click_ele("启动", "登录")
@@ -219,7 +217,6 @@ def login_by_mail(account_key):
 def logout():
     """
     退出登录
-    :return:
     """
     if is_login():
         click_ele("我的", "我的")
@@ -255,7 +252,6 @@ def upgrade(is_upgrade=False):
     """
     升级,此操作应在订阅获取弹窗之前
     :param is_upgrade: 是否升级，默认否
-    :return:
     """
     if is_upgrade is False:
         try:
@@ -272,7 +268,6 @@ def upgrade(is_upgrade=False):
 def user_agreement(is_agree=True):
     """
     用户协议弹窗操作
-    :return:
     """
     if is_agree is True:
         try:
@@ -290,7 +285,6 @@ def subscribe(is_subscribe=False):
     """
     订阅,此操作应在升级弹窗之后
     :param is_subscribe: 是否订阅，默认否
-    :return:
     """
     if is_subscribe is False:
         try:
@@ -315,9 +309,6 @@ def get_user_nickname():
 
 
 if __name__ == "__main__":
-    #start_app("net.poweroak.bluetticloud.debug")
-    #login_by_mail("china")
-    #logout()
-    #switch_lang("英语")
-    #switch_environment("测试环境")
+    switch_lang("英语")
+    switch_environment("测试环境")
     pass

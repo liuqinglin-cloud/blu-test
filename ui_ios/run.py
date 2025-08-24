@@ -1,16 +1,53 @@
 __author__ = "刘青林"
 
 import unittest
+import unittestreport
 import os.path
+import time
+from airtest.report.report import LogToHtml
+from test_me import TestMe
+
 
 
 case_path = os.path.dirname(__file__)
-
+project_path = os.path.dirname(os.path.dirname(__file__))
 
 testsuite = unittest.TestSuite()
-discover = unittest.TestLoader().discover(case_path,pattern='test_*.py',top_level_dir=None)
-testsuite.addTest(discover)
-runner=unittest.TextTestRunner()
-runner.run(testsuite)
+#部分用例，按需添加
+#tests = [TestMe('test_me'))]
+#匹配用例文件
+tests = unittest.TestLoader().discover(case_path,pattern='test_*.py',top_level_dir=None)
+testsuite.addTests(tests)
 
 
+report_path = os.path.join(project_path,"report\\unittest_report\\ui_ios")
+#current_time = time.strftime('%Y%m%d %H%M%S')
+#file_name = f"report{current_time}.html"
+file_name = "report.html"
+runner = unittestreport.TestRunner(testsuite,
+                                   tester='lql',
+                                   filename=file_name,
+                                   report_dir=report_path,
+                                   title="翻译测试报告",
+                                   desc="ios翻译测试",
+                                   templates=1
+                                   )
+
+#执行
+try:
+    runner.run()
+
+#导出airtest报告，方便看翻译测试截图，runner执行后会停止，finally保证生成airtest报告，报告会覆盖
+finally:
+    common_ios_path = os.path.join(project_path,"common_ios")
+    script_path = os.path.join(case_path,"run.py")
+    log_path = os.path.join(common_ios_path,"log")
+    logfile_path = os.path.join(common_ios_path,"log\\log.txt")
+    export_path = os.path.join(project_path,"report\\airtest_report\\ui_ios")
+    h1 = LogToHtml(script_root=script_path,
+                   log_root=log_path,
+                   export_dir=export_path,
+                   logfile=logfile_path,
+                   lang='zh',
+                   plugins=["poco.utils.airtest.report"])
+    h1.report()
