@@ -84,6 +84,17 @@ class TestMe(unittest.TestCase):
         assert_ele_is_exist("通用", "确定")
         key_back(2)
 
+    def test_installer(self):
+        """
+        安装商跳转联系我们
+        """
+        log("测试------《安装商跳转联系我们》")
+        click_ele("我的", "我的")
+        click_ele("我的", "安装商")
+        click_ele("安装商", "联系我们")
+        assert_ele_is_exist("联系我们", "电话服务")
+        key_back(2)
+
     def test_app_mark(self):
         """
         app评分跳转测试
@@ -134,6 +145,23 @@ class TestMe(unittest.TestCase):
         assert_ele_is_exist("BLUETTI APP", "提交")
         key_back(2)
 
+    def test_sign(self):
+        """
+        测试签到
+        """
+        log("测试------《签到》")
+        click_ele("我的", "我的")
+        swipe_bottom_top()
+        click_ele("我的", "签到")
+        sign_text = get_ele_text("签到", "签到")
+        click_ele("签到", "签到")
+        coins_text = get_ele_text("签到", "积分")
+        if sign_text == "已签到":
+            assert_ele_text("签到", "积分", coins_text)
+        else:
+            assert_ele_text("签到", "签到", "已签到")
+            assert_ele_text("签到", "积分", coins_text, False)
+
     def test_clear_cache(self):
         """
         测试清理缓存
@@ -149,29 +177,3 @@ class TestMe(unittest.TestCase):
         else:
             click_ele("我的", "清理缓存")
             assert_ele_text("清理缓存", "缓存数据量", "0.0M")
-
-    def test_sign(self):
-        """
-        测试签到
-        """
-        log("测试------《签到》")
-        click_ele("我的", "我的")
-        swipe_bottom_top()
-        click_ele("我的", "签到")
-        sign_text = get_ele_text("签到", "签到")
-        click_ele("签到", "签到")
-        if sign_text == "已签到":
-            assert_ele_is_exist("签到", "积分")
-        else:
-            assert_ele_text("签到", "签到","已签到")
-
-    def test_installer(self):
-        """
-        安装商跳转联系我们
-        """
-        log("测试------《安装商跳转联系我们》")
-        click_ele("我的", "我的")
-        click_ele("我的", "安装商")
-        click_ele("安装商", "联系我们")
-        assert_ele_is_exist("联系我们", "电话服务")
-        key_back(2)

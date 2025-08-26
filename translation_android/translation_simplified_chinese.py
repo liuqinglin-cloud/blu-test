@@ -38,6 +38,50 @@ class TestSimplifiedChinese(unittest.TestCase):
         click_ele("我的", "我的")
         assert_translation_by_find_ele("我的")
 
+    def test_push(self):
+        """
+        push
+        """
+        log("测试------《push》")
+        click_ele("我的", "我的")
+        click_ele("我的", "push入口")
+        assert_translation_by_find_ele("push消息列表")
+        click_ele("push消息列表", "设置")
+        assert_translation_by_find_ele("push消息设置")
+        key_back(2)
+
+    def test_loyalty_program(self):
+        """
+        Loyalty Program忠诚度计划
+        """
+        log("测试------《Loyalty Program忠诚度计划》")
+        click_ele("我的", "我的")
+        click_ele("我的", "忠诚度计划")
+        assert_translation_by_find_ele("忠诚度计划")
+        swipe_top_bottom()
+        click_ele("忠诚度计划", "获得X项权益")
+        sleep()
+        assert_translation_by_find_ele("权益等级")
+        click_ele("权益等级", "等级说明")
+        assert_translation_by_find_ele("等级说明")
+        key_back(2)
+        click_ele("忠诚度计划", "我的积分")
+        assert_translation_by_find_ele("我的积分")
+        click_ele("我的积分", "兑换记录")
+        assert_translation_by_find_ele("兑换记录")
+        key_back()
+        click_ele("忠诚度计划", "活动规则")
+        sleep()
+        assert_translation_by_find_ele("活动规则")
+        key_back()
+        click_ele("忠诚度计划", "积分商城")
+        assert_translation_by_find_ele("积分商城")
+        key_back()
+        swipe_bottom_top()
+        click_ele("忠诚度计划", "历史记录")
+        assert_translation_by_find_ele("历史记录")
+        key_back(2)
+
     def test_my_account(self):
         """
         我的账户
@@ -67,18 +111,6 @@ class TestSimplifiedChinese(unittest.TestCase):
         assert_translation_by_find_ele("注销账户")
         key_back(3)
 
-    def test_push(self):
-        """
-        push
-        """
-        log("测试------《push》")
-        click_ele("我的", "我的")
-        click_ele("我的", "push入口")
-        assert_translation_by_find_ele("push消息列表")
-        click_ele("push消息列表", "设置")
-        assert_translation_by_find_ele("push消息设置")
-        key_back(2)
-
     def test_address(self):
         """
         地址管理
@@ -98,6 +130,39 @@ class TestSimplifiedChinese(unittest.TestCase):
         click_ele("新增地址", "省州")
         assert_translation_by_find_ele("省州")
         key_back(3)
+
+    def test_bluetti_star(self):
+        """
+        bluetti_star
+        """
+        log("测试------《bluetti_star》")
+        click_ele("我的", "我的")
+        click_ele("我的", "BLUETTI STAR")
+        assert_translation_by_find_ele("BLUETTI STAR")
+        key_back()
+
+    def test_installer(self):
+        """
+        安装商
+        """
+        log("测试------《安装商》")
+        click_ele("我的", "我的")
+        click_ele("我的", "安装商")
+        assert_translation_by_find_ele("安装商")
+        key_back()
+
+    def test_referral_rewards(self):
+        """
+        引荐计划
+        """
+        log("测试------《引荐计划》")
+        click_ele("我的", "我的")
+        click_ele("我的", "引荐计划")
+        assert_translation_by_find_ele("引荐计划")
+        swipe_top_bottom()
+        sleep()
+        click_ele("引荐计划", "你的朋友")
+        assert_translation_by_find_ele("引荐计划-你的朋友")
 
     def test_feedback(self):
         """
@@ -132,28 +197,47 @@ class TestSimplifiedChinese(unittest.TestCase):
         assert_translation_by_find_ele("签到规则")
         key_back(2)
 
-    def test_subscribe(self):
+    def test_lottery(self):
         """
-        订阅品牌
+        大转盘
         """
-        log("测试------《订阅品牌》")
+        log("测试------《大转盘》")
         click_ele("我的", "我的")
         swipe_bottom_top()
-        click_ele("我的", "订阅品牌")
+        click_ele("我的", "大转盘")
+        sleep(2)
+        assert_translation_by_find_ele("大转盘")
+        click_ele("大转盘", "右上角按钮")
+        assert_translation_by_find_ele("右上角按钮")
+        click_ele("大转盘", "活动规则")
+        assert_translation_by_find_ele("活动规则")
+        key_back()
+        click_ele("大转盘", "右上角按钮")
+        click_ele("大转盘", "我的记录")
+        assert_translation_by_find_ele("我的记录")
+        key_back(2)
+
+    def test_user_agreement(self):
+        """
+        用户协议
+        """
+        log("测试------《用户协议》")
+        click_ele("我的", "我的")
+        swipe_bottom_top()
+        click_ele("我的", "用户协议")
+        assert_translation_by_find_ele("用户协议")
+
+    def test_privacy_policy(self):
+        """
+        隐私政策
+        """
+        log("测试------《隐私政策》")
+        click_ele("我的", "我的")
+        swipe_bottom_top()
+        click_ele("我的", "隐私政策")
         sleep()
-        text1 = poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child(
-            "android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child(
-            "android.widget.TextView")[2].get_text()
-        assert_translation_by_find_ele("订阅品牌", "简体中文服务内容",expectation=text1)
-        text2 = poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child(
-            "android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child(
-            "android.widget.TextView")[4].get_text()
-        assert_translation_by_find_ele("订阅品牌", "简体中文订阅方式", expectation=text2)
-        swipe_universal(0.5, 0.6, 0.5, 0.3)
-        text3=poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child("android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child("android.widget.TextView")[5].get_text()
-        assert_translation_by_find_ele("订阅品牌", "简体中文数据保护承诺", expectation=text3)
-        swipe_top_bottom()
-        assert_translation_by_find_ele("订阅品牌")
+        assert_translation_by_find_ele("隐私政策")
+        key_back()
 
     def test_setting(self):
         """
@@ -210,109 +294,26 @@ class TestSimplifiedChinese(unittest.TestCase):
         click_ele("通用", "确定")
         key_back(2)
 
-    def test_privacy_policy(self):
+    def test_subscribe(self):
         """
-        隐私政策
+        订阅品牌
         """
-        log("测试------《隐私政策》")
+        log("测试------《订阅品牌》")
         click_ele("我的", "我的")
         swipe_bottom_top()
-        click_ele("我的", "隐私政策")
+        click_ele("我的", "订阅品牌")
         sleep()
-        assert_translation_by_find_ele("隐私政策")
-        key_back()
-
-    def test_user_agreement(self):
-        """
-        用户协议
-        """
-        log("测试------《用户协议》")
-        click_ele("我的", "我的")
-        swipe_bottom_top()
-        click_ele("我的", "用户协议")
-        assert_translation_by_find_ele("用户协议")
-
-    def test_lottery(self):
-        """
-        大转盘
-        """
-        log("测试------《大转盘》")
-        click_ele("我的", "我的")
-        swipe_bottom_top()
-        click_ele("我的", "大转盘")
-        sleep(2)
-        assert_translation_by_find_ele("大转盘")
-        click_ele("大转盘", "右上角按钮")
-        assert_translation_by_find_ele("右上角按钮")
-        click_ele("大转盘", "活动规则")
-        assert_translation_by_find_ele("活动规则")
-        key_back()
-        click_ele("大转盘", "右上角按钮")
-        click_ele("大转盘", "我的记录")
-        assert_translation_by_find_ele("我的记录")
-        key_back(2)
-
-    def test_referral_rewards(self):
-        """
-        引荐计划
-        """
-        log("测试------《引荐计划》")
-        click_ele("我的", "我的")
-        click_ele("我的", "引荐计划")
-        assert_translation_by_find_ele("引荐计划")
+        text1 = poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child(
+            "android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child(
+            "android.widget.TextView")[2].get_text()
+        assert_translation_by_find_ele("订阅品牌", "简体中文服务内容",expectation=text1)
+        text2 = poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child(
+            "android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child(
+            "android.widget.TextView")[4].get_text()
+        assert_translation_by_find_ele("订阅品牌", "简体中文订阅方式", expectation=text2)
+        swipe_universal(0.5, 0.6, 0.5, 0.3)
+        text3=poco("android.widget.LinearLayout").offspring("net.poweroak.bluetticloud.debug:id/cl_content").child("android.webkit.WebView").offspring("app").child("android.view.View").child("android.view.View")[0].child("android.widget.TextView")[5].get_text()
+        assert_translation_by_find_ele("订阅品牌", "简体中文数据保护承诺", expectation=text3)
         swipe_top_bottom()
-        sleep()
-        click_ele("引荐计划", "你的朋友")
-        assert_translation_by_find_ele("引荐计划-你的朋友")
+        assert_translation_by_find_ele("订阅品牌")
 
-    def test_installer(self):
-        """
-        安装商
-        """
-        log("测试------《安装商》")
-        click_ele("我的", "我的")
-        click_ele("我的", "安装商")
-        assert_translation_by_find_ele("安装商")
-        key_back()
-
-    def test_bluetti_star(self):
-        """
-        bluetti_star
-        """
-        log("测试------《bluetti_star》")
-        click_ele("我的", "我的")
-        click_ele("我的", "BLUETTI STAR")
-        assert_translation_by_find_ele("BLUETTI STAR")
-        key_back()
-
-    def test_loyalty_program(self):
-        """
-        Loyalty Program忠诚度计划
-        """
-        log("测试------《Loyalty Program忠诚度计划》")
-        click_ele("我的", "我的")
-        click_ele("我的", "忠诚度计划")
-        assert_translation_by_find_ele("忠诚度计划")
-        swipe_top_bottom()
-        click_ele("忠诚度计划", "获得X项权益")
-        sleep()
-        assert_translation_by_find_ele("权益等级")
-        click_ele("权益等级", "等级说明")
-        assert_translation_by_find_ele("等级说明")
-        key_back(2)
-        click_ele("忠诚度计划", "我的积分")
-        assert_translation_by_find_ele("我的积分")
-        click_ele("我的积分", "兑换记录")
-        assert_translation_by_find_ele("兑换记录")
-        key_back()
-        click_ele("忠诚度计划", "活动规则")
-        sleep()
-        assert_translation_by_find_ele("活动规则")
-        key_back()
-        click_ele("忠诚度计划", "积分商城")
-        assert_translation_by_find_ele("积分商城")
-        key_back()
-        swipe_bottom_top()
-        click_ele("忠诚度计划", "历史记录")
-        assert_translation_by_find_ele("历史记录")
-        key_back(2)

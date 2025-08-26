@@ -46,12 +46,16 @@ def assert_ele_is_exist(section, key, is_exist=True):
         log(f"《{section}》页面《{key}》元素是坐标定位")
 
 
-def assert_ele_text(section,key,txt):
+def assert_ele_text(section,key,txt,is_equal=True):
     """
     断言元素文本
     :param section: 页面名称
     :param key: 元素名称
     :param txt: 期望文本
+    :param is_equal: 文本是否一致，默认一致
     """
     ele_text = get_ele_text(section,key)
-    assert_equal(ele_text,txt,f"《{section}》页面《{key}》元素文本是{txt}")
+    if is_equal is True:
+        assert_equal(ele_text,txt,f"《{section}》页面《{key}》元素文本是{txt}")
+    else:
+        assert_not_equal(ele_text,txt,f"《{section}》页面《{key}》元素文本不是{txt}")
