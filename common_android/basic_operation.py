@@ -353,17 +353,20 @@ def del_text(section, key):
     :param key: 元素名称
     """
     text1 = get_ele_text(section, key)
-    if type(text1) is not list:
-        len_text = len(text1)
-        log(f"《{section}》页面《{key}》元素，需要按{len_text}次删除按键删除内容")
-        key_del_text(section, key, len_text)
-        text2 = get_ele_text(section, key)
-        if text2 not in text1:
-            log(f"《{section}》页面《{key}》元素内容删除完成")
+    if text1 is not None:
+        if type(text1) is not list:
+            len_text = len(text1)
+            log(f"《{section}》页面《{key}》元素，需要按{len_text}次删除按键删除内容")
+            key_del_text(section, key, len_text)
+            text2 = get_ele_text(section, key)
+            if text2 not in text1:
+                log(f"《{section}》页面《{key}》元素内容删除完成")
+            else:
+                log("删除异常，请检查")
         else:
-            log("删除异常，请检查")
+            log(f"《{section}》页面《{key}》元素是position定位，请使用key_del_text删除文本")
     else:
-        log(f"《{section}》页面《{key}》元素是position定位，请使用key_del_text删除文本")
+        log("文本是None，不用删除")
 
 
 def key_del_text(section, key, num=20):

@@ -14,7 +14,7 @@ project_path = os.path.dirname(os.path.dirname(__file__))
 
 testsuite = unittest.TestSuite()
 #部分用例，按需添加
-tests = [TestUniversal('test_service_feedback')]
+tests = [TestUniversal('test_home_main_page')]
 #所有用例
 #tests = unittest.TestLoader().discover(case_path,pattern='universal_*.py',top_level_dir=None)
 testsuite.addTests(tests)

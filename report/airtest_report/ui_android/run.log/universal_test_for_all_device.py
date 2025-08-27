@@ -37,7 +37,7 @@ class TestUniversal(unittest.TestCase):
         log("测试------《我的》")
         click_ele("我的", "我的")
         assert_ele_is_exist("我的", "我的账户")
-        swipe_bottom_top()
+        swipe_universal(0.5,0.8,0.5,0.2)
         assert_ele_is_exist("我的", "订阅品牌")
 
     def test_me_push(self):
@@ -156,6 +156,7 @@ class TestUniversal(unittest.TestCase):
         log("测试------《BLUETTI STAR》")
         click_ele("我的", "我的")
         click_ele("我的", "BLUETTI STAR")
+        sleep()
         assert_ele_is_exist("BLUETTI STAR", "BLUETTI STAR")
         for i in range(5):
             swipe_universal(0.5, 0.7, 0.5, 0.2)
@@ -181,6 +182,7 @@ class TestUniversal(unittest.TestCase):
         引荐计划
         """
         log("测试------《引荐计划》")
+        click_ele("我的", "我的")
         click_ele("我的", "引荐计划")
         sleep(3)
         assert_ele_is_exist("引荐计划", "标题")
@@ -211,12 +213,14 @@ class TestUniversal(unittest.TestCase):
         """
         log("测试------《问题反馈》")
         click_ele("我的", "我的")
+        swipe_universal(0.5, 0.8, 0.5, 0.2)
         click_ele("我的", "问题反馈")
+        wait_for_ele("问题反馈", "自助报障")
         assert_ele_is_exist("问题反馈", "物流")
         click_ele("问题反馈", "自助报障")
         assert_ele_is_exist("自助报障", "提交")
         click_ele("自助报障", "设备序列号")
-        assert_ele_is_exist("自助报障", "自助报障")
+        assert_ele_is_exist("自助报障", "标题")
         click_ele("自助报障", "设备型号-请选择")
         assert_ele_is_exist("设备型号", "设备型号")
         for i in range(9):
@@ -226,7 +230,7 @@ class TestUniversal(unittest.TestCase):
         click_ele("自助报障", "国家地区")
         assert_ele_is_exist("国家地区", "搜索框")
         click_back_button()
-        for i in range(2):
+        for i in range(4):
             swipe_universal(0.5, 0.7, 0.5, 0.2)
             assert_ele_is_exist("自助报障", "提交")
         click_ele("自助报障", "提交")
@@ -244,7 +248,7 @@ class TestUniversal(unittest.TestCase):
         click_back_button()
         click_ele("问题反馈", "客服问题")
         assert_ele_is_exist("客服问题", "提交")
-        for i in range(2):
+        for i in range(4):
             swipe_universal(0.5, 0.7, 0.5, 0.3)
             assert_ele_is_exist("客服问题", "提交")
         click_ele("客服问题", "提交")
@@ -311,14 +315,14 @@ class TestUniversal(unittest.TestCase):
         assert_ele_is_exist("大转盘", "活动规则")
         click_ele("大转盘", "我的记录")
         assert_ele_is_exist("我的记录", "中奖记录")
-        key_back()  #应该使用click_back_button()
+        key_back()  #应该使用click_back_button()，此处有bug
         click_ele("大转盘", "右上角按钮")
         click_ele("大转盘", "活动规则")
         assert_ele_is_exist("活动规则", "活动规则")
         for i in range(5):
             swipe_universal(0.5, 0.8, 0.5, 0.2)
             assert_ele_is_exist("活动规则", "活动规则")
-        key_back(2)  #应该使用click_back_button(2)
+        key_back(2)  #应该使用click_back_button(2)，此处有bug
 
     def test_me_clear_cache(self):
         """
@@ -530,7 +534,7 @@ class TestUniversal(unittest.TestCase):
         assert_ele_is_exist("搜索", "国家")
         click_ele("搜索", "详情")
         sleep()
-        assert_ele_is_exist("详情", "已解决")
+        assert_ele_is_exist("详情", "详情")
         click_back_button()
         click_ele("搜索", "AC200+B300")
         assert_ele_is_exist("问题列表", "问题")
@@ -587,7 +591,76 @@ class TestUniversal(unittest.TestCase):
         log("测试------《用户指引》")
         click_ele("服务", "服务")
         click_ele("服务", "用户指引")
-        pass
+        assert_ele_is_exist("用户指引", "标题")
+        click_ele("用户指引", "AC系列指南")
+        assert_ele_is_exist("用户指引", "标题")
+        click_ele("用户指引", "太阳能板指南")
+        click_ele("用户指引", "分类列表")
+        assert_ele_is_exist("用户指引", "全部分类")
+        click_ele("用户指引", "分类列表")
+        click_ele("用户指引", "PV200")
+        assert_ele_is_exist("用户指引", "标题")
+        click_ele("用户指引", "PV420")
+        click_ele("用户指引", "问题1")
+        assert_ele_is_exist("用户指引", "标题")
+        click_ele("用户指引", "用户手册")
+        sleep()
+        assert_ele_is_exist("用户手册", "国家地区")
+        click_ele("用户手册", "搜索")
+        assert_ele_is_exist("用户手册", "国家")
+        click_ele("用户手册", "国家")
+        assert_ele_is_exist("用户手册", "US")
+        click_ele("用户手册", "CN")
+        assert_ele_is_exist("用户手册", "国家")
+        click_ele("用户手册", "国家")
+        click_ele("用户手册", "US")
+        assert_ele_is_exist("用户手册", "国家")
+        click_ele("用户手册", "国家")
+        click_ele("用户手册", "关闭按钮")
+        input_text_enter("用户手册", "搜索框","600")
+        assert_ele_is_exist("用户手册", "EP600")
+        click_ele("用户手册", "EP600")
+        assert_ele_is_exist("EP600", "用户手册")
+        click_back_button(2)
+        click_ele("用户手册", "国家地区")
+        assert_ele_is_exist("用户手册", "请选择")
+        click_ele("用户手册", "中国")
+        assert_ele_is_exist("用户手册", "国家地区")
+        click_ele("用户手册", "国家地区")
+        click_ele("用户手册", "美国")
+        click_ele("用户手册", "国家地区")
+        click_ele("用户手册", "关闭按钮")
+        assert_ele_is_exist("用户手册", "EP600")
+        click_ele("用户手册", "EP600")
+        click_ele("EP600", "附件列表")
+        assert_ele_is_exist("EP600", "用户手册")
+        click_ele("EP600", "图片")
+        assert_ele_is_exist("EP600", "用户手册",False)
+        home()
+        start_app("net.poweroak.bluetticloud.debug")
+        click_ele("EP600", "PDF")
+        assert_ele_is_exist("EP600", "文件预览")
+        click_ele("EP600", "下载")
+        assert_ele_is_exist("EP600", "用户手册",False)
+        home()
+        start_app("net.poweroak.bluetticloud.debug")
+        click_back_button()
+        click_ele("EP600", "用户手册")
+        assert_ele_is_exist("EP600", "用户手册")
+        click_ele("EP600", "附件列表")
+        click_ele("EP600", "excel文件")
+        assert_ele_is_exist("EP600", "用户手册", False)
+        home()
+        start_app("net.poweroak.bluetticloud.debug")
+        click_ele("EP600", "视频文件")
+        assert_ele_is_exist("EP600", "用户手册", False)
+        home()
+        start_app("net.poweroak.bluetticloud.debug")
+        click_ele("EP600", "图片文件")
+        assert_ele_is_exist("EP600", "用户手册", False)
+        home()
+        start_app("net.poweroak.bluetticloud.debug")
+        click_back_button(3)
 
 
     def test_service_trouble_shooting(self):
@@ -677,8 +750,54 @@ class TestUniversal(unittest.TestCase):
         log("测试------《联系我们》")
         click_ele("服务", "服务")
         click_ele("服务", "联系我们")
-        pass
-
+        assert_ele_is_exist("联系我们", "在线客服")
+        click_ele("联系我们", "常见问题")
+        assert_ele_is_exist("联系我们", "在线客服")
+        click_ele("联系我们", "服务")
+        click_ele("联系我们", "分类")
+        assert_ele_is_exist("联系我们", "全部分类")
+        click_ele("联系我们", "维修")
+        assert_ele_is_exist("联系我们", "在线客服")
+        click_ele("联系我们", "退换")
+        click_ele("联系我们", "问题1")
+        assert_ele_is_exist("联系我们", "在线客服")
+        click_ele("联系我们", "在线客服")
+        assert_ele_is_exist("联系我们", "标题")
+        click_back_button()
+        click_ele("联系我们", "电话服务")
+        assert_ele_is_exist("联系我们", "电话服务")
+        click_ele("联系我们", "电话")
+        click_ele("联系我们", "关闭按钮")
+        click_ele("联系我们", "电话")
+        assert_ele_is_exist("联系我们", "电话")
+        click_ele("联系我们", "复制")
+        assert_ele_is_exist("联系我们", "电话")
+        click_ele("联系我们", "电话")
+        click_ele("联系我们", "拨打")
+        assert_ele_is_exist("联系我们", "电话服务",False)
+        home()
+        start_app("net.poweroak.bluetticloud.debug")
+        for i in range(3):
+            swipe_universal(0.5,0.8,0.5,0.2)
+            assert_ele_is_exist("联系我们", "电话服务")
+        click_back_button()
+        click_ele("联系我们", "邮箱服务")
+        assert_ele_is_exist("联系我们", "邮箱服务")
+        click_ele("联系我们", "邮箱")
+        click_ele("联系我们", "关闭按钮")
+        click_ele("联系我们", "邮箱")
+        assert_ele_is_exist("联系我们", "邮箱")
+        click_ele("联系我们", "复制")
+        assert_ele_is_exist("联系我们", "邮箱")
+        click_ele("联系我们", "邮箱")
+        click_ele("联系我们", "写邮件")
+        assert_ele_is_exist("联系我们", "邮箱服务", False)
+        home()
+        start_app("net.poweroak.bluetticloud.debug")
+        for i in range(3):
+            swipe_universal(0.5,0.8,0.5,0.2)
+            assert_ele_is_exist("联系我们", "邮箱服务")
+        click_back_button()
 
 
     def test_service_trade_in(self):
@@ -688,8 +807,19 @@ class TestUniversal(unittest.TestCase):
         log("测试------《以旧换新》")
         click_ele("服务", "服务")
         click_ele("服务", "以旧换新")
-        pass
-
+        assert_ele_is_exist("以旧换新", "标题")
+        click_ele("以旧换新", "免费评估")
+        click_ele("以旧换新", "下一步")
+        assert_ele_is_exist("以旧换新", "下一步")
+        click_back_button()
+        click_ele("以旧换新", "最高抵扣")
+        assert_ele_is_exist("以旧换新", "下一步")
+        click_back_button()
+        click_ele("以旧换新", "问题1")
+        assert_ele_is_exist("以旧换新", "标题")
+        for i in range(4):
+            swipe_universal(0.5,0.8,0.5,0.2)
+            assert_ele_is_exist("以旧换新", "标题")
 
 
     def test_service_installation(self):
@@ -698,9 +828,22 @@ class TestUniversal(unittest.TestCase):
         """
         log("测试------《安装》")
         click_ele("服务", "服务")
+        swipe_universal(0.5, 0.8, 0.5, 0.2)
         click_ele("服务", "安装")
-        pass
-
+        assert_ele_is_exist("安装", "标题")
+        click_ele("安装", "记录")
+        assert_ele_is_exist("处理进度", "标题")
+        click_back_button()
+        click_ele("安装", "安装信息选择")
+        assert_ele_is_exist("地址管理", "新增地址")
+        click_back_button()
+        click_ele("安装", "型号选择")
+        assert_ele_is_exist("通用", "确定")
+        click_ele("通用", "确定")
+        assert_ele_is_exist("安装", "标题")
+        click_ele("通用", "下一步")
+        assert_ele_is_exist("安装", "标题")
+        click_back_button()
 
 
     def test_service_maintenance(self):
@@ -709,9 +852,9 @@ class TestUniversal(unittest.TestCase):
         """
         log("测试------《维修》")
         click_ele("服务", "服务")
+        swipe_universal(0.5, 0.8, 0.5, 0.2)
         click_ele("服务", "维修")
-        pass
-
+        assert_ele_is_exist("维修", "标题")
 
 
     def test_service_progress(self):
@@ -720,8 +863,11 @@ class TestUniversal(unittest.TestCase):
         """
         log("测试------《处理进度》")
         click_ele("服务", "服务")
+        swipe_universal(0.5, 0.8, 0.5, 0.2)
         click_ele("服务", "处理进度")
-        pass
+        assert_ele_is_exist("处理进度", "标题")
+        click_ele("处理进度", "维修")
+        assert_ele_is_exist("处理进度", "标题")
 
 
     def test_service_warranty(self):
@@ -730,8 +876,9 @@ class TestUniversal(unittest.TestCase):
         """
         log("测试------《保修政策》")
         click_ele("服务", "服务")
+        swipe_universal(0.5, 0.8, 0.5, 0.2)
         click_ele("服务", "保修政策")
-        pass
+        assert_ele_is_exist("保修政策", "标题")
 
 
     def test_service_refund(self):
@@ -740,8 +887,9 @@ class TestUniversal(unittest.TestCase):
         """
         log("测试------《退款政策》")
         click_ele("服务", "服务")
+        swipe_universal(0.5, 0.8, 0.5, 0.2)
         click_ele("服务", "退款政策")
-        pass
+        assert_ele_is_exist("退款政策", "标题")
 
 
     def test_service_register_product(self):
@@ -750,8 +898,9 @@ class TestUniversal(unittest.TestCase):
         """
         log("测试------《产品登记》")
         click_ele("服务", "服务")
+        swipe_universal(0.5, 0.8, 0.5, 0.2)
         click_ele("服务", "产品登记")
-        pass
+        assert_ele_is_exist("产品登记", "标题")
 
 
     def test_service_extend_warranty(self):
@@ -760,9 +909,151 @@ class TestUniversal(unittest.TestCase):
         """
         log("测试------《延保服务》")
         click_ele("服务", "服务")
+        swipe_universal(0.5,0.8,0.5,0.2)
         click_ele("服务", "延保服务")
-        pass
+        assert_ele_is_exist("延保服务", "标题")
 
 
+    def test_community(self):
+        """
+        社区
+        """
+        log("测试------《社区》")
+        click_ele("社区", "社区")
+        assert_ele_is_exist("社区", "消息")
+
+    def test_home_main_page(self):
+        """
+        首页
+        """
+        log("测试------《首页》")
+        click_ele("首页", "首页")
+        assert_ele_is_exist("首页", "天气")
+        swipe_universal(0.5, 0.8, 0.5, 0.1)
+        assert_ele_is_exist("首页", "用户指引")
+
+    def test_home_weather(self):
+        """
+        天气
+        """
+        log("测试------《天气》")
+        click_ele("首页", "首页")
+        click_ele("首页", "天气")
+        assert_ele_is_exist("首页", "天气关闭按钮")
+        click_ele("首页", "天气关闭按钮")
+
+    def test_home_calculator(self):
+        """
+        选型推荐
+        """
+        log("测试------《选型推荐》")
+        click_ele("首页", "首页")
+        click_ele("首页", "选型推荐")
+        assert_ele_is_exist("首页", "选型推荐")
+        for i in range(4):
+            swipe_universal(0.5, 0.8, 0.5, 0.1)
+            assert_ele_is_exist("首页", "选型推荐")
+        click_back_button()
 
 
+    def test_home_laaf(self):
+        """
+        LAAF
+        """
+        log("测试------《LAAF》")
+        click_ele("首页", "首页")
+        click_ele("首页", "LAAF")
+        assert_ele_is_exist("LAAF", "标题")
+        click_ele("LAAF", "LAAF说明")
+        assert_ele_is_exist("LAAF", "LAAF说明标题")
+        click_back_button(2)
+
+    def test_home_contact_us(self):
+        """
+        联系我们
+        """
+        log("测试------《联系我们》")
+        click_ele("首页", "首页")
+        swipe_universal(0.5, 0.8, 0.5, 0.1)
+        click_ele("首页", "联系我们")
+        assert_ele_is_exist("联系我们", "电话服务")
+        click_back_button()
+
+    def test_home_about_bluetti(self):
+        """
+        关于我们
+        """
+        log("测试------《关于我们》")
+        click_ele("首页", "首页")
+        swipe_universal(0.5, 0.8, 0.5, 0.1)
+        click_ele("首页", "关于我们")
+        assert_ele_is_exist("关于我们", "标题")
+        for i in range(4):
+            swipe_universal(0.5, 0.8, 0.5, 0.1)
+            assert_ele_is_exist("关于我们", "标题")
+        click_back_button()
+
+    def test_home_guidelines(self):
+        """
+        用户指引
+        """
+        log("测试------《用户指引》")
+        click_ele("首页", "首页")
+        swipe_universal(0.5, 0.8, 0.5, 0.1)
+        click_ele("首页", "用户指引")
+        assert_ele_is_exist("用户指引", "标题")
+        click_back_button()
+
+    def test_home_how_to_use(self):
+        """
+        how to use
+        """
+        log("测试------《how to use》")
+        click_ele("首页", "首页")
+        swipe_universal(0.5,0.8,0.5,0.1)
+        click_ele("首页", "How-To-Use")
+        assert_ele_is_exist("How-To-Use", "标题")
+        swipe_universal(0.5, 0.8, 0.5, 0.1)
+        assert_ele_is_exist("How-To-Use", "标题")
+        click_ele("How-To-Use", "搜索")
+        assert_ele_is_exist("How-To-Use", "搜索框")
+        click_back_button()
+        swipe_universal(0.5, 0.2, 0.5, 0.8)
+        click_ele("How-To-Use", "一级标题")
+        assert_ele_is_exist("How-To-Use", "二级标题1")
+        click_ele("How-To-Use", "二级标题展开")
+        assert_ele_is_exist("How-To-Use", "二级标题1")
+        click_ele("How-To-Use", "二级标题展开")
+        for i in range(5):
+            swipe_universal(0.5, 0.8, 0.5, 0.3)
+            assert_ele_is_exist("How-To-Use", "二级标题1")
+        click_ele("How-To-Use", "搜索")
+        input_text_enter("How-To-Use", "搜索框","simon-test091")
+        assert_ele_is_exist("How-To-Use", "搜索标题")
+        click_ele("How-To-Use", "视频描述展开")
+        assert_ele_is_exist("How-To-Use", "搜索标题")
+        click_ele("How-To-Use", "视频1")
+        assert_ele_is_exist("通用", "返回按钮")
+        click_back_button(2)
+        click_ele("How-To-Use", "搜索")
+        input_text_enter("How-To-Use", "搜索框", "725mp4视频 成")
+        assert_ele_is_exist("How-To-Use", "搜索标题")
+        click_ele("How-To-Use", "视频描述展开")
+        assert_ele_is_exist("How-To-Use", "搜索标题")
+        click_ele("How-To-Use", "视频3")
+        assert_ele_is_exist("通用", "返回按钮")
+        click_back_button(2)
+        click_ele("How-To-Use", "搜索")
+        input_text_enter("How-To-Use", "搜索框", "外部链接视频+商")
+        assert_ele_is_exist("How-To-Use", "搜索标题")
+        click_ele("How-To-Use", "视频描述展开")
+        assert_ele_is_exist("How-To-Use", "搜索标题")
+        click_ele("How-To-Use", "商品链接")
+        sleep()
+        assert_ele_is_exist("商品详情", "商品详情")
+        key_back()
+        click_ele("How-To-Use", "视频描述展开")
+        click_ele("How-To-Use", "视频2")
+        assert_ele_is_exist("通用", "返回按钮")
+        key_back()
+        click_back_button(3)
