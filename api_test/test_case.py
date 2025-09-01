@@ -5,7 +5,7 @@ import unittest
 from utils.handle_excel import case_data
 from utils.handle_ini import environment_ini
 from utils.handle_json import header_json
-from utils.handle_dependent_data import get_data
+from utils.handle_api_data import get_data
 from basic_request import request
 
 test_data = case_data.get_excel_data()

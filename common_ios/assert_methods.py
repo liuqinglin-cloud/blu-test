@@ -7,7 +7,7 @@ def assert_translation_by_find_ele(section, key, num=5):
     通过翻译语言定位控件，能定位到表示翻译正确
     :param section: 页面名称
     :param key: 语种名称
-    :param num: 没定位到时，最大上传次数，默认5
+    :param num: 没定位到时，最大上滑次数，默认5
     """
     translation = translation_ini.get_value(section,key)
     translation_list = translation.split("=")

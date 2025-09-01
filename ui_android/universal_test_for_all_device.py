@@ -3,6 +3,7 @@ import unittest
 from common_android.assert_methods import *
 from common_android.app_operation import *
 from common_android.basic_operation import *
+from utils.adb_command import filter_logcat
 
 
 class TestUniversal(unittest.TestCase):
@@ -11,9 +12,10 @@ class TestUniversal(unittest.TestCase):
     def setUpClass(cls):
         ST.SAVE_IMAGE = False
         log("------测试类前置处理------")
+        cls.app = "net.poweroak.bluetticloud"
+        start_app(cls.app)
         login_by_mail("us")
         switch_lang()
-        main_page()
 
     @classmethod
     def tearDownClass(cls):
@@ -205,7 +207,7 @@ class TestUniversal(unittest.TestCase):
         click_ele("我的", "App评分")
         assert_ele_is_exist("我的", "地址管理", is_exist=False)
         home()
-        start_app("net.poweroak.bluetticloud.debug")
+        start_app(self.app)
 
     def test_me_feedback(self):
         """
@@ -637,13 +639,13 @@ class TestUniversal(unittest.TestCase):
         click_ele("EP600", "图片")
         assert_ele_is_exist("EP600", "用户手册", False)
         home()
-        start_app("net.poweroak.bluetticloud.debug")
+        start_app(self.app)
         click_ele("EP600", "PDF")
         assert_ele_is_exist("EP600", "文件预览")
         click_ele("EP600", "下载")
         assert_ele_is_exist("EP600", "用户手册", False)
         home()
-        start_app("net.poweroak.bluetticloud.debug")
+        start_app(self.app)
         click_back_button()
         click_ele("EP600", "用户手册")
         assert_ele_is_exist("EP600", "用户手册")
@@ -651,15 +653,15 @@ class TestUniversal(unittest.TestCase):
         click_ele("EP600", "excel文件")
         assert_ele_is_exist("EP600", "用户手册", False)
         home()
-        start_app("net.poweroak.bluetticloud.debug")
+        start_app(self.app)
         click_ele("EP600", "视频文件")
         assert_ele_is_exist("EP600", "用户手册", False)
         home()
-        start_app("net.poweroak.bluetticloud.debug")
+        start_app(self.app)
         click_ele("EP600", "图片文件")
         assert_ele_is_exist("EP600", "用户手册", False)
         home()
-        start_app("net.poweroak.bluetticloud.debug")
+        start_app(self.app)
         click_back_button(3)
 
     def test_service_trouble_shooting(self):
@@ -774,7 +776,7 @@ class TestUniversal(unittest.TestCase):
         click_ele("联系我们", "拨打")
         assert_ele_is_exist("联系我们", "电话服务", False)
         home()
-        start_app("net.poweroak.bluetticloud.debug")
+        start_app(self.app)
         for i in range(3):
             swipe_universal(0.5, 0.8, 0.5, 0.2)
             assert_ele_is_exist("联系我们", "电话服务")
@@ -791,7 +793,7 @@ class TestUniversal(unittest.TestCase):
         click_ele("联系我们", "写邮件")
         assert_ele_is_exist("联系我们", "邮箱服务", False)
         home()
-        start_app("net.poweroak.bluetticloud.debug")
+        start_app(self.app)
         for i in range(3):
             swipe_universal(0.5, 0.8, 0.5, 0.2)
             assert_ele_is_exist("联系我们", "邮箱服务")
