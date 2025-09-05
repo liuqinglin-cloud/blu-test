@@ -9,7 +9,7 @@ from utils.handle_api_data import get_data
 from basic_request import request
 from assert_methods import assert_api
 
-current_sheet = 1
+current_sheet = 0
 test_data = case_data.get_excel_data(current_sheet)
 print(test_data)
 
@@ -49,7 +49,7 @@ class TestRunCaseDdt(unittest.TestCase):
                     header = header_json.read_json_file()
                 res = request(method, url, request_data, cookie, header)
                 case_data.excel_write_data(current_sheet, row_num, 16, json.dumps(res, ensure_ascii=False))
-                assert_result = assert_api(except_rule,except_result)
+                assert_result = assert_api(except_rule,except_result,environment)
                 if assert_result is True:
                     case_data.excel_write_data(current_sheet, row_num, 15, "通过")
                 else:
