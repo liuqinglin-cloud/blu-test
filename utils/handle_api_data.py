@@ -52,5 +52,5 @@ def get_data(data):
 
 
 if __name__ == '__main__':
-    pre = get_data("1>data[0].id")
+    pre = get_data("1>message")
     print(pre)

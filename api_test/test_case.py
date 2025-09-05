@@ -7,6 +7,7 @@ from utils.handle_ini import environment_ini
 from utils.handle_json import header_json
 from utils.handle_api_data import get_data
 from basic_request import request
+from assert_methods import assert_api
 
 test_data = case_data.get_excel_data()
 
@@ -36,7 +37,7 @@ class TestRunCaseDdt(unittest.TestCase):
                 server_name = data[6]
                 host = environment_ini.get_value(server_name, environment)
                 url = host + url
-                except_method = data[12]
+                except_rule = data[12]
                 except_result = data[13]
                 cookie_method = data[10]
                 is_header = data[11]
@@ -44,23 +45,14 @@ class TestRunCaseDdt(unittest.TestCase):
                     pass
                 if is_header == "yes":
                     header = header_json.read_json_file()
-                print(method)
-                print(url)
-                print(request_data)
-                print(cookie)
-                print(header)
                 res = request(method, url, request_data, cookie, header)
-                print(res)
-                if except_method == "message":  # 可扩展其他断言方式
-                    try:
-                        msg = res["message"]
-                        self.assertEqual(msg, except_result)
-                        case_data.excel_write_data(row_num, 15, "通过")
-                        case_data.excel_write_data(row_num, 16, json.dumps(res, ensure_ascii=False))
-                    except Exception:
-                        case_data.excel_write_data(row_num, 15, "失败")
-                        case_data.excel_write_data(row_num, 16, json.dumps(res, ensure_ascii=False))
-                        raise Exception
+                case_data.excel_write_data(row_num, 16, json.dumps(res, ensure_ascii=False))
+                assert_result = assert_api(except_rule,except_result)
+                if assert_result is True:
+                    case_data.excel_write_data(row_num, 15, "通过")
+                else:
+                    case_data.excel_write_data(row_num, 15, "失败")
+                    raise Exception
             except Exception as e:
                 case_data.excel_write_data(row_num, 15, "失败")
                 raise e
