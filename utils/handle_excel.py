@@ -64,15 +64,16 @@ class HandleExcel:
             row_list.append(i.value)
         return row_list
 
-    def excel_write_data(self, row, cols, value):
+    def excel_write_data(self, index, row, cols, value):
         """
         写入数据
+        :param index: sheet编号，从0开始
         :param row:行
         :param cols:列
         :param value:数据
         """
         wb = self.load_excel()
-        wr = wb.active
+        wr = wb.worksheets[index]
         wr.cell(row, cols, value)
         wb.save(self.path)
 
@@ -106,7 +107,7 @@ class HandleExcel:
 
     def get_excel_data(self, index=None):
         """
-        获取excel数据，用做ddt的数据源
+        获取excel数据
         :param index:sheet编号
         :return:data
         """

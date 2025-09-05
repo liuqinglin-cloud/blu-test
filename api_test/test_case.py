@@ -9,14 +9,16 @@ from utils.handle_api_data import get_data
 from basic_request import request
 from assert_methods import assert_api
 
-test_data = case_data.get_excel_data()
+current_sheet = 1
+test_data = case_data.get_excel_data(current_sheet)
+print(test_data)
 
 
 @ddt.ddt
 class TestRunCaseDdt(unittest.TestCase):
 
     @ddt.data(*test_data)
-    def test_main_case(self, data):
+    def test_case(self, data):
         cookie = None
         header = None
         is_run = data[2]
@@ -46,21 +48,21 @@ class TestRunCaseDdt(unittest.TestCase):
                 if is_header == "yes":
                     header = header_json.read_json_file()
                 res = request(method, url, request_data, cookie, header)
-                case_data.excel_write_data(row_num, 16, json.dumps(res, ensure_ascii=False))
+                case_data.excel_write_data(current_sheet, row_num, 16, json.dumps(res, ensure_ascii=False))
                 assert_result = assert_api(except_rule,except_result)
                 if assert_result is True:
-                    case_data.excel_write_data(row_num, 15, "通过")
+                    case_data.excel_write_data(current_sheet, row_num, 15, "通过")
                 else:
-                    case_data.excel_write_data(row_num, 15, "失败")
+                    case_data.excel_write_data(current_sheet, row_num, 15, "失败")
                     raise Exception
             except Exception as e:
-                case_data.excel_write_data(row_num, 15, "失败")
+                case_data.excel_write_data(current_sheet, row_num, 15, "失败")
                 raise e
 
 
 if __name__ == '__main__':
     suite = unittest.TestSuite()
-    tests = [TestRunCaseDdt('test_main_case')]
+    tests = [TestRunCaseDdt('test_case')]
     suite.addTests(tests)
     runner = unittest.TextTestRunner()
     runner.run(suite)

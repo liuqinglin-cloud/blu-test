@@ -59,7 +59,7 @@ def assert_sql_data(environment, db, field, table, factor_str, except_result, is
 
 def assert_api(except_rule, except_result, environment="test_hk"):
     """
-    接口断言，接口测试直接只用此方法
+    接口断言，接口测试直接用此方法
     :param except_rule: 断言规则
     :param except_result: 期望结果
     :param environment: 环境
