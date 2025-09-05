@@ -150,11 +150,10 @@ def current_environment():
         return "生产环境"
 
 
-def switch_environment(expectation,app):
+def switch_environment(expectation):
     """
     切换App测试环境
     :param expectation: 期望的测试环境
-    :param app: app包名
     """
     current = current_environment()
     if expectation == current:
@@ -165,7 +164,7 @@ def switch_environment(expectation,app):
         click_ele("通用", "确定")
         log(f"环境已切换为{expectation}")
     try:
-        start_app(app)
+        start_app("net.poweroak.bluetticloud.debug")
         log("重启App成功")
     except:
         pass
