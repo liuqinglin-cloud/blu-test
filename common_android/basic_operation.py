@@ -457,7 +457,7 @@ def select_data(data, num=4):
         except:
             if i == num-1:
                 break
-            swipe_bottom_top()
+            swipe_universal(0.5,0.7,0.5,0.4)
 
 
 def swipe_universal(start_x,start_y,end_x,end_y,num=1):

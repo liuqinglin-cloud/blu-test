@@ -1,15 +1,16 @@
 import pymysql.cursors
 from utils.handle_ini import environment_ini
 
+
 class HandleMysql:
 
-    def __init__(self, environment,database):
+    def __init__(self, environment, database):
         """
         连接数据库
         :param environment:环境，如test_hk
         :param database:数据库
         """
-        host = environment_ini.get_value("mysql",environment)
+        host = environment_ini.get_value("mysql", environment)
         try:
             self.__conn = pymysql.connect(
                 host=host,
@@ -164,7 +165,8 @@ class HandleMysql:
         """
         self.__del__()
 
+
 if __name__ == '__main__':
-    mysql = HandleMysql("test_hk","blu-user-center")
-    data = mysql.count("user","country = 'US'")
+    mysql = HandleMysql("test_hk", "blu-user-center")
+    data = mysql.count("user", "country = 'US'")
     print(data)

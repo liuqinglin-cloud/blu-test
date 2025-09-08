@@ -5,7 +5,6 @@ import unittest
 from utils.handle_excel import case_data
 from utils.handle_ini import environment_ini
 from utils.handle_json import header_json
-from utils.handle_api_data import get_data
 from basic_request import request
 from assert_methods import assert_api
 from precondition_methods import precondition_data

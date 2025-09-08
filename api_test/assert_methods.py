@@ -4,9 +4,11 @@ from utils.handle_api_data import *
 """
 断言规则写法如下：
     断言接口返回数据任意字段：
-        res==1>data[0].id
+        断言方式==断言规则（第X个接口>数据获取规则）==断言相等、不等、包含
+        res==1>data[0].id==相等
     断言数据库查询结果：
-        sql==db..field..table..factor_str
+        断言方式==断言规则（数据库..字段..表..条件）==断言相等、不等、包含
+        sql==db..field..table..factor_str==相等
     断言redis：
         待补充
     断言日志：

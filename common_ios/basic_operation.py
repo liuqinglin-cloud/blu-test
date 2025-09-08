@@ -5,14 +5,14 @@ from poco.drivers.ios import iosPoco
 devices = '00008103-0005491036D9001E'
 auto_setup(__file__, logdir=True, devices=[f"ios:///http+usbmux://{devices}", ])
 dev = connect_device(f"iOS:///http+usbmux://{devices}")
-poco = iosPoco(device=dev,use_airtest_input=True, screenshot_each_action=True)
+poco = iosPoco(device=dev, use_airtest_input=True, screenshot_each_action=True)
 
 ST.FIND_TIMEOUT = 20
 ST.FIND_TIMEOUT_TMP = 3
 sleep(1)
 
 
-def element(section,key):
+def element(section, key):
     """
     获取ini元素，创建UIObjectProxy
     :param section: 页面名字
@@ -35,7 +35,7 @@ def element(section,key):
                     x = int(value_list[1])
                     y = int(value_list[2])
                     log(log_info_success)
-                    position = [x,y]
+                    position = [x, y]
                     return position
                 except:
                     log(log_info_fail)
@@ -44,7 +44,7 @@ def element(section,key):
                     ele_attribute_name = value_list[1]
                     ele_attribute_text = value_list[2]
                     log(log_info_success)
-                    ele = poco(name=ele_attribute_name,text=ele_attribute_text)
+                    ele = poco(name=ele_attribute_name, text=ele_attribute_text)
                     return ele
                 except:
                     log(log_info_fail)
@@ -62,14 +62,31 @@ def element(section,key):
     else:
         log(f"请检查《{section}》页面《{key}》元素文件")
 
-def ele_is_exist(section,key):
+
+def wait_for_ele(section, key, timeout=5, appearance=True):
+    """
+    等待元素出现或者消失
+    :param section: 页面名称
+    :param key: 元素名称
+    :param timeout: 最长等待时间，默认5秒
+    :param appearance: 出现/消失，默认出现
+    """
+    ele = element(section, key)
+    if type(ele) is not list:
+        if appearance is True:
+            ele.wait_for_appearance(timeout=timeout)
+        else:
+            ele.wait_for_disappearance()
+
+
+def ele_is_exist(section, key):
     """
     判断元素是否存在，存在则返回UIObjectProxy或position
     :param section: 页面名称
     :param key: 元素名称
     :return: 定位方式是position返回position，其他返回UIObjectProxy
     """
-    ele = element(section,key)
+    ele = element(section, key)
     if ele is not None:
         if type(ele) is not list:
             if ele.exists():
@@ -80,13 +97,14 @@ def ele_is_exist(section,key):
         else:
             return ele
 
-def click_ele(section,key):
+
+def click_ele(section, key):
     """
     单击元素
     :param section: 页面名字
     :param key: 元素名字
     """
-    ele = ele_is_exist(section,key)
+    ele = ele_is_exist(section, key)
     if ele:
         log_info_success = f"点击《{section}》页面《{key}》元素成功"
         log_info_fail = f"点击《{section}》页面《{key}》元素失败"
@@ -108,7 +126,8 @@ def click_ele(section,key):
             except:
                 log(log_info_fail)
 
-def long_click_ele(section,key,duration=2):#
+
+def long_click_ele(section, key, duration=2):  #
     """
     长按元素
     :param section: 页面名称
@@ -132,12 +151,13 @@ def long_click_ele(section,key,duration=2):#
                 log(log_info_fail)
         else:
             try:
-                touch(ele,duration=duration)
+                touch(ele, duration=duration)
                 log(log_info_success)
             except:
                 log(log_info_fail)
 
-def double_click_ele(section,key):
+
+def double_click_ele(section, key):
     """
     双击元素
     :param section: 页面名称
@@ -158,7 +178,8 @@ def double_click_ele(section,key):
         except:
             log(f"双击《{section}》页面《{key}》元素失败")
 
-def times_click_ele(section,key,times=5):
+
+def times_click_ele(section, key, times=5):
     """
     连续点击N次元素，请在多次点击后断言确保无异常
     :param section: 页面名称
@@ -176,6 +197,7 @@ def times_click_ele(section,key,times=5):
         except:
             log(f"连续点击{times}次《{section}》页面《{key}》元素失败")
 
+
 def click_ele_for_translation(txt):
     """
     翻译专用，一般测试的元素定位属性都写在ini文件，是中文格式，
@@ -189,6 +211,7 @@ def click_ele_for_translation(txt):
         sleep()
     except:
         log("点击元素失败")
+
 
 def click_back_button(times=1):
     """
@@ -206,6 +229,7 @@ def click_back_button(times=1):
             log(f"第{i}次点击,没有找到返回按钮，停止点击")
             break
 
+
 def swipe_bottom_top(coordinates=1050):
     """
     从下往上滑动，展示下方内容，for ipad pro12.9，暂时固定滑动点，根据后期需要再修改
@@ -213,6 +237,7 @@ def swipe_bottom_top(coordinates=1050):
     """
     swipe((coordinates, 2000), (coordinates, 1000))
     log("从下往上滑动，展示下方内容")
+
 
 def swipe_top_bottom(coordinates=1050):
     """
@@ -222,6 +247,7 @@ def swipe_top_bottom(coordinates=1050):
     swipe((coordinates, 1000), (coordinates, 2000))
     log("从上往下滑动,展示上方内容")
 
+
 def swipe_left_right(coordinates=1350):
     """
     从左往右滑动，展示左方内容，for ipad pro12.9
@@ -229,6 +255,7 @@ def swipe_left_right(coordinates=1350):
     """
     swipe((600, coordinates), (1400, coordinates))
     log("从左往右滑动，展示左方内容")
+
 
 def swipe_right_left(coordinates=1350):
     """
@@ -238,27 +265,46 @@ def swipe_right_left(coordinates=1350):
     swipe((1400, coordinates), (600, coordinates))
     log("从右往左滑动，展示右方内容")
 
+
+def swipe_universal(start_x, start_y, end_x, end_y, num=1):
+    """
+    通用的滑动
+    :param start_x: 起点横坐标倍数，范围0-1
+    :param start_y: 起点纵坐标倍数，范围0-1
+    :param end_x: 起点横坐标倍数，范围0-1
+    :param end_y: 起点纵坐标倍数，范围0-1
+    :param num: 次数，默认1
+    """
+    xy = poco.get_screen_size()
+    x = xy[0]
+    y = xy[1]
+    for i in range(num):
+        swipe((start_x * x, start_y * y), (end_x * x, end_y * y))
+
+
 def del_text():
     """
     删除输入框的文本
     """
     try:
-        click_ele("通用","清除文本")
+        click_ele("通用", "清除文本")
     except:
         log("文本清除失败")
 
-def input_text(section,key,txt):
+
+def input_text(section, key, txt):
     """
     输入内容
     :param section: 页面名字
     :param key: 元素名字
     :param txt: 输入内容
     """
-    click_ele(section,key)
+    click_ele(section, key)
     del_text()
     text(txt)
 
-def input_text_enter(section,key,txt):
+
+def input_text_enter(section, key, txt):
     """
     输入内容并按回车键，采用airtest输入，有时会失败，输入后应该检查
     :param section: 页面名字
@@ -268,27 +314,43 @@ def input_text_enter(section,key,txt):
     click_ele(section, key)
     del_text()
     try:
-        text(txt,enter=True)
+        text(txt, enter=True)
         log(f"《{section}》页面《{key}》元素输入{txt}并按回车键")
     except:
         log(f"《{section}》页面《{key}》元素'输入{txt}并按回车键'操作失败")
 
-def input_text_search(section,key,txt):
+
+def input_text_search(section, key, txt):
     """
     输入内容并搜索，，采用airtest输入，有时会失败，输入后应该检查
     :param section: 页面名字
     :param key: 元素名字
     :param txt: 输入内容
     """
-    click_ele(section,key)
+    click_ele(section, key)
     del_text()
     try:
-        text(txt,search=True)
+        text(txt, search=True)
         log(f"《{section}》页面《{key}》元素输入{txt}并搜索")
     except:
         log(f"《{section}》页面《{key}》元素'输入{txt}并搜索'操作失败")
 
+
+def select_data(data, num=4):
+    """
+    选择数据，比如在设备列表选择设备，在国家列表选择国家
+    :param data:数据
+    :param num: 尝试次数，默认4
+    """
+    for i in range(num):
+        try:
+            poco(text=data).click()
+            break
+        except:
+            if i == num-1:
+                break
+            swipe_universal(0.5,0.7,0.5,0.4)
+
+
 if __name__ == "__main__":
     pass
-
-
