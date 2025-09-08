@@ -1,6 +1,17 @@
 from utils.handle_mysql import *
 from utils.handle_api_data import *
-from utils.handle_redis import *
+
+"""
+断言规则写法如下：
+    断言接口返回数据任意字段：
+        res==1>data[0].id
+    断言数据库查询结果：
+        sql==db..field..table..factor_str
+    断言redis：
+        待补充
+    断言日志：
+        待补充
+"""
 
 
 def basic_assert(expectation, result, is_equal):
@@ -49,13 +60,14 @@ def assert_sql_data(environment, rule, except_result, is_equal):
     :param is_equal: 断言相等、包含、不等
     :return: 断言结果
     """
-    rule_sql = rule.split("=")
-    db = rule_sql[0]
-    field = rule_sql[1]
-    table = rule_sql[2]
-    factor_str = rule_sql[3]
+    sql_rule = rule.split("..")
+    db = sql_rule[0]
+    field = sql_rule[1]
+    table = sql_rule[2]
+    factor_str = sql_rule[3]
     con = HandleMysql(environment, db)
-    sql_data = con.select_one(table, factor_str, field)
+    select_data = con.select_one(table, factor_str, field)
+    sql_data = select_data[field]
     return basic_assert(except_result, sql_data, is_equal)
 
 

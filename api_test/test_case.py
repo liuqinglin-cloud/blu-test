@@ -8,8 +8,9 @@ from utils.handle_json import header_json
 from utils.handle_api_data import get_data
 from basic_request import request
 from assert_methods import assert_api
+from precondition_methods import precondition_data
 
-current_sheet = 0
+current_sheet = 1
 test_data = case_data.get_excel_data(current_sheet)
 print(test_data)
 
@@ -25,17 +26,17 @@ class TestRunCaseDdt(unittest.TestCase):
         case_id = data[0]
         row_num = case_data.get_row_number(case_id)
         if is_run == "yes":
-            is_depend = data[3]
+            precondition_rule = data[3]
+            environment = data[5]
             request_data = json.loads(data[9])
             try:
-                if is_depend is not None:
+                if precondition_rule is not None:
                     depend_key = data[4]
-                    depend_data = get_data(is_depend)
+                    depend_data = precondition_data(precondition_rule,environment)
                     request_data[depend_key] = depend_data
                     request_data = demjson3.encode(request_data)
                 method = data[8]
                 url = data[7]
-                environment = data[5]
                 server_name = data[6]
                 host = environment_ini.get_value(server_name, environment)
                 url = host + url
