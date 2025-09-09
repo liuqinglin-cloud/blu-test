@@ -9,7 +9,7 @@ from basic_request import request
 from assert_methods import assert_api
 from precondition_methods import precondition_data
 
-current_sheet = 1
+current_sheet = 0
 test_data = case_data.get_excel_data(current_sheet)
 print(test_data)
 

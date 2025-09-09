@@ -107,7 +107,7 @@ class HandleExcel:
 
     def get_excel_data(self, index=None):
         """
-        获取excel数据
+        获取单个sheet的excel数据
         :param index:sheet编号
         :return:data
         """
@@ -115,6 +115,18 @@ class HandleExcel:
         for i in range(self.get_rows()):
             data_list.append(self.get_rows_value(i + 2, index))
         return data_list
+
+
+    def get_excel_datas(self,index_list):
+        """
+        获取多个sheet的excel数据
+        :param index_list: sheet编号列表
+        :return: data
+        """
+        data_lists = []
+        for i in index_list:
+            data_lists += self.get_excel_data(i)
+        return data_lists
 
 
 case_data = HandleExcel(case_path)
