@@ -1,7 +1,7 @@
 import ddt
 import unittest
-from api_request import *
-
+from api_request import run_request
+from utils.handle_excel import case_data
 
 marketing,FAQ = 0,1
 test_marketing_data = case_data.get_excel_data(marketing)

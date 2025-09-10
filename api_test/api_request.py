@@ -60,6 +60,11 @@ def request(method, url, data, cookie=None, header=None):
     return res
 
 def run_request(data,current_sheet):
+    """
+    执行测试
+    :param data: 测试数据
+    :param current_sheet: 测试数据所在的sheet编号
+    """
     is_run = data[2]
     case_id = data[0]
     row_num = case_data.get_row_number(case_id)
