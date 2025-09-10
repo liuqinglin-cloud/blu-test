@@ -5,7 +5,7 @@ from utils.handle_api_res_data import *
 
 def res_precondition(res_rule, current_sheet):
     """
-    获取接口返回的某指定数据
+    获取接口返回数据中的某指定数据
     :param res_rule: 数据规则
     :param current_sheet: sheet编号
     :return: 数据

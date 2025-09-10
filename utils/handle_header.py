@@ -2,7 +2,7 @@ from utils.handle_api_res_data import get_data
 from utils.handle_json import *
 
 
-def add_authorization_to_header(rule, current_sheet):
+def add_value_to_header(rule, current_sheet):
     """
     通过规则获取值，并写入header文件
     :param rule: 获取value并写入header的规则
@@ -33,7 +33,7 @@ def handle_header(rule, current_sheet):
     elif rule == "no":
         return None
     else:
-        add_authorization_to_header(rule, current_sheet)
+        add_value_to_header(rule, current_sheet)
         return get_header()
 
 

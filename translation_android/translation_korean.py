@@ -40,9 +40,3 @@ class TestKorean(unittest.TestCase):
         assert_translation_by_find_ele("我的","韩语")
 
 
-if __name__ == "__main__":
-    suite = unittest.TestSuite()
-    tests = [TestKorean('test_me')]
-    suite.addTests(tests)
-    runner=unittest.TextTestRunner()
-    runner.run(suite)

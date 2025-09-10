@@ -5,7 +5,7 @@ from utils.handle_api_res_data import *
 
 def basic_assert(expectation, result, is_equal):
     """
-    断言
+    基本断言
     :param expectation: 期望值
     :param result: 实际值
     :param is_equal: 断言相等、包含、不等

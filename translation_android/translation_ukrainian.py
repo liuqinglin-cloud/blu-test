@@ -40,9 +40,3 @@ class TestUkrainian(unittest.TestCase):
         assert_translation_by_find_ele("我的","乌克兰语")
 
 
-if __name__ == "__main__":
-    suite = unittest.TestSuite()
-    tests = [TestUkrainian('test_me')]
-    suite.addTests(tests)
-    runner=unittest.TextTestRunner()
-    runner.run(suite)

@@ -42,7 +42,6 @@ blu-test/
 │   │   ├── translation_ios------------------iOS翻译测试报告
 │   │   └── ui_ios---------------------------iOS UI测试报告
 │   └── unittest_report----------------------unittest报告，无截图，可以添加截图，按时间命名，不会覆盖
-│       ├── api_test-------------------------接口测试报告，接口测试结果也会写入测试用例表格
 │       ├── translation_android--------------Android翻译测试报告
 │       ├── ui_android-----------------------Android UI测试报告
 │       ├── translation_ios------------------iOS翻译测试报告

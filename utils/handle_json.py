@@ -48,6 +48,16 @@ class HandleJson:
         self.write_value(data)
 
 
+    def del_value(self,key):
+        """
+        删除json文件的元素
+        :param key: key
+        """
+        data = self.read_json_file()
+        del data[key]
+        self.write_value(data)
+
+
 header_json = HandleJson(header_path)
 
 if __name__ == "__main__":

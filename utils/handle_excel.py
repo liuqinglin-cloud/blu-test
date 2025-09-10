@@ -94,9 +94,9 @@ class HandleExcel:
 
     def get_row_number(self, case_id):
         """
-        获取case_id行号（根据被依赖case_id获取被依赖case行号：传入case_id，拿到case_id的行号）
-        :param case_id: 用例id（condition_data中的方法分离前置条件获得）
-        :return: 行号（返回被依赖case的行号，从而执行case）
+        获取case_id行号
+        :param case_id: 用例id
+        :return: 行号
         """
         num = 1
         cols_data = self.get_columns_value()

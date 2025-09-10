@@ -40,9 +40,4 @@ class TestTraditionalChinese(unittest.TestCase):
         assert_translation_by_find_ele("我的","繁体中文")
 
 
-if __name__ == "__main__":
-    suite = unittest.TestSuite()
-    tests = [TestTraditionalChinese('test_me')]
-    suite.addTests(tests)
-    runner=unittest.TextTestRunner()
-    runner.run(suite)
+

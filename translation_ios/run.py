@@ -12,9 +12,7 @@ case_path = os.path.dirname(__file__)
 project_path = os.path.dirname(os.path.dirname(__file__))
 
 testsuite = unittest.TestSuite()
-#部分用例，按需添加
 #tests = [TestSimplifiedChinese('test_me'),TestEnglish("test_me")]
-#匹配用例文件
 tests = unittest.TestLoader().discover(case_path,pattern='translation_*.py',top_level_dir=None)
 testsuite.addTests(tests)
 
@@ -31,12 +29,8 @@ runner = unittestreport.TestRunner(testsuite,
                                    desc="ios翻译测试",
                                    templates=1
                                    )
-
-#执行
 try:
     runner.run()
-
-#导出airtest报告，方便看翻译测试截图，runner执行后会停止，finally保证生成airtest报告，报告会覆盖
 finally:
     common_ios_path = os.path.join(project_path,"common_ios")
     script_path = os.path.join(case_path,"run.py")

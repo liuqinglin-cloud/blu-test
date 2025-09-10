@@ -39,10 +39,3 @@ class TestSpanish(unittest.TestCase):
         click_ele_for_translation("Yo")
         assert_translation_by_find_ele("我的","西班牙语")
 
-
-if __name__ == "__main__":
-    suite = unittest.TestSuite()
-    tests = [TestSpanish('test_me')]
-    suite.addTests(tests)
-    runner=unittest.TextTestRunner()
-    runner.run(suite)

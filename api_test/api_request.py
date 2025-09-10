@@ -1,5 +1,3 @@
-from time import sleep
-
 import demjson3
 import requests
 import json
@@ -61,7 +59,7 @@ def request(method, url, data, cookie=None, header=None):
 
 def run_request(data,current_sheet):
     """
-    执行测试
+    执行测试请求
     :param data: 测试数据
     :param current_sheet: 测试数据所在的sheet编号
     """
