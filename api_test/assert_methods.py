@@ -1,19 +1,6 @@
 from utils.handle_mysql import *
-from utils.handle_api_data import *
+from utils.handle_api_res_data import *
 
-"""
-断言规则写法如下：
-    断言接口返回数据任意字段：
-        断言方式==断言规则（第X个接口>数据获取规则）==断言相等、不等、包含
-        res==1>data[0].id==相等
-    断言数据库查询结果：
-        断言方式==断言规则（数据库..字段..表..条件）==断言相等、不等、包含
-        sql==db..field..table..factor_str==相等
-    断言redis：
-        待补充
-    断言日志：
-        待补充
-"""
 
 
 def basic_assert(expectation, result, is_equal):
@@ -41,15 +28,16 @@ def basic_assert(expectation, result, is_equal):
             return True
 
 
-def assert_res_data(res_rule, except_result, is_equal):
+def assert_res_data(res_rule, except_result, is_equal, current_sheet):
     """
     断言返回数据
     :param res_rule: 返回数据获取规则
     :param except_result: 期望值
     :param is_equal: 断言相等、包含、不等
+    :param current_sheet: sheet编号
     :return: 断言结果
     """
-    res_data = get_data(res_rule)
+    res_data = get_data(res_rule, current_sheet)
     return basic_assert(except_result, res_data, is_equal)
 
 
@@ -73,12 +61,13 @@ def assert_sql_data(environment, rule, except_result, is_equal):
     return basic_assert(except_result, sql_data, is_equal)
 
 
-def assert_api(except_rule, except_result, environment):
+def assert_api(except_rule, except_result, environment, current_sheet):
     """
     接口断言，接口测试直接用此方法
     :param except_rule: 断言规则
     :param except_result: 期望结果
     :param environment: 环境
+    :param current_sheet: sheet编号
     :return: 断言结果
     """
     except_rule_list = except_rule.split("==")
@@ -86,7 +75,7 @@ def assert_api(except_rule, except_result, environment):
     rule = except_rule_list[1]
     is_equal = except_rule_list[2]
     if method == "res":
-        return assert_res_data(rule, except_result, is_equal)
+        return assert_res_data(rule, except_result, is_equal, current_sheet)
     elif method == "sql":
         return assert_sql_data(environment, rule, except_result, is_equal)
     else:

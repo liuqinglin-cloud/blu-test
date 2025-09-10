@@ -2,12 +2,14 @@ import unittest
 import unittestreport
 import time
 import os.path
+from test_case import TestRunCaseDdt
 
 
 case_path = os.path.dirname(__file__)
 project_path = os.path.dirname(os.path.dirname(__file__))
 
 testsuite = unittest.TestSuite()
+#tests = [TestRunCaseDdt('test_marketing')]
 tests = unittest.TestLoader().discover(case_path,pattern='test_*.py',top_level_dir=None)
 testsuite.addTests(tests)
 report_path = os.path.join(project_path, "report\\unittest_report\\api_test")

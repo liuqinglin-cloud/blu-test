@@ -33,14 +33,15 @@ class HandleExcel:
         data = self.load_excel()[sheet_name[index]]
         return data
 
-    def get_cell_value(self, row, column):
+    def get_cell_value(self, row, column, index):
         """
         获取某个单元格的内容
         :param row:行
         :param column:列
+        :param index: sheet编号
         :return:data
         """
-        data = self.get_sheet_data().cell(row=row, column=column).value
+        data = self.get_sheet_data(index).cell(row=row, column=column).value
         return data
 
     def get_rows(self, index=None):
@@ -132,4 +133,6 @@ class HandleExcel:
 case_data = HandleExcel(case_path)
 
 if __name__ == '__main__':
+    data = case_data.get_excel_data(1)
+    print(data)
     pass

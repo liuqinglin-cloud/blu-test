@@ -37,6 +37,17 @@ class HandleJson:
             f.write(data_value)
 
 
+    def add_value(self,key,value):
+        """
+        往json文件添加元素
+        :param key: key
+        :param value: value
+        """
+        data = self.read_json_file()
+        data[key]=value
+        self.write_value(data)
+
+
 header_json = HandleJson(header_path)
 
 if __name__ == "__main__":
