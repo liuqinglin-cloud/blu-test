@@ -129,6 +129,16 @@ class HandleExcel:
             data_lists += self.get_excel_data(i)
         return data_lists
 
+    def get_response_data(self, case_id, index):
+        """
+        获取指定的接口测试返回结果
+        :param case_id: 用例编号
+        :param index: sheet编号
+        :return: 返回测试结果
+        """
+        row_num = self.get_row_number(int(case_id))
+        return self.get_cell_value(row_num, 16, index)
+
 
 case_data = HandleExcel(case_path)
 
