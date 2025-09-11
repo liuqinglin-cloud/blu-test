@@ -168,5 +168,5 @@ class HandleMysql:
 
 if __name__ == '__main__':
     mysql = HandleMysql("test_hk", "blu-user-center")
-    data = mysql.count("user", "country = 'US'")
+    data = mysql.select_more("user", "country = 'US' limit 10","id")
     print(data)
