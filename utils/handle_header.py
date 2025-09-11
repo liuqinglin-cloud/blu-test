@@ -1,5 +1,6 @@
-from utils.handle_api_res_data import get_data
 from utils.handle_json import *
+from utils.handle_excel import case_data
+
 
 
 def add_value_to_header(rule, current_sheet):
@@ -11,7 +12,10 @@ def add_value_to_header(rule, current_sheet):
     key = rule.split("=")[-1]
     rule_list = rule.split("=").pop()
     value_rule = "".join(rule_list)
-    value = get_data(value_rule, current_sheet)
+    case_id = value_rule.split(">")[0]
+    rule_data = value_rule.split(">")[1]
+    response = case_data.get_response_data(case_id, current_sheet)
+    value = get_data_by_rule(response, rule_data)
     header_json.add_value(key, value)
 
 def get_header():
