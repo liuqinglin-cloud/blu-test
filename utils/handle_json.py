@@ -1,13 +1,14 @@
 import json
 import os.path
-
+from jsonpath_rw import parse
 
 project_path = os.path.dirname(os.path.dirname(__file__))
-header_path = os.path.join(project_path,"config\\header.json")
+header_path = os.path.join(project_path, "config\\header.json")
+
 
 class HandleJson:
 
-    def __init__(self,file_path):
+    def __init__(self, file_path):
         self.path = file_path
 
     def read_json_file(self):
@@ -18,7 +19,7 @@ class HandleJson:
             data = json.load(f)
         return data
 
-    def get_json_by_key(self,key):
+    def get_json_by_key(self, key):
         """
         获取json里key对应的值
         :param key: key
@@ -27,28 +28,26 @@ class HandleJson:
         data = self.read_json_file()
         return data.get(key)
 
-    def write_value(self,data):
+    def write_value(self, data):
         """
         写入json文件
         :param data: 数据
         """
         data_value = json.dumps(data)
-        with open(self.path,"w") as f:
+        with open(self.path, "w") as f:
             f.write(data_value)
 
-
-    def add_value(self,key,value):
+    def add_value(self, key, value):
         """
         往json文件添加元素
         :param key: key
         :param value: value
         """
         data = self.read_json_file()
-        data[key]=value
+        data[key] = value
         self.write_value(data)
 
-
-    def del_value(self,key):
+    def del_value(self, key):
         """
         删除json文件的元素
         :param key: key
@@ -60,6 +59,19 @@ class HandleJson:
 
 header_json = HandleJson(header_path)
 
+
+def get_data_by_rule(json_data, rule):
+    """
+    获取json里的指定值
+    :param json_data: json
+    :param rule: 获取指定值的规则
+    :return: 指定值
+    """
+    res_data = json.loads(json_data)
+    json_exe = parse(rule)
+    model = json_exe.find(res_data)
+    return [math.value for math in model][0]
+
+
 if __name__ == "__main__":
     pass
-
