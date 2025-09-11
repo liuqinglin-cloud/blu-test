@@ -9,7 +9,7 @@ test_FAQ_data = case_data.get_excel_data(FAQ)
 
 
 @ddt.ddt
-class TestRunCaseDdt(unittest.TestCase):
+class TestCase(unittest.TestCase):
 
     @ddt.data(*test_marketing_data)
     def test_marketing(self, data):
