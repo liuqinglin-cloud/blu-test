@@ -1,5 +1,6 @@
 from utils.handle_mysql import *
-from utils.handle_api_res_data import *
+from utils.handle_excel import case_data
+from utils.handle_json import get_data_by_rule
 
 
 
@@ -37,7 +38,10 @@ def assert_res_data(res_rule, except_result, is_equal, current_sheet):
     :param current_sheet: sheet编号
     :return: 断言结果
     """
-    res_data = get_data(res_rule, current_sheet)
+    case_id = res_rule.split(">")[0]
+    rule_data = res_rule.split(">")[1]
+    response = case_data.get_response_data(case_id, current_sheet)
+    res_data =  get_data_by_rule(response, rule_data)
     return basic_assert(except_result, res_data, is_equal)
 
 
