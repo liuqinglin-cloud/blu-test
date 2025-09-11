@@ -87,12 +87,13 @@ blu-test/
 │   └── test_service.py----------------------“服务”页面所有功能测试用例
 └── utils------------------------------------实用方法
     ├── adb_command.py-----------------------执行ADB命令，如抓取日志
-    ├── handle_api_res_data.py---------------主要是获取指定的接口返回数据，用于获取依赖数据、断言、处理header
     ├── handle_cookie.py---------------------cookie处理，如果做web自动化，也会用到，故放于此
     ├── handle_excel.py----------------------读写excel
-    ├── handle_header.py---------------------cookie处理，如果做web自动化，可能也会用到，故放于此
+    ├── handle_header.py---------------------header处理，如果做web自动化，可能也会用到，故放于此
     ├── handle_ini.py------------------------ini文件处理
     ├── handle_json.py-----------------------json文件处理
     ├── handle_mysql.py----------------------mysql操作
-    └── handle_redis.py----------------------redis操作
+    ├── handle_redis.py----------------------redis操作
+    ├── handle_test_data.py------------------处理特殊的测试数据
+    └── server_log.py------------------------查询服务器日志、文件
 ```
