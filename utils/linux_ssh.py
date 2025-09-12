@@ -80,7 +80,20 @@ class Ssh:
                 output = channel.recv(1024).decode('utf-8')
                 print(output)
 
+    def cat_grep_log(self, key):
+        """
+        grep日志
+        :param key: 关键字
+        :return: 有日志返回True，else False
+        """
+        command = f"cat /data/logs/blu-marketing-center/blu-marketing-center.log | tail -n 100 | grep {key}"
+        result = self.execute_channel(command)
+        print(result)
+        if result:
+            return True
+        else:
+            return False
 
 
 if __name__ == '__main__':
-    linux = Ssh("营销")
+    pass
