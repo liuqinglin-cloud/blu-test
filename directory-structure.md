@@ -28,7 +28,7 @@ blu-test/
 │   ├── system_operation.py------------------系统操作，比如切换WiFi，给App授权
 ├── config-----------------------------------配置，全是测试用到的相对固定的数据
 │   ├── device.ini---------------------------设备，测试设备时使用
-│   ├── environment.ini----------------------环境信息，测试接口、操作mysql、操作redis使用
+│   ├── environment.ini----------------------环境信息，测试接口、操作mysql、操作redis、连接Linux使用
 │   ├── header.json--------------------------header，测试接口使用
 │   ├── local_element_android.ini------------Android元素信息，测试翻译、UI功能使用
 │   ├── local_element_ios.ini----------------iOS元素信息，测试翻译、UI功能使用
@@ -37,7 +37,6 @@ blu-test/
 ├── report-----------------------------------报告
 │   ├── airtest_report-----------------------airtest报告，有截图，方便测试翻译时检查UI效果，每次会覆盖上一次的报告
 │   │   ├── translation_android--------------Android翻译测试报告
-│   │   ├── translation_h5-------------------H5翻译测试报告
 │   │   ├── ui_android-----------------------Android UI测试报告
 │   │   ├── translation_ios------------------iOS翻译测试报告
 │   │   └── ui_ios---------------------------iOS UI测试报告
