@@ -46,7 +46,7 @@ class Ssh:
         """
         tail实时查看日志
         :param key: grep关键字，默认None
-        :param rows: 行数，默认100
+        :param rows: 行数，默认200
         """
         transport = self.ssh.get_transport()
         channel = transport.open_session()
@@ -91,7 +91,7 @@ class Ssh:
         """
         grep日志，执行后close
         :param key: 关键字
-        :param rows: 行数，默认100
+        :param rows: 行数，默认200
         :return: 有日志返回True，else False
         """
         command = f"cat /data/logs/{self.server}/{self.server}.log | tail -n {rows} | grep {key}"
