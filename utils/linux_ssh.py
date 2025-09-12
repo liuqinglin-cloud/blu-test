@@ -86,13 +86,9 @@ class Ssh:
         :param key: 关键字
         :return: 有日志返回True，else False
         """
-        command = f"cat /data/logs/blu-marketing-center/blu-marketing-center.log | tail -n 100 | grep {key}"
+        command = f"cat /data/logs/{self.server}/{self.server}.log | tail -n 100 | grep {key}"
         result = self.execute_channel(command)
-        print(result)
-        if result:
-            return True
-        else:
-            return False
+        return True if result else False
 
 
 if __name__ == '__main__':
