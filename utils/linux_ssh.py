@@ -80,31 +80,7 @@ class Ssh:
                 output = channel.recv(1024).decode('utf-8')
                 print(output)
 
-    def grep(self, key):
-        """
-        grep，用于判断、断言
-        :param key: grep关键字
-        :return: 有日志返回True，else False
-        """
-        transport = self.ssh.get_transport()
-        channel = transport.open_session()
-        channel.get_pty()
-        command = f"tail -1000f /data/logs/{self.server}/{self.server}.log | grep '{key}'"
-        channel.exec_command(command)
-        if channel.exit_status_ready():
-            try:
-                rl, wl, el = select.select([channel], [], [])
-                if len(rl) > 0:
-                    return True
-                else:
-                    return False
-            except KeyboardInterrupt:
-                print("Caught control-C")
-                channel.send("\x03")
-                channel.close()
 
 
 if __name__ == '__main__':
-    market_ssh = Ssh("营销")
-    data = market_ssh.grep("获取物流信息")
-    print(data)
+    linux = Ssh("营销")
