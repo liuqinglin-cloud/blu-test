@@ -1,3 +1,5 @@
+import subprocess
+
 from common_ios.basic_operation import *
 from utils.handle_ini import translation_ini,test_user_ini
 
@@ -125,6 +127,18 @@ def switch_lang(expectation):
         log(f"已切换语言为{expectation}")
         sleep(3)
         main_page()
+
+def kill_app(app_package_name="net.poweroak.bluetticloud"):
+    kill_app_command = ['ios', 'kill', app_package_name]
+    subprocess.run(kill_app_command, check=True)
+
+def launch_app(app_package_name="net.poweroak.bluetticloud"):
+    launch_app_command = ['ios', 'launch', app_package_name]
+    subprocess.run(launch_app_command, check=True)
+
+def start_app(app_package_name="net.poweroak.bluetticloud"):
+    kill_app(app_package_name)
+    launch_app(app_package_name)
 
 if __name__ == "__main__":
     switch_lang("英语")

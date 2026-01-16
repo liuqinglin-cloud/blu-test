@@ -13,8 +13,8 @@ case_path = os.path.dirname(__file__)
 project_path = os.path.dirname(os.path.dirname(__file__))
 
 testsuite = unittest.TestSuite()
-tests = [TestUniversal('test_home_main_page')]
-#tests = unittest.TestLoader().discover(case_path,pattern='universal_*.py',top_level_dir=None)
+#tests = [TestUniversal('test_home_main_page')]
+tests = unittest.TestLoader().discover(case_path,pattern='universal_*.py',top_level_dir=None)
 testsuite.addTests(tests)
 
 

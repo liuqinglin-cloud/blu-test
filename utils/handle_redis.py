@@ -42,6 +42,14 @@ class HandleRedis:
         else:
             print("没有找到匹配的 keys")
 
+    def is_key_exist(self,key):
+        """
+        判断key是否存在
+        :param key: key
+        :return: 存在返回1，不存在返回0
+        """
+        return self.__redis.exists(key)
+
     def __del__(self):
         """
         销毁对象时close

@@ -100,6 +100,5 @@ class Ssh:
 
 
 if __name__ == '__main__':
-    ssh = Ssh("营销")
+    ssh = Ssh("通知")
     ssh.tail_realtime()
-    pass
